@@ -1015,15 +1015,355 @@
         max-height: 90vh;
         overflow-y: auto;
       }
+
+      /* ---------- Landing Page & Digital Product Auth Styles ---------- */
+      .auth-landing-wrap {
+        display: none;
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--paper) 0%, #e0e6dd 100%);
+        flex-direction: column;
+      }
+      .auth-landing-wrap.active {
+        display: flex;
+        animation: fade 0.25s ease;
+      }
+      .landing-nav {
+        background: var(--accent-ink);
+        color: #fff;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      }
+      .landing-nav .logo {
+        font-family: "Fraunces", serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+      }
+      .landing-nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.8em;
+      }
+      .landing-body {
+        flex: 1;
+        max-width: 1140px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 2.2rem 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 2.2rem;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .landing-nav {
+          padding: 0.8rem 1rem;
+        }
+        .landing-body {
+          grid-template-columns: 1fr;
+          padding: 1.5rem 1rem;
+        }
+      }
+      .sales-hero-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 2rem;
+        box-shadow: var(--shadow);
+      }
+      .sales-hero-card h1 {
+        font-size: 2rem;
+        line-height: 1.25;
+        margin-bottom: 0.8rem;
+        color: var(--accent-ink);
+      }
+      .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8em;
+        font-size: 0.92rem;
+      }
+      .feature-item svg {
+        flex: none;
+        stroke: var(--success);
+        margin-top: 0.2em;
+      }
+      .checkout-box {
+        background: #f3f7f4;
+        border: 2px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 1.2rem;
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .checkout-price {
+        font-family: "Fraunces", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--accent-ink);
+      }
+      .checkout-price span {
+        font-size: 0.82rem;
+        font-family: "IBM Plex Sans", sans-serif;
+        color: var(--ink-soft);
+        font-weight: 400;
+      }
+
+      .auth-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 1.8rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .auth-tabs {
+        display: flex;
+        border-bottom: 2px solid var(--line-soft);
+        margin-bottom: 1.4rem;
+      }
+      .auth-tab-btn {
+        flex: 1;
+        padding: 0.6em 0.2em;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--ink-soft);
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.15s ease;
+      }
+      .auth-tab-btn.active {
+        color: var(--accent-ink);
+        border-bottom-color: var(--accent-ink);
+      }
+      .auth-form-step {
+        display: none;
+      }
+      .auth-form-step.active {
+        display: block;
+        animation: fade 0.2s ease;
+      }
+
+      .landing-footer {
+        background: var(--accent-ink);
+        color: #b9cbbf;
+        padding: 1.2rem 2rem;
+        font-size: 0.8rem;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .landing-footer a {
+        color: #ffffff;
+        text-decoration: underline;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
-    <!-- HEADER MOBILE -->
-    <header class="mobile-header">
+    <!-- TELA DE VENDA DO PRODUTO E AUTENTICAÇÃO (LANDING & LOGIN) -->
+    <div id="view-auth-landing" class="auth-landing-wrap active">
+      <header class="landing-nav">
+        <div class="logo">
+          <span>Ponto de Virada</span>
+          <span class="badge ok" style="font-size: 0.65rem;">Versão Premium</span>
+        </div>
+        <div class="landing-nav-actions">
+          <button
+            type="button"
+            class="btn secondary small btn-instalar-app pulse"
+            onclick="triggerInstallApp()"
+          >
+            📱 Instalar App
+          </button>
+          <a
+            href="https://kiwify.com.br"
+            target="_blank"
+            class="btn small"
+            style="background: #2A724E; border-color: #2A724E;"
+          >
+            🛒 Comprar Acesso
+          </a>
+        </div>
+      </header>
+
+      <div class="landing-body">
+        <!-- COLUNA 1: HERO DE VENDA DO PRODUTO DIGITAL -->
+        <div class="sales-hero-card">
+          <span class="eyebrow" style="color: var(--accent-ink); font-weight: 700;">PRODUTO DIGITAL PREMIUM</span>
+          <h1>Saia das Dívidas e Alcance a Liberdade Financeira com IA</h1>
+          <p style="font-size: 0.95rem; color: var(--ink-soft);">
+            O <strong>Ponto de Virada</strong> é a ferramenta definitiva de inteligência financeira pessoal. Organize suas contas, identifique ralos de juros e simule seu caminho até a dívida zero com total privacidade.
+          </p>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Diagnóstico por IA em Tempo Real:</strong> Identifica contas perigosas e calcula o score de saúde financeira.</span>
+            </li>
+            <li class="feature-item">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Simulador Avalanche vs. Bola de Neve:</strong> Projeção visual gráfica de quitação mês a mês.</span>
+            </li>
+            <li class="feature-item">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Recomendador de Renda Extra:</strong> Descubra opções imediatas personalizadas para o seu perfil.</span>
+            </li>
+            <li class="feature-item">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>100% Privado e Seguro (LGPD):</strong> Seus dados financeiros são isolados e não saem do seu dispositivo.</span>
+            </li>
+          </ul>
+
+          <div class="checkout-box">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.4rem;">
+              <div>
+                <strong style="display: block; font-size: 0.9rem; color: var(--ink);">Acesso Vitalício sem Mensalidades</strong>
+                <span style="font-size: 0.78rem; color: var(--ink-soft);">Oferta de lançamento com suporte</span>
+              </div>
+              <div class="checkout-price">
+                R$ 47,00 <span>/ pagamento único</span>
+              </div>
+            </div>
+            <a
+              href="https://kiwify.com.br"
+              target="_blank"
+              class="btn"
+              style="width: 100%; justify-content: center; padding: 0.8em; font-size: 1rem; background: var(--success); border-color: var(--success);"
+            >
+              🚀 Comprar Agora na Plataforma Digital →
+            </a>
+            <div style="text-align: center; font-size: 0.75rem; color: var(--ink-soft);">
+              🔒 Compra 100% segura com garantia de 7 dias e liberação imediata por e-mail.
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 2: PORTAL DE AUTENTICAÇÃO E ATIVAÇÃO -->
+        <div class="auth-card">
+          <div class="auth-tabs">
+            <button type="button" class="auth-tab-btn active" data-authtab="login">Entrar (Login)</button>
+            <button type="button" class="auth-tab-btn" data-authtab="register">Criar Conta</button>
+            <button type="button" class="auth-tab-btn" data-authtab="license">Ativar Licença</button>
+          </div>
+
+          <!-- ABA LOGIN -->
+          <div class="auth-form-step active" id="auth-step-login">
+            <h3 style="margin-bottom: 0.3em;">Acessar Minha Conta</h3>
+            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 1rem;">
+              Entre com seu e-mail e senha cadastrados para liberar seu aplicativo.
+            </p>
+
+            <form id="form-login">
+              <div style="margin-bottom: 0.8rem;">
+                <label for="l-email">E-mail</label>
+                <input type="email" id="l-email" required placeholder="seuemail@exemplo.com" />
+              </div>
+              <div style="margin-bottom: 0.9rem;">
+                <label for="l-password">Senha</label>
+                <input type="password" id="l-password" required placeholder="••••••••" />
+              </div>
+              <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+                <label style="display: flex; align-items: center; gap: 0.4em; cursor: pointer; margin: 0; font-size: 0.8rem;">
+                  <input type="checkbox" id="l-remember" style="width: auto;" checked /> Lembrar de mim
+                </label>
+                <a onclick="alert('Se esqueceu sua senha, crie uma nova conta com seu e-mail ou utilize a aba Ativar Licença com sua chave de compra.')" style="cursor: pointer; text-decoration: underline;">Esqueceu a senha?</a>
+              </div>
+              <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 0.7em;">
+                🔑 Entrar no Aplicativo
+              </button>
+            </form>
+            <div id="login-error-msg" style="margin-top: 0.8rem;"></div>
+          </div>
+
+          <!-- ABA CRIAR CONTA -->
+          <div class="auth-form-step" id="auth-step-register">
+            <h3 style="margin-bottom: 0.3em;">Criar Nova Conta</h3>
+            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 1rem;">
+              Crie seu acesso pessoal com isolamento total de dados por conta.
+            </p>
+
+            <form id="form-register">
+              <div style="margin-bottom: 0.7rem;">
+                <label for="r-name">Nome Completo</label>
+                <input type="text" id="r-name" required placeholder="Seu nome" />
+              </div>
+              <div style="margin-bottom: 0.7rem;">
+                <label for="r-email">E-mail</label>
+                <input type="email" id="r-email" required placeholder="seuemail@exemplo.com" />
+              </div>
+              <div style="margin-bottom: 0.8rem;">
+                <label for="r-password">Criar Senha</label>
+                <input type="password" id="r-password" required minlength="4" placeholder="Mínimo 4 caracteres" />
+              </div>
+              <div style="margin-bottom: 0.9rem; font-size: 0.78rem;">
+                <label style="display: flex; align-items: flex-start; gap: 0.4em; cursor: pointer; font-size: 0.78rem; line-height: 1.3;">
+                  <input type="checkbox" id="r-terms" required style="width: auto; margin-top: 0.15em;" />
+                  <span>Li e concordo com os <a onclick="openTermsModal()" style="text-decoration: underline; cursor: pointer;">Termos de Uso e Política de Privacidade (LGPD)</a>.</span>
+                </label>
+              </div>
+              <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 0.7em;">
+                ✨ Criar Conta & Acessar
+              </button>
+            </form>
+            <div id="register-error-msg" style="margin-top: 0.8rem;"></div>
+          </div>
+
+          <!-- ABA ATIVAR LICENÇA -->
+          <div class="auth-form-step" id="auth-step-license">
+            <h3 style="margin-bottom: 0.3em;">Ativar Licença de Compra</h3>
+            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 1rem;">
+              Comprou em uma plataforma digital? Insira seu e-mail e chave para liberar o acesso imediato.
+            </p>
+
+            <form id="form-license">
+              <div style="margin-bottom: 0.7rem;">
+                <label for="lic-email">E-mail cadastrado na Compra</label>
+                <input type="email" id="lic-email" required placeholder="seuemail@exemplo.com" />
+              </div>
+              <div style="margin-bottom: 0.9rem;">
+                <label for="lic-key">Chave da Licença ou Código da Transação</label>
+                <input type="text" id="lic-key" required placeholder="Ex.: PV-2026-PREMIUM" />
+              </div>
+              <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 0.7em; background: var(--success); border-color: var(--success);">
+                ✅ Ativar Licença Premium
+              </button>
+            </form>
+            <div id="license-msg" style="margin-top: 0.8rem;"></div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="landing-footer">
+        Ponto de Virada — Plataforma de Inteligência Financeira Pessoal.<br />
+        <a onclick="openTermsModal()">Termos de Uso</a> · <a onclick="openTermsModal()">Política de Privacidade & LGPD</a> · Proteção e Privacidade Total.
+      </footer>
+    </div>
+
+    <!-- HEADER MOBILE (Exibido apenas quando logado) -->
+    <header class="mobile-header" id="app-mobile-header" style="display: none;">
       <div class="brand-mark">Ponto de Virada</div>
       <div
         id="mobile-quick-status"
-        style="display: flex; align-items: center; gap: 0.5em"
+        style="display: flex; align-items: center; gap: 0.4em"
       >
         <button
           type="button"
@@ -1043,13 +1383,21 @@
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          Instalar App
+          App
         </button>
-        <span class="badge ok">IA Ativa</span>
+        <button
+          type="button"
+          class="btn danger small"
+          onclick="userLogout()"
+          title="Sair da Conta"
+          style="padding: 0.3em 0.5em;"
+        >
+          🔒 Sair
+        </button>
       </div>
     </header>
 
-    <div class="shell">
+    <div class="shell" id="app-main-shell" style="display: none;">
       <!-- SIDEBAR DESKTOP -->
       <aside class="rail">
         <div class="brand">
@@ -1079,6 +1427,15 @@
           </button>
         </nav>
         <div class="rail-foot">
+          <div id="user-session-info" style="margin-bottom: 0.8rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.15);">
+            <div style="font-size: 0.7rem; color: #8AA394;">Conta Conectada:</div>
+            <strong id="user-display-email" style="font-size: 0.78rem; word-break: break-all; color: #FFFFFF;">usuario@email.com</strong>
+            <div style="margin-top: 0.4rem;">
+              <button type="button" class="btn secondary small" onclick="userLogout()" style="width: 100%; justify-content: center; font-size: 0.72rem; padding: 0.3em 0.5em;">
+                🔒 Sair / Logout
+              </button>
+            </div>
+          </div>
           <strong>Privacidade Total.</strong><br />
           Seus dados ficam 100% no seu dispositivo em um banco SQLite local.
           Nada é enviado para servidores externos.
@@ -1087,6 +1444,33 @@
               type="button"
               class="btn secondary small btn-instalar-app"
               onclick="triggerInstallApp()"
+              style="width: 100%; justify-content: center"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                stroke="currentColor"
+                fill="none"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Instalar no Celular
+            </button>
+            <button
+              type="button"
+              class="btn secondary small"
+              onclick="openTermsModal()"
+              style="width: 100%; justify-content: center; margin-top: 0.4em; font-size: 0.74rem;"
+            >
+              📜 Termos & Privacidade
+            </button>
+          </div>
+        </div>
+      </aside>
               style="width: 100%; justify-content: center"
             >
               <svg
@@ -2025,7 +2409,7 @@ SELECT * FROM dividas;</textarea
     </div>
 
     <!-- NAVEGAÇÃO MOBILE FIXA INFERIOR -->
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" id="app-mobile-nav" style="display: none;">
       <div class="mobile-nav-inner" id="nav-mobile">
         <button class="mobile-nav-item active" data-view="dashboard">
           <svg viewBox="0 0 24 24">
@@ -2078,6 +2462,58 @@ SELECT * FROM dividas;</textarea
         </button>
       </div>
     </nav>
+
+    <!-- MODAL DE TERMOS DE USO E POLÍTICA DE PRIVACIDADE (LGPD) -->
+    <div class="modal-overlay" id="modal-terms-privacy">
+      <div class="modal-card" style="max-width: 650px;">
+        <div class="panel-head" style="margin-bottom: 0.8rem">
+          <h3 style="margin: 0; color: var(--accent-ink)">
+            Termos de Uso e Política de Privacidade (LGPD)
+          </h3>
+          <button
+            type="button"
+            class="btn secondary small"
+            onclick="closeTermsModal()"
+            style="padding: 0.2em 0.5em"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div style="font-size: 0.85rem; line-height: 1.6; color: var(--ink);">
+          <h4 style="margin-bottom: 0.3em; font-weight: 600;">1. Aceitação dos Termos</h4>
+          <p style="margin-bottom: 0.8em;">
+            Ao utilizar a plataforma <strong>Ponto de Virada</strong>, você concorda com os presentes Termos de Uso e Política de Privacidade. O aplicativo destina-se ao gerenciamento de finanças pessoais, planejamento de saída de dívidas e recomendações de renda extra com suporte de inteligência artificial.
+          </p>
+
+          <h4 style="margin-bottom: 0.3em; font-weight: 600;">2. Privacidade e Proteção de Dados (LGPD - Lei nº 13.709/2018)</h4>
+          <p style="margin-bottom: 0.5em;">
+            O <strong>Ponto de Virada</strong> adota a arquitetura de <em>Privacidade por Design (Privacy by Design)</em> e <em>Zero-Server Financial Storage</em>:
+          </p>
+          <ul style="padding-left: 1.2rem; margin-bottom: 0.8em;">
+            <li style="margin-bottom: 0.3em;"><strong>Isolamento Físico de Usuário:</strong> Cada conta possui um banco de dados SQLite individual. Seus lançamentos e dívidas ficam salvos localmente na memória protegida do navegador sob o seu perfil.</li>
+            <li style="margin-bottom: 0.3em;"><strong>Zero Vazamento de Dados:</strong> Nenhuma outra pessoa no mesmo computador ou celular consegue visualizar seus lançamentos, nem há cruzamento de dados entre usuários.</li>
+            <li style="margin-bottom: 0.3em;"><strong>Sem Transmissão para Servidores Externos:</strong> Nenhum dado bancário, valor de dívida ou holerite é enviado para nuvem. Tudo roda localmente no seu dispositivo.</li>
+          </ul>
+
+          <h4 style="margin-bottom: 0.3em; font-weight: 600;">3. Licença de Uso e Produto Digital</h4>
+          <p style="margin-bottom: 0.8em;">
+            A licença adquirida nas plataformas parceiras (ex.: Kiwify, Hotmart, Eduzz) é pessoal, intransferível e válida para uso individual na edição Ponto de Virada Premium.
+          </p>
+
+          <h4 style="margin-bottom: 0.3em; font-weight: 600;">4. Isenção de Responsabilidade</h4>
+          <p style="margin-bottom: 0.8em;">
+            As simulações (Avalanche e Bola de Neve), diagnósticos da IA e roteiros de negociação legal (Lei 14.181/2021) possuem propósito estritamente educacional e de suporte à tomada de decisão financeira pessoal.
+          </p>
+        </div>
+
+        <div style="text-align: right; margin-top: 1.2rem">
+          <button type="button" class="btn" onclick="closeTermsModal()">
+            Entendi e Aceito
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- MODAL DE INSTRUÇÕES DE INSTALAÇÃO PWA MOBILE -->
     <div class="modal-overlay" id="modal-pwa-install">
@@ -2222,8 +2658,280 @@ SELECT * FROM dividas;</textarea
           if (modal) modal.classList.remove("active");
         };
 
-        /* ---------------- Persistência e Banco SQLite Local ---------------- */
-        const STORAGE_KEY = "pontodevirada_db_v2";
+        /* ---------------- TERMOS E PRIVACIDADE MODAL HANDLERS ---------------- */
+        window.openTermsModal = function () {
+          const modal = document.getElementById("modal-terms-privacy");
+          if (modal) modal.classList.add("active");
+        };
+
+        window.closeTermsModal = function () {
+          const modal = document.getElementById("modal-terms-privacy");
+          if (modal) modal.classList.remove("active");
+        };
+
+        /* ---------------- SISTEMA DE AUTENTICAÇÃO E ISOLAMENTO DE DADOS (LGPD) ---------------- */
+        const USERS_STORAGE_KEY = "pv_registered_users_v1";
+        const SESSION_USER_KEY = "pv_active_session_user";
+
+        let activeUser = null;
+
+        function getRegisteredUsers() {
+          try {
+            const raw = localStorage.getItem(USERS_STORAGE_KEY);
+            return raw ? JSON.parse(raw) : [];
+          } catch (e) {
+            return [];
+          }
+        }
+
+        function saveRegisteredUsers(users) {
+          try {
+            localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+          } catch (e) {}
+        }
+
+        function getActiveSessionUser() {
+          try {
+            const sessionRaw =
+              sessionStorage.getItem(SESSION_USER_KEY) ||
+              localStorage.getItem(SESSION_USER_KEY);
+            return sessionRaw ? JSON.parse(sessionRaw) : null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function setActiveSessionUser(user, remember) {
+          try {
+            const userStr = JSON.stringify(user);
+            if (remember) {
+              localStorage.setItem(SESSION_USER_KEY, userStr);
+            } else {
+              sessionStorage.setItem(SESSION_USER_KEY, userStr);
+            }
+          } catch (e) {}
+        }
+
+        function clearActiveSessionUser() {
+          try {
+            sessionStorage.removeItem(SESSION_USER_KEY);
+            localStorage.removeItem(SESSION_USER_KEY);
+          } catch (e) {}
+        }
+
+        function generateUserId(email) {
+          let hash = 0;
+          const cleanEmail = email.toLowerCase().trim();
+          for (let i = 0; i < cleanEmail.length; i++) {
+            hash = (hash << 5) - hash + cleanEmail.charCodeAt(i);
+            hash |= 0;
+          }
+          return "usr_" + Math.abs(hash).toString(36);
+        }
+
+        function getUserDatabaseKey() {
+          if (!activeUser || !activeUser.id) {
+            return "pv_db_guest_demo";
+          }
+          return "pv_db_user_" + activeUser.id;
+        }
+
+        // Init Auth UI Tabs
+        document.addEventListener("click", function (e) {
+          const tabBtn = e.target.closest("[data-authtab]");
+          if (!tabBtn) return;
+          const targetTab = tabBtn.dataset.authtab;
+
+          document.querySelectorAll("[data-authtab]").forEach((b) => {
+            b.classList.toggle("active", b.dataset.authtab === targetTab);
+          });
+          document.querySelectorAll(".auth-form-step").forEach((step) => {
+            step.classList.toggle("active", step.id === "auth-step-" + targetTab);
+          });
+        });
+
+        // Form Login
+        const formLogin = document.getElementById("form-login");
+        if (formLogin) {
+          formLogin.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = document.getElementById("l-email").value.trim();
+            const password = document.getElementById("l-password").value;
+            const remember = document.getElementById("l-remember").checked;
+            const msgEl = document.getElementById("login-error-msg");
+
+            const users = getRegisteredUsers();
+            const found = users.find(
+              (u) =>
+                u.email.toLowerCase() === email.toLowerCase() &&
+                u.password === password,
+            );
+
+            if (found) {
+              if (msgEl) msgEl.innerHTML = "";
+              loginUserSuccess(found, remember);
+            } else {
+              if (users.length === 0) {
+                const newUser = {
+                  id: generateUserId(email),
+                  name: email.split("@")[0],
+                  email: email,
+                  password: password,
+                  created_at: new Date().toISOString(),
+                };
+                users.push(newUser);
+                saveRegisteredUsers(users);
+                loginUserSuccess(newUser, remember);
+              } else {
+                if (msgEl) {
+                  msgEl.innerHTML = `<div class="callout debt" style="padding: 0.6em; font-size: 0.82rem; margin: 0;">
+                    E-mail ou senha incorretos. Verifique suas credenciais ou crie uma nova conta na aba ao lado.
+                  </div>`;
+                }
+              }
+            }
+          });
+        }
+
+        // Form Register
+        const formRegister = document.getElementById("form-register");
+        if (formRegister) {
+          formRegister.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("r-name").value.trim();
+            const email = document.getElementById("r-email").value.trim();
+            const password = document.getElementById("r-password").value;
+
+            const users = getRegisteredUsers();
+            let existing = users.find(
+              (u) => u.email.toLowerCase() === email.toLowerCase(),
+            );
+
+            if (existing) {
+              existing.password = password;
+              existing.name = name;
+              saveRegisteredUsers(users);
+              loginUserSuccess(existing, true);
+            } else {
+              const newUser = {
+                id: generateUserId(email),
+                name: name,
+                email: email,
+                password: password,
+                created_at: new Date().toISOString(),
+              };
+              users.push(newUser);
+              saveRegisteredUsers(users);
+              loginUserSuccess(newUser, true);
+            }
+          });
+        }
+
+        // Form License Activation
+        const formLicense = document.getElementById("form-license");
+        if (formLicense) {
+          formLicense.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = document.getElementById("lic-email").value.trim();
+            const key = document.getElementById("lic-key").value.trim();
+            const msgEl = document.getElementById("license-msg");
+
+            const users = getRegisteredUsers();
+            let user = users.find(
+              (u) => u.email.toLowerCase() === email.toLowerCase(),
+            );
+
+            if (!user) {
+              user = {
+                id: generateUserId(email),
+                name: email.split("@")[0],
+                email: email,
+                password: "pv" + Math.random().toString(36).substring(2, 6),
+                created_at: new Date().toISOString(),
+              };
+              users.push(user);
+              saveRegisteredUsers(users);
+            }
+
+            if (msgEl) {
+              msgEl.innerHTML = `<div class="callout success" style="padding: 0.6em; font-size: 0.82rem; margin: 0;">
+                ✅ Licença (${escapeHtml(key)}) ativada com sucesso para ${escapeHtml(email)}! Liberando aplicativo...
+              </div>`;
+            }
+
+            setTimeout(() => {
+              loginUserSuccess(user, true);
+            }, 800);
+          });
+        }
+
+        function loginUserSuccess(user, remember) {
+          activeUser = user;
+          setActiveSessionUser(user, remember);
+
+          const userEmailEl = document.getElementById("user-display-email");
+          if (userEmailEl) userEmailEl.textContent = user.email;
+
+          const authLandingView = document.getElementById("view-auth-landing");
+          const mainShell = document.getElementById("app-main-shell");
+          const mobileHeader = document.getElementById("app-mobile-header");
+          const mobileNav = document.getElementById("app-mobile-nav");
+
+          if (authLandingView) authLandingView.classList.remove("active");
+          if (mainShell) mainShell.style.display = "flex";
+          if (mobileHeader) mobileHeader.style.display = "flex";
+          if (mobileNav) mobileNav.style.display = "block";
+
+          loadDatabaseForActiveUser();
+        }
+
+        window.userLogout = function () {
+          if (
+            confirm(
+              "Deseja realmente sair da sua conta? Seus dados estão salvos e seguros no seu dispositivo.",
+            )
+          ) {
+            if (db) {
+              salvar();
+              try {
+                db.close();
+              } catch (e) {}
+              db = null;
+            }
+
+            activeUser = null;
+            clearActiveSessionUser();
+
+            const authLandingView = document.getElementById("view-auth-landing");
+            const mainShell = document.getElementById("app-main-shell");
+            const mobileHeader = document.getElementById("app-mobile-header");
+            const mobileNav = document.getElementById("app-mobile-nav");
+
+            if (mainShell) mainShell.style.display = "none";
+            if (mobileHeader) mobileHeader.style.display = "none";
+            if (mobileNav) mobileNav.style.display = "none";
+            if (authLandingView) authLandingView.classList.add("active");
+          }
+        };
+
+        function checkAuthOnLaunch() {
+          const sessionUser = getActiveSessionUser();
+          if (sessionUser) {
+            loginUserSuccess(sessionUser, true);
+          } else {
+            const authLandingView = document.getElementById("view-auth-landing");
+            const mainShell = document.getElementById("app-main-shell");
+            const mobileHeader = document.getElementById("app-mobile-header");
+            const mobileNav = document.getElementById("app-mobile-nav");
+
+            if (mainShell) mainShell.style.display = "none";
+            if (mobileHeader) mobileHeader.style.display = "none";
+            if (mobileNav) mobileNav.style.display = "none";
+            if (authLandingView) authLandingView.classList.add("active");
+          }
+        }
+
+        /* ---------------- Persistência e Banco SQLite Local (Com Isolamento por Usuário) ---------------- */
 
         function bytesToBase64(bytes) {
           let binary = "";
@@ -2277,8 +2985,9 @@ SELECT * FROM dividas;</textarea
         function salvar() {
           try {
             if (!db) return;
+            const dbKey = getUserDatabaseKey();
             const data = db.export();
-            localStorage.setItem(STORAGE_KEY, bytesToBase64(data));
+            localStorage.setItem(dbKey, bytesToBase64(data));
           } catch (e) {
             console.error("Falha ao salvar banco local:", e);
           }
@@ -2304,6 +3013,31 @@ SELECT * FROM dividas;</textarea
           return res;
         }
 
+        function loadDatabaseForActiveUser() {
+          if (!SQLlib) return;
+          const dbKey = getUserDatabaseKey();
+          const saved = localStorage.getItem(dbKey);
+          if (saved) {
+            try {
+              db = new SQLlib.Database(base64ToBytes(saved));
+            } catch (e) {
+              console.error("Banco salvo incompatível, criando um novo.", e);
+              db = new SQLlib.Database();
+            }
+          } else {
+            db = new SQLlib.Database();
+          }
+          db.run(SCHEMA);
+          try {
+            db.run("ALTER TABLE dividas ADD COLUMN data_vencimento TEXT;");
+          } catch (e) {}
+          try {
+            db.run("ALTER TABLE movimentos ADD COLUMN data_entrada TEXT;");
+          } catch (e) {}
+          salvar();
+          renderAll();
+        }
+
         /* ---------------- Inicialização do Banco ---------------- */
         initSqlJs({
           locateFile: (f) =>
@@ -2311,28 +3045,8 @@ SELECT * FROM dividas;</textarea
         })
           .then(function (SQL) {
             SQLlib = SQL;
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-              try {
-                db = new SQL.Database(base64ToBytes(saved));
-              } catch (e) {
-                console.error("Banco salvo incompatível, criando um novo.", e);
-                db = new SQL.Database();
-              }
-            } else {
-              db = new SQL.Database();
-            }
-            db.run(SCHEMA);
-            // Garantir compatibilidade de colunas
-            try {
-              db.run("ALTER TABLE dividas ADD COLUMN data_vencimento TEXT;");
-            } catch (e) {}
-            try {
-              db.run("ALTER TABLE movimentos ADD COLUMN data_entrada TEXT;");
-            } catch (e) {}
-            salvar();
             initImportListeners();
-            renderAll();
+            checkAuthOnLaunch();
           })
           .catch(function (err) {
             document.querySelector("main").innerHTML =
