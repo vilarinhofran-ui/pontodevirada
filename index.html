@@ -1141,6 +1141,13 @@
                         Empréstimo Consignado (~ 2.1% a.m.)
                       </option>
                       <option
+                        value="Financiamento Imobiliário"
+                        data-taxa="0.8"
+                        data-tipo="financiamento"
+                      >
+                        Financiamento Imobiliário (~ 0.8% a.m.)
+                      </option>
+                      <option
                         value="Dívida Pessoal / Amigos"
                         data-taxa="0"
                         data-tipo="pessoa_fisica"
@@ -1173,13 +1180,14 @@
                   </select>
                 </div>
                 <div>
-                  <label for="d-saldo">Saldo devedor hoje (R$)</label>
+                  <label for="d-saldo"
+                    >Saldo devedor hoje (R$) (opcional)</label
+                  >
                   <input
                     id="d-saldo"
                     type="number"
                     min="0"
                     step="0.01"
-                    required
                     placeholder="0,00"
                   />
                 </div>
@@ -2632,14 +2640,17 @@ SELECT * FROM dividas;</textarea
                 ? credorCustomInput.value.trim()
                 : credorSelect.value.trim();
             const tipo = tipoSelect.value;
-            const saldo = parseFloat(document.getElementById("d-saldo").value);
+            const saldoRaw = document.getElementById("d-saldo").value;
+            const saldo = isNaN(parseFloat(saldoRaw))
+              ? 0
+              : parseFloat(saldoRaw);
             const parcela = parseFloat(
               document.getElementById("d-parcela").value,
             );
             const taxaPct = parseFloat(taxaInput.value);
             const dataVenc = document.getElementById("d-data-venc").value;
 
-            if (!credorVal || isNaN(saldo) || isNaN(parcela)) return;
+            if (!credorVal || isNaN(parcela)) return;
 
             let diaVencNum = null;
             if (dataVenc && dataVenc.includes("-")) {
@@ -2680,19 +2691,36 @@ SELECT * FROM dividas;</textarea
             return;
           }
 
-          const totalDevido = rows.reduce((s, r) => s + r.saldo_devedor, 0);
-          const totalParcelas = rows.reduce((s, r) => s + r.parcela_minima, 0);
-          resumo.textContent = `${rows.length} dívida(s) · Total ${fmtBRL(totalDevido)} · Parcelas mínimas ${fmtBRL(totalParcelas)}/mês`;
+          const totalDevido = rows.reduce(
+            (s, r) => s + (r.saldo_devedor || 0),
+            0,
+          );
+          const totalParcelas = rows.reduce(
+            (s, r) => s + (r.parcela_minima || 0),
+            0,
+          );
+          const totalJurosEstimado = rows.reduce(
+            (s, r) => s + (r.saldo_devedor || 0) * (r.taxa_juros_mensal || 0),
+            0,
+          );
+
+          resumo.textContent =
+            `${rows.length} dívida(s) · Total devedor ${fmtBRL(totalDevido)} · Parcelas mínimas ${fmtBRL(totalParcelas)}/mês` +
+            (totalJurosEstimado > 0
+              ? ` · Juros ~ ${fmtBRL(totalJurosEstimado)}/mês`
+              : "");
 
           let html =
             '<table><thead><tr><th>Credor</th><th>Tipo</th><th class="num">Saldo Devedor</th><th class="num">Parcela Mín.</th><th class="num">Juros a.m.</th><th>Vencimento</th><th></th></tr></thead><tbody>';
           rows.forEach((r) => {
             const st = getStatusVencimento(r.data_vencimento, r.dia_vencimento);
+            const saldoDisplay =
+              r.saldo_devedor > 0 ? fmtBRL(r.saldo_devedor) : "—";
             html +=
               "<tr>" +
               `<td><strong>${escapeHtml(r.credor)}</strong></td>` +
               `<td>${TIPO_LABEL[r.tipo] || r.tipo}</td>` +
-              `<td class="num"><strong>${fmtBRL(r.saldo_devedor)}</strong></td>` +
+              `<td class="num"><strong>${saldoDisplay}</strong></td>` +
               `<td class="num">${fmtBRL(r.parcela_minima)}</td>` +
               `<td class="num">${fmtPct(r.taxa_juros_mensal * 100)}</td>` +
               `<td><span class="badge ${st.badge}">${st.label}</span></td>` +
