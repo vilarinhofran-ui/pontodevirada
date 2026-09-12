@@ -1183,6 +1183,12 @@
     <div id="view-auth-landing" class="auth-landing-wrap active">
       <header class="landing-nav">
         <div class="logo">
+          <svg viewBox="0 0 32 32" width="28" height="28" fill="none" style="flex: none;">
+            <rect width="32" height="32" rx="7" fill="#2A724E"/>
+            <path d="M8 22L14 15L18 19L24 10" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 10H24V15" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="10" r="2" fill="#8FC6A9"/>
+          </svg>
           <span>Ponto de Virada</span>
           <span class="badge ok" style="font-size: 0.65rem;">Versão Premium</span>
         </div>
@@ -1221,11 +1227,11 @@
             </li>
             <li class="feature-item">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Simulador Avalanche vs. Bola de Neve:</strong> Projeção visual gráfica de quitação mês a mês.</span>
+              <span><strong>Atualização Diária de Saldos & Status:</strong> Acompanhe valores com juros recalculados diariamente e mude o status de quitação.</span>
             </li>
             <li class="feature-item">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Recomendador de Renda Extra:</strong> Descubra opções imediatas personalizadas para o seu perfil.</span>
+              <span><strong>Simulador Avalanche vs. Bola de Neve:</strong> Projeção visual gráfica de quitação mês a mês.</span>
             </li>
             <li class="feature-item">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1236,23 +1242,31 @@
           <div class="checkout-box">
             <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.4rem;">
               <div>
-                <strong style="display: block; font-size: 0.9rem; color: var(--ink);">Acesso Vitalício sem Mensalidades</strong>
-                <span style="font-size: 0.78rem; color: var(--ink-soft);">Oferta de lançamento com suporte</span>
+                <strong style="display: block; font-size: 0.95rem; color: var(--ink);">Acesso Vitalício sem Mensalidades</strong>
+                <span style="font-size: 0.78rem; color: var(--ink-soft);">Oferta de lançamento com suporte e atualização contínua</span>
               </div>
               <div class="checkout-price">
-                R$ 47,00 <span>/ pagamento único</span>
+                R$ 47,00 <span style="display: block; font-size: 0.75rem; text-align: right;">/ pagamento único</span>
               </div>
             </div>
+
+            <!-- FORMAS DE PAGAMENTO COM DESTAQUE DE CARTÃO DE CRÉDITO -->
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.4rem 0;">
+              <span class="badge ok" style="font-weight: 600; font-size: 0.78rem; padding: 0.35em 0.6em; background: #d7efe0; color: #1f3d32;">💳 Cartão de Crédito em até 12x</span>
+              <span class="badge ok" style="font-weight: 600; font-size: 0.78rem; padding: 0.35em 0.6em; background: #d7efe0; color: #1f3d32;">⚡ PIX Liberação Imediata</span>
+              <span class="badge" style="font-weight: 600; font-size: 0.78rem; padding: 0.35em 0.6em;">📄 Boleto Bancário</span>
+            </div>
+
             <a
               href="https://kiwify.com.br"
               target="_blank"
               class="btn"
-              style="width: 100%; justify-content: center; padding: 0.8em; font-size: 1rem; background: var(--success); border-color: var(--success);"
+              style="width: 100%; justify-content: center; padding: 0.85em; font-size: 1.05rem; background: var(--success); border-color: var(--success); font-weight: 700;"
             >
-              🚀 Comprar Agora na Plataforma Digital →
+              🚀 Comprar Agora no Cartão de Crédito ou PIX →
             </a>
             <div style="text-align: center; font-size: 0.75rem; color: var(--ink-soft);">
-              🔒 Compra 100% segura com garantia de 7 dias e liberação imediata por e-mail.
+              🔒 Compra 100% segura · Liberação imediata no e-mail · Garantia incondicional de 7 dias
             </div>
           </div>
         </div>
@@ -1352,6 +1366,184 @@
         </div>
       </div>
 
+      <!-- SEÇÃO SHOWCASE: SIMULADOR DE USABILIDADE DA VISÃO INTERNA DO APLICATIVO COM DADOS FICTÍCIOS -->
+      <div class="landing-showcase" style="max-width: 1140px; margin: 0 auto 2.5rem; padding: 0 1.5rem; width: 100%;">
+        <div class="sales-hero-card" style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.8rem; box-shadow: var(--shadow);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--line-soft); padding-bottom: 0.8rem;">
+            <div>
+              <span class="eyebrow" style="color: var(--accent-ink); font-weight: 700;">SIMULADOR DE USABILIDADE</span>
+              <h2 style="margin: 0.2rem 0 0; color: var(--accent-ink);">Conheça por Dentro os Módulos do Ponto de Virada</h2>
+            </div>
+            <span class="badge ok" style="font-size: 0.78rem; font-weight: 600;">📊 Visão Interna com Dados Fictícios de Demonstração</span>
+          </div>
+
+          <!-- NAVEGAÇÃO DOS MÓDULOS NO SIMULADOR -->
+          <div class="sim-module-tabs" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
+            <button type="button" class="btn small sim-tab-btn active" data-simtab="balanco" onclick="switchSimTab('balanco')">
+              📊 01. Balanço & Saúde
+            </button>
+            <button type="button" class="btn small secondary sim-tab-btn" data-simtab="dividas" onclick="switchSimTab('dividas')">
+              💳 02. Quita Dívidas & Atualização Diária
+            </button>
+            <button type="button" class="btn small secondary sim-tab-btn" data-simtab="estrategia" onclick="switchSimTab('estrategia')">
+              🚀 03. Simulador Avalanche
+            </button>
+            <button type="button" class="btn small secondary sim-tab-btn" data-simtab="ia" onclick="switchSimTab('ia')">
+              🤖 04. Inteligência Financeira IA
+            </button>
+          </div>
+
+          <!-- CONTEÚDO DO SIMULADOR DA VISÃO INTERNA -->
+          <div id="sim-content-area" style="background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.2rem;">
+            <!-- ABA 1: BALANÇO E SAÚDE -->
+            <div class="sim-view-pane active" id="sim-pane-balanco">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-bottom: 1rem;">
+                <div class="metric" style="background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--line-soft);">
+                  <div class="label" style="font-size: 0.75rem; color: var(--ink-soft);">Total Devedor Atualizado</div>
+                  <div class="value num" id="sim-val-devido" style="font-size: 1.3rem; font-weight: 700; color: var(--debt);">R$ 12.450,00</div>
+                  <div style="font-size: 0.7rem; color: var(--warn);">⚡ Atualização Diária</div>
+                </div>
+                <div class="metric" style="background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--line-soft);">
+                  <div class="label" style="font-size: 0.75rem; color: var(--ink-soft);">Renda Mensal Líquida</div>
+                  <div class="value num" style="font-size: 1.3rem; font-weight: 700; color: var(--success);">R$ 5.200,00</div>
+                  <div style="font-size: 0.7rem; color: var(--ink-soft);">Salário + Renda Extra</div>
+                </div>
+                <div class="metric" style="background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--line-soft);">
+                  <div class="label" style="font-size: 0.75rem; color: var(--ink-soft);">Gastos Essenciais</div>
+                  <div class="value num" style="font-size: 1.3rem; font-weight: 700; color: var(--ink);">R$ 2.950,00</div>
+                  <div style="font-size: 0.7rem; color: var(--ink-soft);">Contas, Alimentação</div>
+                </div>
+                <div class="metric" style="background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--line-soft);">
+                  <div class="label" style="font-size: 0.75rem; color: var(--ink-soft);">Sobra Operacional</div>
+                  <div class="value num" id="sim-val-sobra" style="font-size: 1.3rem; font-weight: 700; color: var(--accent-ink);">R$ 1.100,00</div>
+                  <div style="font-size: 0.7rem; color: var(--success);">Disponível p/ Quitação</div>
+                </div>
+              </div>
+
+              <div style="background: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--line-soft); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                  <h4 style="margin: 0; color: var(--accent-ink);">Score de Saúde Financeira: 82 / 100</h4>
+                  <p style="margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--ink-soft);">Situação sob controle. 21.1% da renda alocada em dívidas ativas.</p>
+                </div>
+                <span class="badge ok" style="font-size: 0.85rem; padding: 0.4em 0.8em;">🟢 Nível Seguro</span>
+              </div>
+            </div>
+
+            <!-- ABA 2: QUITA DÍVIDAS COM ATUALIZAÇÃO DIÁRIA E STATUS -->
+            <div class="sim-view-pane" id="sim-pane-dividas" style="display: none;">
+              <p style="font-size: 0.85rem; margin-bottom: 0.8rem; color: var(--ink-soft);">
+                <strong>Simulador de Usabilidade:</strong> Altere o status das dívidas fictícias abaixo para testar a atualização automática nos valores!
+              </p>
+
+              <div class="table-wrap" style="background: #fff; border-radius: 4px; border: 1px solid var(--line-soft); overflow-x: auto;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Credor</th>
+                      <th>Tipo</th>
+                      <th class="num">Saldo Inicial</th>
+                      <th class="num">Valor no Vencimento</th>
+                      <th class="num">Valor Atualizado Hoje ⚡</th>
+                      <th class="num">Juros a.m.</th>
+                      <th>Status (Teste Alterar!)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Nubank — Cartão de Crédito</strong></td>
+                      <td>Cartão de crédito</td>
+                      <td class="num">R$ 3.800,00</td>
+                      <td class="num">R$ 450,00</td>
+                      <td class="num"><strong style="color: var(--debt);">R$ 3.818,24</strong></td>
+                      <td class="num">14,5%</td>
+                      <td>
+                        <select onchange="updateSimData()" class="sim-status-select" style="padding: 0.2em; font-size: 0.78rem; font-weight: 600;">
+                          <option value="3818.24" selected>🟢 Em Dia</option>
+                          <option value="3818.24">🟡 Pendente</option>
+                          <option value="3818.24">🔴 Em Atraso</option>
+                          <option value="0">✅ Quitada / Pago</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Itaú — Cheque Especial</strong></td>
+                      <td>Cheque especial</td>
+                      <td class="num">R$ 1.200,00</td>
+                      <td class="num">R$ 180,00</td>
+                      <td class="num"><strong style="color: var(--debt);">R$ 1.205,12</strong></td>
+                      <td class="num">12,8%</td>
+                      <td>
+                        <select onchange="updateSimData()" class="sim-status-select" style="padding: 0.2em; font-size: 0.78rem; font-weight: 600;">
+                          <option value="1205.12">🟢 Em Dia</option>
+                          <option value="1205.12">🟡 Pendente</option>
+                          <option value="1205.12" selected>🔴 Em Atraso</option>
+                          <option value="0">✅ Quitada / Pago</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Caixa — Financiamento Imobiliário</strong></td>
+                      <td>Financiamento</td>
+                      <td class="num">R$ 7.450,00</td>
+                      <td class="num">R$ 520,00</td>
+                      <td class="num"><strong style="color: var(--debt);">R$ 7.452,10</strong></td>
+                      <td class="num">0,8%</td>
+                      <td>
+                        <select onchange="updateSimData()" class="sim-status-select" style="padding: 0.2em; font-size: 0.78rem; font-weight: 600;">
+                          <option value="7452.10" selected>🟢 Em Dia</option>
+                          <option value="7452.10">🟡 Pendente</option>
+                          <option value="7452.10">🔴 Em Atraso</option>
+                          <option value="0">✅ Quitada / Pago</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- ABA 3: SIMULADOR AVALANCHE -->
+            <div class="sim-view-pane" id="sim-pane-estrategia" style="display: none;">
+              <div style="background: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--line-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem;">
+                  <h4 style="margin: 0; color: var(--accent-ink);">Estratégia Recomendada: Método Avalanche</h4>
+                  <span class="badge ok" style="font-size: 0.75rem;">⚡ Menor Custo de Juros</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 1rem;">
+                  A IA prioriza quitar primeiro o <strong>Nubank Cartão (14.5% a.m.)</strong> para estancar o juro mais caro, eliminando as dívidas em apenas <strong>11 meses</strong>.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 200px; background: var(--success-soft); padding: 0.8rem; border-radius: 4px; border-left: 4px solid var(--success);">
+                    <div style="font-size: 0.75rem; color: var(--ink-soft);">Economia estimada em juros</div>
+                    <strong style="font-size: 1.2rem; color: var(--success);">R$ 3.840,00 economizados</strong>
+                  </div>
+                  <div style="flex: 1; min-width: 200px; background: var(--accent-soft); padding: 0.8rem; border-radius: 4px; border-left: 4px solid var(--accent);">
+                    <div style="font-size: 0.75rem; color: var(--ink-soft);">Tempo até Dívida Zero</div>
+                    <strong style="font-size: 1.2rem; color: var(--accent-ink);">11 Meses (Quitação Acelerada)</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ABA 4: DIAGNÓSTICO IA -->
+            <div class="sim-view-pane" id="sim-pane-ia" style="display: none;">
+              <div class="ai-insight-card warning" style="margin: 0; padding: 1rem; border-left: 4px solid var(--warn); background: #faf6eb; border-radius: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                  <h4 style="margin: 0; font-size: 0.95rem; color: var(--ink); font-weight: 700;">🤖 Parecer da Inteligência Financeira</h4>
+                  <span class="badge warn" style="font-size: 0.7rem;">Alerta Prioritário</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--ink); margin: 0 0 0.5rem 0;">
+                  "Atenção com o Cartão Nubank! Ele representa 74% de todo o seu custo de juros mensal. Destine R$ 300,00 adicionais da sua sobra para estancar esse ralo de dinheiro."
+                </p>
+                <div style="font-size: 0.75rem; color: var(--ink-soft);">
+                  💡 <em>Dica de Renda Extra identificada: Faça vendas de itens usados para levantar R$ 500,00 nos próximos 5 dias.</em>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <footer class="landing-footer">
         Ponto de Virada — Plataforma de Inteligência Financeira Pessoal.<br />
         <a onclick="openTermsModal()">Termos de Uso</a> · <a onclick="openTermsModal()">Política de Privacidade & LGPD</a> · Proteção e Privacidade Total.
@@ -1360,7 +1552,14 @@
 
     <!-- HEADER MOBILE (Exibido apenas quando logado) -->
     <header class="mobile-header" id="app-mobile-header" style="display: none;">
-      <div class="brand-mark">Ponto de Virada</div>
+      <div class="brand-mark" style="display: flex; align-items: center; gap: 0.4em;">
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="none" style="flex: none;">
+          <rect width="32" height="32" rx="6" fill="#2A724E"/>
+          <path d="M8 22L14 15L18 19L24 10" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M19 10H24V15" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Ponto de Virada</span>
+      </div>
       <div
         id="mobile-quick-status"
         style="display: flex; align-items: center; gap: 0.4em"
@@ -1401,7 +1600,15 @@
       <!-- SIDEBAR DESKTOP -->
       <aside class="rail">
         <div class="brand">
-          <div class="mark">Ponto de Virada</div>
+          <div class="mark" style="display: flex; align-items: center; gap: 0.4em;">
+            <svg viewBox="0 0 32 32" width="28" height="28" fill="none" style="flex: none;">
+              <rect width="32" height="32" rx="7" fill="#2A724E"/>
+              <path d="M8 22L14 15L18 19L24 10" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19 10H24V15" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="24" cy="10" r="2" fill="#8FC6A9"/>
+            </svg>
+            <span>Ponto de Virada</span>
+          </div>
           <div class="sub">
             Organize as dívidas. Aumente a renda. Siga o plano com IA.
           </div>
@@ -1694,9 +1901,7 @@
                   </select>
                 </div>
                 <div>
-                  <label for="d-saldo"
-                    >Saldo devedor hoje (R$) (opcional)</label
-                  >
+                  <label for="d-saldo">Saldo Devedor Inicial (R$)</label>
                   <input
                     id="d-saldo"
                     type="number"
@@ -1706,11 +1911,16 @@
                   />
                 </div>
                 <div>
-                  <label for="d-parcela">Parcela / Mínimo mensal (R$)</label>
+                  <label for="d-parcela">Valor no Vencimento / Parcela (R$)</label>
                   <input
                     id="d-parcela"
                     type="number"
                     min="0"
+                    step="0.01"
+                    required
+                    placeholder="0,00"
+                  />
+                </div>
                     step="0.01"
                     required
                     placeholder="0,00"
@@ -2653,6 +2863,47 @@ SELECT * FROM dividas;</textarea
           }
         };
 
+        window.switchSimTab = function (tabName) {
+          document.querySelectorAll(".sim-tab-btn").forEach((b) => {
+            if (b.dataset.simtab === tabName) {
+              b.classList.add("active");
+              b.classList.remove("secondary");
+            } else {
+              b.classList.remove("active");
+              b.classList.add("secondary");
+            }
+          });
+          document.querySelectorAll(".sim-view-pane").forEach((pane) => {
+            pane.style.display =
+              pane.id === "sim-pane-" + tabName ? "block" : "none";
+          });
+        };
+
+        window.updateSimData = function () {
+          let total = 0;
+          document.querySelectorAll(".sim-status-select").forEach((sel) => {
+            total += parseFloat(sel.value) || 0;
+          });
+          const el = document.getElementById("sim-val-devido");
+          if (el)
+            el.textContent =
+              "R$ " +
+              total.toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              });
+          const elSobra = document.getElementById("sim-val-sobra");
+          if (elSobra) {
+            const sobra = 5200 - 2950 - (total > 0 ? 1150 : 0);
+            elSobra.textContent =
+              "R$ " +
+              Math.max(0, sobra).toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              });
+          }
+        };
+
         window.closeInstallModal = function () {
           const modal = document.getElementById("modal-pwa-install");
           if (modal) modal.classList.remove("active");
@@ -3569,44 +3820,88 @@ SELECT * FROM dividas;</textarea
             return;
           }
 
-          const totalDevido = rows.reduce(
+          const activeRows = rows.filter((r) => r.situacao !== "paga");
+
+          const totalDevidoInicial = activeRows.reduce(
             (s, r) => s + (r.saldo_devedor || 0),
             0,
           );
-          const totalParcelas = rows.reduce(
+          const totalParcelas = activeRows.reduce(
             (s, r) => s + (r.parcela_minima || 0),
-            0,
-          );
-          const totalJurosEstimado = rows.reduce(
-            (s, r) => s + (r.saldo_devedor || 0) * (r.taxa_juros_mensal || 0),
             0,
           );
 
           resumo.textContent =
-            `${rows.length} dívida(s) · Total devedor ${fmtBRL(totalDevido)} · Parcelas mínimas ${fmtBRL(totalParcelas)}/mês` +
-            (totalJurosEstimado > 0
-              ? ` · Juros ~ ${fmtBRL(totalJurosEstimado)}/mês`
-              : "");
+            `${activeRows.length} dívida(s) ativa(s) · Total devedor ${fmtBRL(totalDevidoInicial)} · Valor no Vencimento ${fmtBRL(totalParcelas)}/mês`;
 
           let html =
-            '<table><thead><tr><th>Credor</th><th>Tipo</th><th class="num">Saldo Devedor</th><th class="num">Parcela Mín.</th><th class="num">Juros a.m.</th><th>Vencimento</th><th></th></tr></thead><tbody>';
+            '<table><thead><tr><th>Credor</th><th>Tipo</th><th class="num">Saldo Inicial</th><th class="num">Valor no Vencimento</th><th class="num">Valor Atualizado Hoje ⚡</th><th class="num">Juros a.m.</th><th>Vencimento</th><th>Status (Controle)</th><th></th></tr></thead><tbody>';
+
           rows.forEach((r) => {
             const st = getStatusVencimento(r.data_vencimento, r.dia_vencimento);
             const saldoDisplay =
               r.saldo_devedor > 0 ? fmtBRL(r.saldo_devedor) : "—";
+
+            // Cálculo da atualização automática diária de saldo com juros
+            let valorAtualizado = r.saldo_devedor || 0;
+            if (r.saldo_devedor > 0 && r.taxa_juros_mensal > 0 && r.situacao !== "paga") {
+              let dias = 1;
+              if (r.criado_em) {
+                const diffMs = Date.now() - new Date(r.criado_em).getTime();
+                dias = Math.max(1, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+              } else {
+                dias = new Date().getDate();
+              }
+              const taxaDiaria = (r.taxa_juros_mensal || 0) / 30;
+              valorAtualizado = (r.saldo_devedor || 0) * (1 + (taxaDiaria * dias));
+            }
+
+            const valAtualizadoDisplay =
+              r.situacao === "paga"
+                ? '<span class="badge ok">R$ 0,00 (Quitada)</span>'
+                : `<strong style="color: var(--debt);">⚡ ${fmtBRL(valorAtualizado)}</strong>`;
+
+            const currentStatus = r.situacao || "ativa";
+
             html +=
               "<tr>" +
               `<td><strong>${escapeHtml(r.credor)}</strong></td>` +
               `<td>${TIPO_LABEL[r.tipo] || r.tipo}</td>` +
-              `<td class="num"><strong>${saldoDisplay}</strong></td>` +
-              `<td class="num">${fmtBRL(r.parcela_minima)}</td>` +
+              `<td class="num">${saldoDisplay}</td>` +
+              `<td class="num"><strong>${fmtBRL(r.parcela_minima)}</strong></td>` +
+              `<td class="num">${valAtualizadoDisplay}</td>` +
               `<td class="num">${fmtPct(r.taxa_juros_mensal * 100)}</td>` +
               `<td><span class="badge ${st.badge}">${st.label}</span></td>` +
+              `<td>
+                <select class="status-select-inline" data-status-divida="${r.id}" style="padding: 0.25em 0.4em; font-size: 0.78rem; font-weight: 600; border-radius: 4px; border: 1px solid var(--line); background: var(--surface);">
+                  <option value="ativa" ${currentStatus === "ativa" ? "selected" : ""}>🟢 Em Dia</option>
+                  <option value="pendente" ${currentStatus === "pendente" ? "selected" : ""}>🟡 Pendente</option>
+                  <option value="atrasada" ${currentStatus === "atrasada" ? "selected" : ""}>🔴 Em Atraso</option>
+                  <option value="paga" ${currentStatus === "paga" ? "selected" : ""}>✅ Quitada / Pago</option>
+                </select>
+              </td>` +
               `<td class="row-actions"><button class="btn danger small" data-del-divida="${r.id}">Remover</button></td>` +
               "</tr>";
           });
           html += "</tbody></table>";
           wrap.innerHTML = html;
+
+          // Event Listener para alterar status e atualizar automaticamente nos demais módulos
+          wrap.querySelectorAll("[data-status-divida]").forEach((sel) => {
+            sel.addEventListener("change", function () {
+              const id = parseInt(this.dataset.statusDivida, 10);
+              const newStatus = this.value;
+              runExec("UPDATE dividas SET situacao=? WHERE id=?;", [
+                newStatus,
+                id,
+              ]);
+              renderDividas();
+              renderDashboard();
+              if (typeof renderSimulador === "function") renderSimulador();
+              if (typeof renderExtraIncome === "function") renderExtraIncome();
+              if (typeof renderAiReport === "function") renderAiReport();
+            });
+          });
 
           wrap.querySelectorAll("[data-del-divida]").forEach((b) => {
             b.addEventListener("click", function () {
@@ -3662,19 +3957,39 @@ SELECT * FROM dividas;</textarea
           }
 
           let html =
-            '<table><thead><tr><th>Tipo</th><th>Categoria</th><th class="num">Valor Mensal</th><th>Data de Entrada</th><th></th></tr></thead><tbody>';
+            '<table><thead><tr><th>Tipo</th><th>Categoria</th><th class="num">Valor Mensal</th><th>Data de Entrada</th><th>Status</th><th></th></tr></thead><tbody>';
           rows.forEach((r) => {
+            const currentStatus = r.situacao || "confirmado";
             html +=
               "<tr>" +
               `<td><span class="tag ${r.tipo === "receita" ? "avalanche" : "neve"}">${MOV_LABEL[r.tipo] || r.tipo}</span></td>` +
               `<td><strong>${escapeHtml(r.categoria)}</strong></td>` +
               `<td class="num"><strong>${fmtBRL(r.valor)}</strong></td>` +
               `<td>${fmtDataEntrada(r.data_entrada)}</td>` +
+              `<td>
+                <select class="status-mov-inline" data-status-mov="${r.id}" style="padding: 0.25em 0.4em; font-size: 0.78rem; font-weight: 600; border-radius: 4px; border: 1px solid var(--line); background: var(--surface);">
+                  <option value="confirmado" ${currentStatus === "confirmado" ? "selected" : ""}>✅ Confirmado / Pago</option>
+                  <option value="pendente" ${currentStatus === "pendente" ? "selected" : ""}>⏳ Pendente / A Vencer</option>
+                </select>
+              </td>` +
               `<td class="row-actions"><button class="btn danger small" data-del-mov="${r.id}">Remover</button></td>` +
               "</tr>";
           });
           html += "</tbody></table>";
           wrap.innerHTML = html;
+
+          wrap.querySelectorAll("[data-status-mov]").forEach((sel) => {
+            sel.addEventListener("change", function () {
+              const id = parseInt(this.dataset.statusMov, 10);
+              const newStatus = this.value;
+              runExec("UPDATE movimentos SET situacao=? WHERE id=?;", [
+                newStatus,
+                id,
+              ]);
+              renderMovimentos();
+              renderDashboard();
+            });
+          });
 
           wrap.querySelectorAll("[data-del-mov]").forEach((b) => {
             b.addEventListener("click", function () {
@@ -3693,23 +4008,39 @@ SELECT * FROM dividas;</textarea
 
         function getResumoFinanceiro() {
           const receita = runQuery(
-            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='receita';",
+            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='receita' AND (situacao != 'pendente' OR situacao IS NULL);",
           )[0].v;
           const essencial = runQuery(
-            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='despesa_essencial';",
+            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='despesa_essencial' AND (situacao != 'pendente' OR situacao IS NULL);",
           )[0].v;
           const variavel = runQuery(
-            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='despesa_variavel';",
+            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='despesa_variavel' AND (situacao != 'pendente' OR situacao IS NULL);",
           )[0].v;
+
+          // Somente dívidas não quitadas entram nos cálculos ativos
           const dividasAtivas = runQuery(
-            "SELECT * FROM dividas WHERE situacao='ativa';",
+            "SELECT * FROM dividas WHERE situacao IS NULL OR situacao != 'paga';",
           );
-          const totalDevido = dividasAtivas.reduce(
-            (s, d) => s + d.saldo_devedor,
-            0,
-          );
+
+          // Total devido recalculado com a taxa de juros diária atualizada
+          const totalDevido = dividasAtivas.reduce((s, d) => {
+            let valorAtualizado = d.saldo_devedor || 0;
+            if (d.saldo_devedor > 0 && d.taxa_juros_mensal > 0) {
+              let dias = 1;
+              if (d.criado_em) {
+                const diffMs = Date.now() - new Date(d.criado_em).getTime();
+                dias = Math.max(1, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+              } else {
+                dias = new Date().getDate();
+              }
+              const taxaDiaria = (d.taxa_juros_mensal || 0) / 30;
+              valorAtualizado = (d.saldo_devedor || 0) * (1 + (taxaDiaria * dias));
+            }
+            return s + valorAtualizado;
+          }, 0);
+
           const parcelasMinimas = dividasAtivas.reduce(
-            (s, d) => s + d.parcela_minima,
+            (s, d) => s + (d.parcela_minima || 0),
             0,
           );
           const sobra = receita - essencial - variavel - parcelasMinimas;
