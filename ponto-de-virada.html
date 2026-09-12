@@ -1,0 +1,3670 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1F3D32" />
+    <title>
+      Ponto de Virada — Plano para Sair das Dívidas com IA e Renda Extra
+    </title>
+    <link rel="manifest" id="pwa-manifest-link" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- SQLite WASM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-wasm.js"></script>
+    <!-- ApexCharts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+      :root {
+        --paper: #eef0e9;
+        --surface: #ffffff;
+        --ink: #17231d;
+        --ink-soft: #4c5a51;
+        --line: #cbd3c4;
+        --line-soft: #dde3d6;
+        --accent: #33604f;
+        --accent-ink: #1f3d32;
+        --accent-soft: #dce7de;
+        --debt: #a24638;
+        --debt-soft: #f3dfd9;
+        --warn: #a97a22;
+        --warn-soft: #f1e6cb;
+        --success: #2a724e;
+        --success-soft: #d7efe0;
+        --rail-w: 240px;
+        --radius: 4px;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 15.5px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Fraunces", Georgia, serif;
+        color: var(--accent-ink);
+        margin: 0 0 0.3em 0;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      h1 {
+        font-size: 1.85rem;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      h3 {
+        font-size: 1.05rem;
+      }
+      p {
+        margin: 0 0 0.9em 0;
+        max-width: 65ch;
+      }
+      a {
+        color: var(--accent-ink);
+      }
+      .num {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+        font-size: 0.95rem;
+        color: var(--ink);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0.55em 0.65em;
+        width: 100%;
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus,
+      button:focus-visible,
+      .navitem:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 1px;
+        border-color: var(--accent);
+      }
+      label {
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--ink-soft);
+        display: block;
+        margin-bottom: 0.3em;
+      }
+
+      /* ---------- layout ---------- */
+      .shell {
+        display: flex;
+        min-height: 100vh;
+      }
+      .rail {
+        width: var(--rail-w);
+        flex: none;
+        background: var(--accent-ink);
+        color: #eaf0ea;
+        padding: 1.6rem 1.1rem;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .brand {
+        margin-bottom: 1.8rem;
+      }
+      .brand .mark {
+        font-family: "Fraunces", serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #fff;
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
+        gap: 0.4em;
+      }
+      .brand .sub {
+        font-size: 0.76rem;
+        color: #b9cbbf;
+        margin-top: 0.35em;
+        line-height: 1.3;
+      }
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        flex: 1;
+      }
+      .navitem {
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+        text-align: left;
+        background: none;
+        border: none;
+        color: #cfe0d5;
+        padding: 0.65em 0.6em;
+        border-radius: var(--radius);
+        font-size: 0.9rem;
+        border-left: 3px solid transparent;
+        transition: all 0.15s ease;
+      }
+      .navitem .idx {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        color: #7fa391;
+      }
+      .navitem:hover {
+        background: rgba(255, 255, 255, 0.07);
+        color: #fff;
+      }
+      .navitem.active {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        border-left-color: #8fc6a9;
+        font-weight: 500;
+      }
+      .rail-foot {
+        font-size: 0.72rem;
+        color: #8aa394;
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+        padding-top: 1rem;
+        margin-top: 1rem;
+      }
+      .rail-foot strong {
+        color: #cfe0d5;
+      }
+
+      main {
+        flex: 1;
+        min-width: 0;
+        padding: 2rem 2.4rem 5rem;
+      }
+      .view {
+        display: none;
+      }
+      .view.active {
+        display: block;
+        animation: fade 0.22s ease;
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ---------- Header ---------- */
+      .page-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1rem;
+        margin-bottom: 1.4rem;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      .page-head .eyebrow {
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--ink-soft);
+        margin-bottom: 0.2em;
+      }
+
+      /* ---------- Mobile Layout ---------- */
+      .mobile-header {
+        display: none;
+        background: var(--accent-ink);
+        color: #fff;
+        padding: 0.85rem 1.1rem;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .mobile-header .brand-mark {
+        font-family: "Fraunces", serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #fff;
+      }
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--accent-ink);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        z-index: 1000;
+        box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+      }
+      .mobile-nav-inner {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0.25rem 0;
+      }
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.2rem;
+        background: none;
+        border: none;
+        color: #a3c2b4;
+        font-size: 0.65rem;
+        padding: 0.45rem 0.2rem;
+        flex: 1;
+        text-align: center;
+        cursor: pointer;
+      }
+      .mobile-nav-item svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .mobile-nav-item.active {
+        color: #ffffff;
+        font-weight: 600;
+      }
+      .mobile-nav-item.active svg {
+        stroke: #8fc6a9;
+      }
+
+      /* ---------- Metrics Strip ---------- */
+      .metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        margin-bottom: 1.6rem;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .metric {
+        flex: 1 1 170px;
+        padding: 1rem 1.1rem;
+        border-right: 1px solid var(--line-soft);
+      }
+      .metric:last-child {
+        border-right: none;
+      }
+      .metric .label {
+        font-size: 0.76rem;
+        color: var(--ink-soft);
+        margin-bottom: 0.3em;
+        font-weight: 500;
+      }
+      .metric .value {
+        font-family: "Fraunces", serif;
+        font-size: 1.55rem;
+        font-weight: 600;
+        color: var(--accent-ink);
+      }
+      .metric .value.bad {
+        color: var(--debt);
+      }
+      .metric .value.warn {
+        color: var(--warn);
+      }
+      .metric .value.good {
+        color: var(--success);
+      }
+      .metric .note {
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+        margin-top: 0.25em;
+      }
+
+      /* ---------- Panels & Callouts ---------- */
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 1.25rem 1.4rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+      .panel-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.9rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .callout {
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        padding: 0.9rem 1.1rem;
+        border-radius: var(--radius);
+        margin: 1rem 0;
+        box-shadow: var(--shadow);
+      }
+      .callout.warn {
+        border-left-color: var(--warn);
+        background: var(--warn-soft);
+      }
+      .callout.debt {
+        border-left-color: var(--debt);
+        background: var(--debt-soft);
+      }
+      .callout.success {
+        border-left-color: var(--success);
+        background: var(--success-soft);
+      }
+      .callout p:last-child {
+        margin-bottom: 0;
+      }
+      .callout h4 {
+        margin-bottom: 0.3em;
+        color: var(--ink);
+      }
+
+      /* ---------- Badges & Tags ---------- */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+        font-size: 0.73rem;
+        font-weight: 600;
+        padding: 0.2em 0.6em;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        white-space: nowrap;
+      }
+      .badge.urgent {
+        background: var(--debt-soft);
+        color: var(--debt);
+        border-color: #e2b6af;
+      }
+      .badge.warning {
+        background: var(--warn-soft);
+        color: #7d5912;
+        border-color: #e4d1a2;
+      }
+      .badge.ok {
+        background: var(--accent-soft);
+        color: var(--accent-ink);
+        border-color: #b8d6c4;
+      }
+      .badge.neutral {
+        background: #e8ece6;
+        color: var(--ink-soft);
+        border-color: var(--line);
+      }
+
+      .tag {
+        display: inline-block;
+        font-size: 0.72rem;
+        padding: 0.18em 0.55em;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        color: var(--ink-soft);
+      }
+      .tag.avalanche {
+        border-color: var(--accent);
+        color: var(--accent-ink);
+        background: var(--accent-soft);
+      }
+      .tag.neve {
+        border-color: var(--warn);
+        color: #6b4e14;
+        background: var(--warn-soft);
+      }
+
+      /* ---------- Buttons ---------- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4em;
+        border: 1px solid var(--accent-ink);
+        background: var(--accent-ink);
+        color: #fff;
+        padding: 0.55em 1.1em;
+        border-radius: var(--radius);
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease;
+      }
+      .btn:hover {
+        background: #142a21;
+      }
+      .btn.secondary {
+        background: var(--surface);
+        color: var(--accent-ink);
+        border-color: var(--line);
+      }
+      .btn.secondary:hover {
+        border-color: var(--accent-ink);
+        background: #f4f6f2;
+      }
+      .btn.danger {
+        background: var(--surface);
+        color: var(--debt);
+        border-color: var(--debt-soft);
+      }
+      .btn.danger:hover {
+        background: var(--debt-soft);
+      }
+      .btn.small {
+        padding: 0.35em 0.75em;
+        font-size: 0.78rem;
+      }
+      .btn[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* ---------- Tables ---------- */
+      .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+        text-align: left;
+      }
+      th {
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+        font-weight: 600;
+        border-bottom: 1px solid var(--line);
+        padding: 0.6em 0.6em;
+      }
+      td {
+        border-bottom: 1px solid var(--line-soft);
+        padding: 0.65em 0.6em;
+        vertical-align: middle;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      td.num,
+      th.num {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .row-actions {
+        display: flex;
+        gap: 0.35em;
+        justify-content: flex-end;
+      }
+
+      /* ---------- Forms ---------- */
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .form-actions {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      /* ---------- AI & Quiz Styles ---------- */
+      .quiz-box {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 1.4rem;
+        margin-bottom: 1.6rem;
+        box-shadow: var(--shadow);
+      }
+      .quiz-step {
+        display: none;
+      }
+      .quiz-step.active {
+        display: block;
+        animation: fade 0.2s ease;
+      }
+      .quiz-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.8rem;
+        margin: 1rem 0 1.2rem;
+      }
+      .quiz-opt {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        background: var(--surface);
+        display: flex;
+        flex-direction: column;
+        gap: 0.2em;
+      }
+      .quiz-opt:hover {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+      }
+      .quiz-opt.selected {
+        border-color: var(--accent-ink);
+        background: var(--accent-soft);
+        box-shadow: 0 0 0 2px var(--accent-ink);
+      }
+      .quiz-opt strong {
+        font-family: "Fraunces", serif;
+        color: var(--accent-ink);
+        font-size: 0.95rem;
+      }
+      .quiz-opt span {
+        font-size: 0.78rem;
+        color: var(--ink-soft);
+      }
+      .quiz-progress {
+        height: 6px;
+        background: var(--line-soft);
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 1.2rem;
+      }
+      .quiz-progress-bar {
+        height: 100%;
+        background: var(--accent);
+        width: 20%;
+        transition: width 0.3s ease;
+      }
+
+      .rec-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+      }
+      .rec-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+      .rec-card .match-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--accent-soft);
+        color: var(--accent-ink);
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.25em 0.6em;
+        border-radius: 12px;
+        border: 1px solid var(--accent);
+      }
+      .rec-card h3 {
+        margin-bottom: 0.4em;
+        padding-right: 4rem;
+        font-size: 1.1rem;
+      }
+      .rec-card .gain {
+        font-family: "Fraunces", serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--accent-ink);
+        margin-bottom: 0.6em;
+      }
+      .rec-card ul {
+        padding-left: 1.2rem;
+        margin: 0.4em 0 0.8em;
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+      }
+      .rec-card li {
+        margin-bottom: 0.25em;
+      }
+
+      .ai-score-card {
+        display: flex;
+        align-items: center;
+        gap: 1.4rem;
+        padding: 1.2rem;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        margin-bottom: 1.4rem;
+        flex-wrap: wrap;
+        box-shadow: var(--shadow);
+      }
+      .ai-score-gauge {
+        width: 120px;
+        height: 120px;
+        flex: none;
+        position: relative;
+      }
+
+      .sim-grid {
+        display: grid;
+        grid-template-columns: 310px 1fr;
+        gap: 1.6rem;
+      }
+      @media (max-width: 900px) {
+        .sim-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .strategy-choice {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .strategy-choice label.opt {
+        display: flex;
+        gap: 0.6em;
+        align-items: flex-start;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0.7em 0.8em;
+        cursor: pointer;
+        font-size: 0.85rem;
+        color: var(--ink);
+        background: var(--surface);
+      }
+      .strategy-choice label.opt input {
+        width: auto;
+        margin-top: 0.2em;
+      }
+      .strategy-choice .opt strong {
+        display: block;
+        font-family: "Fraunces", serif;
+        font-size: 0.95rem;
+        margin-bottom: 0.15em;
+        color: var(--accent-ink);
+      }
+
+      .sql-console textarea {
+        width: 100%;
+        min-height: 100px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.85rem;
+        resize: vertical;
+      }
+      .sql-result {
+        margin-top: 1rem;
+        max-height: 300px;
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+      }
+      .sql-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin: 0.6rem 0;
+      }
+      .chip {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 0.25em 0.7em;
+        background: var(--surface);
+        color: var(--ink-soft);
+      }
+      .chip:hover {
+        border-color: var(--accent-ink);
+        color: var(--accent-ink);
+      }
+
+      .empty {
+        border: 1px dashed var(--line);
+        border-radius: var(--radius);
+        padding: 1.6rem;
+        text-align: center;
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+      }
+      footer.note {
+        font-size: 0.76rem;
+        color: var(--ink-soft);
+        margin-top: 2.5rem;
+        border-top: 1px solid var(--line);
+        padding-top: 1rem;
+      }
+
+      /* ---------- Responsive Media Queries ---------- */
+      @media (max-width: 840px) {
+        .shell {
+          flex-direction: column;
+        }
+        .rail {
+          display: none;
+        }
+        .mobile-header {
+          display: flex;
+        }
+        .mobile-nav {
+          display: block;
+        }
+        main {
+          padding: 1.2rem 1.1rem 5.5rem;
+        }
+        h1 {
+          font-size: 1.5rem;
+        }
+        .metrics {
+          flex-direction: column;
+        }
+        .metric {
+          border-right: none;
+          border-bottom: 1px solid var(--line-soft);
+        }
+        .metric:last-child {
+          border-bottom: none;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        #dash-charts-wrap {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* ---------- PWA & Modal Styles ---------- */
+      .btn-instalar-app {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        background: #33604f;
+        color: #ffffff;
+        border: 1px solid #8fc6a9;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          background 0.15s ease;
+      }
+      .btn-instalar-app:hover {
+        background: #1f3d32;
+        transform: translateY(-1px);
+      }
+      .btn-instalar-app.pulse {
+        animation: pwaPulse 2s infinite;
+      }
+      @keyframes pwaPulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(143, 198, 169, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 8px rgba(143, 198, 169, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(143, 198, 169, 0);
+        }
+      }
+
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      .modal-overlay.active {
+        display: flex;
+        animation: fade 0.2s ease;
+      }
+      .modal-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        max-width: 500px;
+        width: 100%;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER MOBILE -->
+    <header class="mobile-header">
+      <div class="brand-mark">Ponto de Virada</div>
+      <div
+        id="mobile-quick-status"
+        style="display: flex; align-items: center; gap: 0.5em"
+      >
+        <button
+          type="button"
+          class="btn small btn-instalar-app pulse"
+          onclick="triggerInstallApp()"
+          title="Instalar Aplicativo no Celular"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            stroke="currentColor"
+            fill="none"
+            stroke-width="2"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Instalar App
+        </button>
+        <span class="badge ok">IA Ativa</span>
+      </div>
+    </header>
+
+    <div class="shell">
+      <!-- SIDEBAR DESKTOP -->
+      <aside class="rail">
+        <div class="brand">
+          <div class="mark">Ponto de Virada</div>
+          <div class="sub">
+            Organize as dívidas. Aumente a renda. Siga o plano com IA.
+          </div>
+        </div>
+        <nav id="nav-desktop">
+          <button class="navitem active" data-view="dashboard">
+            <span class="idx">01</span> Visão geral
+          </button>
+          <button class="navitem" data-view="dividas">
+            <span class="idx">02</span> Minhas dívidas
+          </button>
+          <button class="navitem" data-view="orcamento">
+            <span class="idx">03</span> Orçamento mensal
+          </button>
+          <button class="navitem" data-view="renda-extra">
+            <span class="idx">04</span> Renda extra
+          </button>
+          <button class="navitem" data-view="plano">
+            <span class="idx">05</span> Análise de IA & Plano
+          </button>
+          <button class="navitem" data-view="sql">
+            <span class="idx">06</span> Consulta SQL
+          </button>
+        </nav>
+        <div class="rail-foot">
+          <strong>Privacidade Total.</strong><br />
+          Seus dados ficam 100% no seu dispositivo em um banco SQLite local.
+          Nada é enviado para servidores externos.
+          <div style="margin-top: 0.8rem">
+            <button
+              type="button"
+              class="btn secondary small btn-instalar-app"
+              onclick="triggerInstallApp()"
+              style="width: 100%; justify-content: center"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                stroke="currentColor"
+                fill="none"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Instalar no Celular
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <!-- ============ VISÃO GERAL ============ -->
+        <section class="view active" id="view-dashboard">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">01 · Visão geral</div>
+              <h1>Como está sua situação hoje</h1>
+            </div>
+            <button class="btn secondary" id="btn-exemplo">
+              Carregar dados de exemplo
+            </button>
+          </div>
+
+          <div class="metrics" id="metrics-strip"></div>
+          <div id="dashboard-alerts"></div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Balanço Visual e Distribuição</h2></div>
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem"
+              id="dash-charts-wrap"
+            >
+              <div>
+                <h3
+                  style="
+                    font-size: 0.95rem;
+                    margin-bottom: 0.6em;
+                    color: var(--ink-soft);
+                  "
+                >
+                  Composição da renda mensal
+                </h3>
+                <div id="chart-composicao-apex" style="min-height: 220px"></div>
+              </div>
+              <div>
+                <h3
+                  style="
+                    font-size: 0.95rem;
+                    margin-bottom: 0.6em;
+                    color: var(--ink-soft);
+                  "
+                >
+                  Dívidas ativas por saldo devedor
+                </h3>
+                <div id="chart-dividas-apex" style="min-height: 220px"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="panel-proxima-acao">
+            <div class="panel-head">
+              <h2 style="margin: 0">Diagnóstico Rápido da IA</h2>
+              <button
+                class="btn small secondary"
+                onclick="navegarPara('plano')"
+              >
+                Ver Análise Completa →
+              </button>
+            </div>
+            <div id="proxima-acao-conteudo"></div>
+          </div>
+        </section>
+
+        <!-- ============ DÍVIDAS ============ -->
+        <section class="view" id="view-dividas">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">02 · Minhas dívidas</div>
+              <h1>Cada dívida, com número, taxa e vencimento</h1>
+            </div>
+          </div>
+          <p>
+            Registre todas as suas dívidas ativas. Acompanhe a data de
+            vencimento de cada conta para evitar multas e juros de mora.
+          </p>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3 style="margin: 0">Adicionar dívida</h3>
+            </div>
+            <form id="form-divida">
+              <div class="form-grid">
+                <div>
+                  <label for="d-credor">Credor / Descrição</label>
+                  <select id="d-credor" required>
+                    <option value="" disabled selected>
+                      Selecione o Credor / Instituição...
+                    </option>
+                    <optgroup label="Bancos & Instituições Frequentes">
+                      <option
+                        value="Nubank — Cartão de Crédito"
+                        data-taxa="14.5"
+                        data-tipo="cartao"
+                      >
+                        Nubank (Cartão ~ 14.5% a.m.)
+                      </option>
+                      <option
+                        value="Itaú — Cheque Especial"
+                        data-taxa="12.8"
+                        data-tipo="cheque_especial"
+                      >
+                        Itaú (Cheque Especial ~ 12.8% a.m.)
+                      </option>
+                      <option
+                        value="Bradesco — Empréstimo Pessoal"
+                        data-taxa="4.5"
+                        data-tipo="emprestimo"
+                      >
+                        Bradesco (Empréstimo ~ 4.5% a.m.)
+                      </option>
+                      <option
+                        value="Banco do Brasil — Cartão / Cheque"
+                        data-taxa="11.9"
+                        data-tipo="cartao"
+                      >
+                        Banco do Brasil (~ 11.9% a.m.)
+                      </option>
+                      <option
+                        value="Santander — Empréstimo"
+                        data-taxa="5.2"
+                        data-tipo="emprestimo"
+                      >
+                        Santander (Empréstimo ~ 5.2% a.m.)
+                      </option>
+                      <option
+                        value="Caixa — Financiamento / Crédito"
+                        data-taxa="2.5"
+                        data-tipo="financiamento"
+                      >
+                        Caixa Econômica (~ 2.5% a.m.)
+                      </option>
+                      <option
+                        value="Banco Inter — Cartão / Crédito"
+                        data-taxa="12.5"
+                        data-tipo="cartao"
+                      >
+                        Banco Inter (~ 12.5% a.m.)
+                      </option>
+                      <option
+                        value="C6 Bank — Cartão Rotativo"
+                        data-taxa="13.9"
+                        data-tipo="cartao"
+                      >
+                        C6 Bank (~ 13.9% a.m.)
+                      </option>
+                      <option
+                        value="Mercado Pago — Crédito Pessoal"
+                        data-taxa="15.2"
+                        data-tipo="emprestimo"
+                      >
+                        Mercado Pago (~ 15.2% a.m.)
+                      </option>
+                      <option
+                        value="Carnê / Parcelamento de Loja"
+                        data-taxa="8.9"
+                        data-tipo="parcelamento"
+                      >
+                        Carnê Loja / Departamentos (~ 8.9% a.m.)
+                      </option>
+                      <option
+                        value="Empréstimo Consignado"
+                        data-taxa="2.1"
+                        data-tipo="emprestimo"
+                      >
+                        Empréstimo Consignado (~ 2.1% a.m.)
+                      </option>
+                      <option
+                        value="Dívida Pessoal / Amigos"
+                        data-taxa="0"
+                        data-tipo="pessoa_fisica"
+                      >
+                        Dívida Pessoal / Amigos (0% a.m.)
+                      </option>
+                    </optgroup>
+                    <option value="Outro">
+                      Outro Credor / Digitar Nome...
+                    </option>
+                  </select>
+                  <input
+                    id="d-credor-custom"
+                    placeholder="Digite o nome do credor..."
+                    style="display: none; margin-top: 0.4em"
+                  />
+                </div>
+                <div>
+                  <label for="d-tipo">Tipo</label>
+                  <select id="d-tipo">
+                    <option value="cartao">Cartão de crédito</option>
+                    <option value="cheque_especial">Cheque especial</option>
+                    <option value="emprestimo">Empréstimo pessoal</option>
+                    <option value="financiamento">Financiamento</option>
+                    <option value="parcelamento">Parcelamento / loja</option>
+                    <option value="pessoa_fisica">
+                      Dívida com pessoa física
+                    </option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="d-saldo">Saldo devedor hoje (R$)</label>
+                  <input
+                    id="d-saldo"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                    placeholder="0,00"
+                  />
+                </div>
+                <div>
+                  <label for="d-parcela">Parcela / Mínimo mensal (R$)</label>
+                  <input
+                    id="d-parcela"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                    placeholder="0,00"
+                  />
+                </div>
+                <div>
+                  <label for="d-taxa">Juros ao mês (%)</label>
+                  <input
+                    id="d-taxa"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 12 para cheque especial"
+                  />
+                </div>
+                <div>
+                  <label for="d-data-venc">Data de Vencimento</label>
+                  <input id="d-data-venc" type="date" />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn">Adicionar dívida</button>
+                <span style="font-size: 0.8rem; color: var(--ink-soft)"
+                  >Saber a data evita atrasos e cobranças abusivas.</span
+                >
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3 style="margin: 0">Dívidas cadastradas</h3>
+              <span
+                id="dividas-resumo"
+                style="font-size: 0.82rem; color: var(--ink-soft)"
+              ></span>
+            </div>
+            <div id="tabela-dividas" class="table-wrap"></div>
+          </div>
+        </section>
+
+        <!-- ============ ORÇAMENTO ============ -->
+        <section class="view" id="view-orcamento">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">03 · Orçamento mensal</div>
+              <h1>Quanto entra, quanto sai e data de entrada</h1>
+            </div>
+          </div>
+          <p>
+            Lance sua renda e seus gastos essenciais e variáveis. Informe a
+            <strong>Data de Entrada</strong> para saber exatamente quando o
+            dinheiro estará disponível na sua conta.
+          </p>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3 style="margin: 0">Adicionar lançamento</h3>
+            </div>
+            <form id="form-mov">
+              <div class="form-grid">
+                <div>
+                  <label for="m-tipo">Tipo</label>
+                  <select id="m-tipo">
+                    <option value="receita">Receita (Renda)</option>
+                    <option value="despesa_essencial">Despesa essencial</option>
+                    <option value="despesa_variavel">Despesa variável</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="m-categoria">Categoria</label>
+                  <select id="m-categoria" required>
+                    <option value="" disabled selected>
+                      Selecione a Categoria...
+                    </option>
+                    <optgroup label="Entradas (Receitas)">
+                      <option value="Salário Principal">
+                        Salário Principal
+                      </option>
+                      <option value="Renda Extra">Renda Extra</option>
+                      <option value="Pró-Labore / Serviços">
+                        Pró-Labore / Serviços
+                      </option>
+                      <option value="Comissões / Vendas">
+                        Comissões / Vendas
+                      </option>
+                      <option value="Rendimentos / Outros">
+                        Rendimentos / Outros
+                      </option>
+                    </optgroup>
+                    <optgroup label="Despesas Essenciais">
+                      <option value="Aluguel & Condomínio">
+                        Aluguel & Condomínio
+                      </option>
+                      <option value="Supermercado & Alimentação">
+                        Supermercado & Alimentação
+                      </option>
+                      <option value="Transporte & Combustível">
+                        Transporte & Combustível
+                      </option>
+                      <option value="Farmácia & Saúde">Farmácia & Saúde</option>
+                      <option value="Contas Básicas (Água/Luz/Gás)">
+                        Contas Básicas (Água/Luz/Gás)
+                      </option>
+                      <option value="Educação & Cursos">
+                        Educação & Cursos
+                      </option>
+                    </optgroup>
+                    <optgroup label="Despesas Variáveis & Estilo de Vida">
+                      <option value="Lazer & Restaurantes">
+                        Lazer & Restaurantes
+                      </option>
+                      <option value="Internet & Celular">
+                        Internet & Celular
+                      </option>
+                      <option value="Assinaturas & Streaming">
+                        Assinaturas & Streaming
+                      </option>
+                      <option value="Compras & Vestuário">
+                        Compras & Vestuário
+                      </option>
+                      <option value="Outros Lançamentos">
+                        Outros Lançamentos
+                      </option>
+                    </optgroup>
+                  </select>
+                </div>
+                <div>
+                  <label for="m-valor">Valor mensal (R$)</label>
+                  <input
+                    id="m-valor"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                    placeholder="0,00"
+                  />
+                </div>
+                <div>
+                  <label for="m-data-entrada"
+                    >Data de Entrada / Recebimento</label
+                  >
+                  <input
+                    id="m-data-entrada"
+                    type="date"
+                    placeholder="Selecione a data de entrada"
+                  />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn">Adicionar lançamento</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3 style="margin: 0">Lançamentos do mês</h3>
+            </div>
+            <div id="tabela-mov" class="table-wrap"></div>
+          </div>
+
+          <!-- PAINEL DE IMPORTAÇÃO DE HOLERITES, EXTRATOS E CONTAS -->
+          <div class="panel" style="margin-top: 1.5rem">
+            <div class="panel-head">
+              <h3 style="margin: 0">Importar Documentos & Boletos</h3>
+              <span class="badge ok">Holerites, Extratos e Contas</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--ink-soft)">
+              Selecione arquivos de comprovantes de renda (Holerites), extratos
+              bancários (OFX, CSV, TXT) ou faturas/contas (PDF, Boletos, TXT,
+              JSON) para extração automática e sincronização com os módulos.
+            </p>
+
+            <div class="form-grid" style="margin-top: 1rem">
+              <div>
+                <label for="import-holerite"
+                  >📄 Holerite / Comprovante de Renda</label
+                >
+                <input
+                  type="file"
+                  id="import-holerite"
+                  accept=".pdf,.txt,.csv,.json,.png,.jpg"
+                />
+              </div>
+              <div>
+                <label for="import-extrato"
+                  >🏦 Extrato Bancário (OFX, CSV, TXT)</label
+                >
+                <input
+                  type="file"
+                  id="import-extrato"
+                  accept=".ofx,.csv,.txt,.json"
+                />
+              </div>
+              <div>
+                <label for="import-conta">📑 Contas / Faturas / Boletos</label>
+                <input
+                  type="file"
+                  id="import-conta"
+                  accept=".pdf,.txt,.json,.csv"
+                />
+              </div>
+            </div>
+
+            <div
+              id="import-preview-container"
+              style="
+                display: none;
+                margin-top: 1.2rem;
+                border-top: 1px solid var(--line-soft);
+                padding-top: 1rem;
+              "
+            >
+              <div class="panel-head">
+                <h4 style="margin: 0">
+                  Lançamentos Detectados para Sincronização
+                </h4>
+                <span id="import-count-badge" class="badge warning"
+                  >0 item(ns)</span
+                >
+              </div>
+              <div
+                id="import-preview-table"
+                class="table-wrap"
+                style="margin-bottom: 1rem"
+              ></div>
+
+              <div class="form-actions">
+                <button type="button" class="btn" id="btn-sync-imported">
+                  ⚡ Sincronizar com o Módulo Correspondente
+                </button>
+                <button
+                  type="button"
+                  class="btn secondary"
+                  id="btn-clear-import"
+                >
+                  Cancelar Importação
+                </button>
+              </div>
+            </div>
+            <div id="import-status-msg" style="margin-top: 0.8rem"></div>
+          </div>
+        </section>
+
+        <!-- ============ RENDA EXTRA ============ -->
+        <section class="view" id="view-renda-extra">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">04 · Recomendador Estratégico</div>
+              <h1>Recomendador de Renda Extra com IA</h1>
+            </div>
+          </div>
+          <p>
+            Responda às 5 perguntas estratégicas abaixo para que a IA
+            identifique as melhores fontes de renda extra para o seu perfil,
+            tempo e recursos atuais.
+          </p>
+
+          <div class="quiz-box" id="quiz-container">
+            <div class="quiz-progress">
+              <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+            </div>
+
+            <!-- PERGUNTA 1 -->
+            <div class="quiz-step active" data-step="1">
+              <h3>
+                1. Quanto tempo por semana você pode dedicar para a renda extra?
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--ink-soft)">
+                Escolha a opção que melhor se ajusta à sua rotina real.
+              </p>
+              <div class="quiz-options">
+                <div class="quiz-opt" data-key="tempo" data-val="pouco">
+                  <strong>2 a 5 horas / semana</strong>
+                  <span>Finais de semana ou horários vagos à noite</span>
+                </div>
+                <div class="quiz-opt" data-key="tempo" data-val="medio">
+                  <strong>5 a 15 horas / semana</strong>
+                  <span>1 a 2 horas por dia útil + fim de semana</span>
+                </div>
+                <div class="quiz-opt" data-key="tempo" data-val="alto">
+                  <strong>15 a 30 horas / semana</strong>
+                  <span>Meio período dedicado à nova atividade</span>
+                </div>
+                <div class="quiz-opt" data-key="tempo" data-val="total">
+                  <strong>Mais de 30 horas / semana</strong>
+                  <span>Dedicação quase exclusiva</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- PERGUNTA 2 -->
+            <div class="quiz-step" data-step="2">
+              <h3>2. Quanto você pode investir no início?</h3>
+              <p style="font-size: 0.85rem; color: var(--ink-soft)">
+                Muitas opções valiosas não exigem nenhum capital inicial.
+              </p>
+              <div class="quiz-options">
+                <div class="quiz-opt" data-key="capital" data-val="zero">
+                  <strong>R$ 0,00 (Zero investimento)</strong>
+                  <span>Usar apenas o que você já possui hoje</span>
+                </div>
+                <div class="quiz-opt" data-key="capital" data-val="baixo">
+                  <strong>Até R$ 100,00</strong>
+                  <span
+                    >Para insumos básicos, embalagens ou anúncios simples</span
+                  >
+                </div>
+                <div class="quiz-opt" data-key="capital" data-val="medio">
+                  <strong>Até R$ 500,00</strong>
+                  <span
+                    >Para pequenos estoques, ingredientes ou equipamentos</span
+                  >
+                </div>
+                <div class="quiz-opt" data-key="capital" data-val="alto">
+                  <strong>R$ 1.000,00 ou mais</strong>
+                  <span
+                    >Para investir em estrutura ou ferramentas
+                    profissionais</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- PERGUNTA 3 -->
+            <div class="quiz-step" data-step="3">
+              <h3>3. Qual é a sua habilidade ou área de maior interesse?</h3>
+              <p style="font-size: 0.85rem; color: var(--ink-soft)">
+                Selecione onde você tem maior afinidade.
+              </p>
+              <div class="quiz-options">
+                <div class="quiz-opt" data-key="perfil" data-val="digital">
+                  <strong>Digital & Tecnologia</strong>
+                  <span>Redação, planilhas, redes sociais, suporte remoto</span>
+                </div>
+                <div class="quiz-opt" data-key="perfil" data-val="culinaria">
+                  <strong>Culinária & Gastronomia</strong>
+                  <span>Marmitas fit/congeladas, doces, bolos, salgados</span>
+                </div>
+                <div class="quiz-opt" data-key="perfil" data-val="servicos">
+                  <strong>Serviços Manuais & Domésticos</strong>
+                  <span
+                    >Limpeza, pequenas reformas, pet sitter, organização</span
+                  >
+                </div>
+                <div class="quiz-opt" data-key="perfil" data-val="vendas">
+                  <strong>Vendas & Comércio</strong>
+                  <span
+                    >Revenda de produtos, brechó de desapegos, vendas
+                    online</span
+                  >
+                </div>
+                <div class="quiz-opt" data-key="perfil" data-val="ensino">
+                  <strong>Ensino & Mentoria</strong>
+                  <span
+                    >Aulas de reforço escolar, idiomas, música,
+                    treinamento</span
+                  >
+                </div>
+                <div class="quiz-opt" data-key="perfil" data-val="transporte">
+                  <strong>Transporte & Entregas</strong>
+                  <span
+                    >Entregas de app, motoboy, motorista, pequenos fretes</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- PERGUNTA 4 -->
+            <div class="quiz-step" data-step="4">
+              <h3>4. Em quanto tempo você precisa ver o primeiro dinheiro?</h3>
+              <p style="font-size: 0.85rem; color: var(--ink-soft)">
+                O nível de urgência direciona o modelo de negócios.
+              </p>
+              <div class="quiz-options">
+                <div class="quiz-opt" data-key="urgencia" data-val="imediato">
+                  <strong>Urgência Máxima (Esta semana)</strong>
+                  <span
+                    >Preciso de dinheiro rápido para cobrir despesas de
+                    imediato</span
+                  >
+                </div>
+                <div class="quiz-opt" data-key="urgencia" data-val="curto">
+                  <strong>Curto Prazo (Até 30 dias)</strong>
+                  <span>Posso estruturar e receber nas próximas semanas</span>
+                </div>
+                <div class="quiz-opt" data-key="urgencia" data-val="medio">
+                  <strong>Médio Prazo & Escalável</strong>
+                  <span>Busco construir uma renda mensal sustentável</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- PERGUNTA 5 -->
+            <div class="quiz-step" data-step="5">
+              <h3>5. Quais recursos você possui disponíveis em mãos?</h3>
+              <p style="font-size: 0.85rem; color: var(--ink-soft)">
+                Aproveite os equipamentos que você já tem em casa.
+              </p>
+              <div class="quiz-options">
+                <div class="quiz-opt" data-key="recursos" data-val="celular">
+                  <strong>Celular com Internet</strong>
+                  <span>Para redes sociais, chamadas e aplicativos</span>
+                </div>
+                <div class="quiz-opt" data-key="recursos" data-val="pc">
+                  <strong>Computador / Notebook + Internet</strong>
+                  <span
+                    >Para trabalhos administrativos e serviços digitais</span
+                  >
+                </div>
+                <div class="quiz-opt" data-key="recursos" data-val="veiculo">
+                  <strong>Veículo (Carro, Moto ou Bicicleta)</strong>
+                  <span>Para transporte, deslocamento ou entregas</span>
+                </div>
+                <div class="quiz-opt" data-key="recursos" data-val="cozinha">
+                  <strong>Cozinha equipada e forno</strong>
+                  <span>Para produção e preparo de alimentos</span>
+                </div>
+                <div
+                  class="quiz-opt"
+                  data-key="recursos"
+                  data-val="ferramentas"
+                >
+                  <strong>Ferramentas / Material de Limpeza</strong>
+                  <span>Para prestar serviços práticos ou manutenção</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- NAVEGAÇÃO QUIZ -->
+            <div
+              class="form-actions"
+              style="margin-top: 1.2rem; justify-content: space-between"
+            >
+              <button
+                class="btn secondary"
+                id="btn-quiz-prev"
+                style="display: none"
+              >
+                ← Voltar
+              </button>
+              <button class="btn" id="btn-quiz-next">Próxima Pergunta →</button>
+            </div>
+          </div>
+
+          <!-- PAINEL DE RESULTADOS -->
+          <div id="renda-extra-resultados" style="display: none">
+            <div class="panel-head" style="margin-bottom: 1rem">
+              <h2>Opções Recomendadas pela IA para Você</h2>
+              <button class="btn secondary small" id="btn-quiz-refazer">
+                Refazer Perguntas
+              </button>
+            </div>
+            <div class="rec-grid" id="rec-cards-container"></div>
+          </div>
+        </section>
+
+        <!-- ============ PLANO & IA ============ -->
+        <section class="view" id="view-plano">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">05 · Análise de IA & Plano de Saída</div>
+              <h1>Diagnóstico Inteligente e Projeção de Quitação</h1>
+            </div>
+          </div>
+
+          <!-- PAINEL DE DIAGNÓSTICO IA COMPLETO -->
+          <div class="panel" id="panel-ia-full">
+            <div class="panel-head">
+              <h2 style="margin: 0">Relatório de Inteligência Financeira IA</h2>
+              <span class="badge ok">Análise em Tempo Real</span>
+            </div>
+            <div class="ai-score-card">
+              <div class="ai-score-gauge">
+                <div id="chart-gauge-apex"></div>
+              </div>
+              <div style="flex: 1">
+                <h3 style="margin-bottom: 0.2em" id="ai-score-title">
+                  Analisando dados...
+                </h3>
+                <p
+                  style="margin-bottom: 0.5em; font-size: 0.9rem"
+                  id="ai-score-desc"
+                ></p>
+                <div id="ai-score-badges"></div>
+              </div>
+            </div>
+            <div id="ai-report-details"></div>
+          </div>
+
+          <!-- SIMULADOR AVALANCHE VS BOLA DE NEVE -->
+          <div class="panel">
+            <h2>Simulador de Quitação (Avalanche vs Bola de Neve)</h2>
+            <p style="font-size: 0.88rem; color: var(--ink-soft)">
+              Simule como um valor extra mensal (do seu orçamento ou da sua
+              renda extra) acelera a eliminação total das dívidas.
+            </p>
+
+            <div class="sim-grid">
+              <div>
+                <label for="sim-extra"
+                  >Aporte extra mensal além dos mínimos (R$)</label
+                >
+                <input
+                  id="sim-extra"
+                  type="number"
+                  min="0"
+                  step="10"
+                  value="0"
+                />
+                <div style="height: 0.8rem"></div>
+                <div class="strategy-choice">
+                  <label class="opt">
+                    <input
+                      type="radio"
+                      name="estrategia"
+                      value="avalanche"
+                      checked
+                    />
+                    <span
+                      ><strong>Estratégia Avalanche</strong>Ataca primeiro a
+                      dívida com maior taxa de juros. Economiza o máximo de
+                      dinheiro em juros.</span
+                    >
+                  </label>
+                  <label class="opt">
+                    <input
+                      type="radio"
+                      name="estrategia"
+                      value="bola-de-neve"
+                    />
+                    <span
+                      ><strong>Estratégia Bola de Neve</strong>Ataca primeiro a
+                      dívida de menor saldo. Quita contas rápido e gera
+                      motivação imediata.</span
+                    >
+                  </label>
+                </div>
+                <div style="height: 0.9rem"></div>
+                <button
+                  class="btn"
+                  id="btn-simular"
+                  style="width: 100%; justify-content: center"
+                >
+                  Simular Projeção de Saída
+                </button>
+              </div>
+              <div id="sim-resultado">
+                <div class="empty">
+                  Cadastre suas dívidas e clique em
+                  <strong>Simular Projeção</strong> para ver o gráfico e prazo
+                  até a dívida zero.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GUIA DE RENEGOCIAÇÃO E LEI DO SUPERENDIVIDAMENTO -->
+          <div class="panel">
+            <h2>Roteiro Legal de Renegociação (Lei 14.181/2021)</h2>
+            <ol class="steps" style="margin-top: 1rem">
+              <li>
+                <h3>Proteja o Mínimo Existencial</h3>
+                <p>
+                  A Lei do Superendividamento garante que pagamentos de dívidas
+                  de consumo não podem comprometer seus gastos básicos de
+                  sobrevivência (moradia, alimentação, água, luz e saúde).
+                </p>
+              </li>
+              <li>
+                <h3>Abordagem Estratégica dos Credores</h3>
+                <p>
+                  Apresente sua planilha de renda real aos credores. Proponha um
+                  valor de parcela justa ou solicite o desconto de 100% das
+                  multas e juros de mora para pagamento à vista.
+                </p>
+              </li>
+              <li>
+                <h3>Conciliação Judicial ou via Procon</h3>
+                <p>
+                  Se o banco recusar a negociação direta, procure o Procon ou a
+                  Defensoria Pública do seu estado para solicitar uma audiência
+                  de conciliação de repactuação global de dívidas.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- ============ SQL ============ -->
+        <section class="view" id="view-sql">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">06 · Consulta SQL</div>
+              <h1>Banco de dados SQLite Local em Tempo Real</h1>
+            </div>
+          </div>
+          <p>
+            Todos os seus dados estão salvos de forma segura e privada em um
+            banco de dados SQLite executado pelo seu próprio navegador.
+          </p>
+
+          <div class="panel sql-console">
+            <div class="sql-chips">
+              <button
+                class="chip"
+                data-q="SELECT * FROM dividas ORDER BY saldo_devedor DESC;"
+              >
+                todas as dívidas
+              </button>
+              <button
+                class="chip"
+                data-q="SELECT * FROM movimentos ORDER BY criado_em DESC;"
+              >
+                todos os lançamentos
+              </button>
+              <button
+                class="chip"
+                data-q="SELECT tipo, SUM(valor) AS total FROM movimentos GROUP BY tipo;"
+              >
+                totais do orçamento
+              </button>
+              <button
+                class="chip"
+                data-q="SELECT SUM(saldo_devedor) AS total_devido, SUM(parcela_minima) AS total_parcelas FROM dividas WHERE situacao='ativa';"
+              >
+                resumo de dívidas
+              </button>
+              <button
+                class="chip"
+                data-q="SELECT name FROM sqlite_master WHERE type='table';"
+              >
+                listar tabelas
+              </button>
+            </div>
+            <textarea id="sql-input" spellcheck="false">
+SELECT * FROM dividas;</textarea
+            >
+            <div class="form-actions" style="margin-top: 0.7rem">
+              <button class="btn" id="btn-run-sql">Executar SQL</button>
+              <button class="btn secondary" id="btn-export-db">
+                Baixar arquivo (.sqlite)
+              </button>
+              <button class="btn danger" id="btn-reset-db">
+                Resetar banco de dados
+              </button>
+            </div>
+            <div
+              id="sql-msg"
+              style="font-size: 0.82rem; margin-top: 0.6rem"
+            ></div>
+            <div class="sql-result" id="sql-result" class="table-wrap"></div>
+          </div>
+        </section>
+
+        <footer class="note">
+          Ponto de Virada — Ferramenta de inteligência financeira pessoal.
+          Funciona 100% offline no seu navegador.
+        </footer>
+      </main>
+    </div>
+
+    <!-- NAVEGAÇÃO MOBILE FIXA INFERIOR -->
+    <nav class="mobile-nav">
+      <div class="mobile-nav-inner" id="nav-mobile">
+        <button class="mobile-nav-item active" data-view="dashboard">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 3v18h18" />
+            <path d="M18 17V9" />
+            <path d="M13 17V5" />
+            <path d="M8 17v-3" />
+          </svg>
+          <span>Visão Geral</span>
+        </button>
+        <button class="mobile-nav-item" data-view="dividas">
+          <svg viewBox="0 0 24 24">
+            <rect width="20" height="14" x="2" y="5" rx="2" />
+            <line x1="2" x2="22" y1="10" y2="10" />
+          </svg>
+          <span>Dívidas</span>
+        </button>
+        <button class="mobile-nav-item" data-view="orcamento">
+          <svg viewBox="0 0 24 24">
+            <line x1="12" x2="12" y1="2" y2="22" />
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>
+          <span>Orçamento</span>
+        </button>
+        <button class="mobile-nav-item" data-view="renda-extra">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+            />
+            <path d="M9 18h6" />
+            <path d="M10 22h4" />
+          </svg>
+          <span>Renda Extra</span>
+        </button>
+        <button class="mobile-nav-item" data-view="plano">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.5h-2v-2h2zm0-4h-2V7h2z"
+            />
+          </svg>
+          <span>IA & Plano</span>
+        </button>
+        <button class="mobile-nav-item" data-view="sql">
+          <svg viewBox="0 0 24 24">
+            <ellipse cx="12" cy="5" rx="9" ry="3" />
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+          </svg>
+          <span>SQL</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MODAL DE INSTRUÇÕES DE INSTALAÇÃO PWA MOBILE -->
+    <div class="modal-overlay" id="modal-pwa-install">
+      <div class="modal-card">
+        <div class="panel-head" style="margin-bottom: 0.8rem">
+          <h3 style="margin: 0; color: var(--accent-ink)">
+            Instalar Aplicativo no Celular
+          </h3>
+          <button
+            type="button"
+            class="btn secondary small"
+            onclick="closeInstallModal()"
+            style="padding: 0.2em 0.5em"
+          >
+            ✕
+          </button>
+        </div>
+        <p style="font-size: 0.88rem">
+          O <strong>Ponto de Virada</strong> pode ser instalado na tela de
+          início do seu celular como um aplicativo nativo e funciona
+          inteiramente offline!
+        </p>
+
+        <div class="callout" style="margin: 0.8rem 0">
+          <h4 style="margin-bottom: 0.3em; font-size: 0.92rem">
+            📱 No iPhone ou iPad (Safari):
+          </h4>
+          <ol style="margin: 0; padding-left: 1.2rem; font-size: 0.84rem">
+            <li>
+              Toque no ícone de <strong>Compartilhar</strong> no navegador
+              Safari.
+            </li>
+            <li>
+              Role a lista e selecione
+              <strong>"Adicionar à Tela de Início"</strong>.
+            </li>
+            <li>
+              Toque em <strong>Adicionar</strong> no canto superior direito.
+            </li>
+          </ol>
+        </div>
+
+        <div class="callout" style="margin: 0.8rem 0">
+          <h4 style="margin-bottom: 0.3em; font-size: 0.92rem">
+            🤖 No Android (Chrome / Firefox):
+          </h4>
+          <ol style="margin: 0; padding-left: 1.2rem; font-size: 0.84rem">
+            <li>
+              Toque nos <strong>três pontos (⋮)</strong> no canto superior do
+              navegador.
+            </li>
+            <li>
+              Selecione <strong>"Instalar aplicativo"</strong> ou
+              <strong>"Adicionar à tela inicial"</strong>.
+            </li>
+            <li>Confirme clicando em <strong>Instalar</strong>.</li>
+          </ol>
+        </div>
+
+        <div style="text-align: right; margin-top: 1.2rem">
+          <button type="button" class="btn" onclick="closeInstallModal()">
+            Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        /* ---------------- PWA - Manifest & Service Worker ---------------- */
+        const manifestData = {
+          name: "Ponto de Virada — Sair das Dívidas",
+          short_name: "PontoVirada",
+          start_url: "./",
+          display: "standalone",
+          background_color: "#EEF0E9",
+          theme_color: "#1F3D32",
+          description:
+            "Plano inteligente para sair das dívidas com IA e controle financeiro offline.",
+          icons: [
+            {
+              src: "https://cdn-icons-png.flaticon.com/512/2489/2489756.png",
+              sizes: "512x512",
+              type: "image/png",
+            },
+          ],
+        };
+        try {
+          const manifestBlob = new Blob([JSON.stringify(manifestData)], {
+            type: "application/json",
+          });
+          const manifestURL = URL.createObjectURL(manifestBlob);
+          const linkEl = document.getElementById("pwa-manifest-link");
+          if (linkEl) linkEl.setAttribute("href", manifestURL);
+        } catch (e) {}
+
+        if ("serviceWorker" in navigator) {
+          const swCode = `
+            self.addEventListener('install', e => self.skipWaiting());
+            self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+            self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
+          `;
+          try {
+            const swBlob = new Blob([swCode], {
+              type: "application/javascript",
+            });
+            const swUrl = URL.createObjectURL(swBlob);
+            navigator.serviceWorker.register(swUrl).catch(() => {});
+          } catch (e) {}
+        }
+
+        let deferredPrompt = null;
+        window.addEventListener("beforeinstallprompt", (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+          document
+            .querySelectorAll(".btn-instalar-app")
+            .forEach((b) => b.classList.add("pulse"));
+        });
+
+        window.triggerInstallApp = function () {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choice) => {
+              if (choice.outcome === "accepted") {
+                alert(
+                  "Aplicativo Ponto de Virada instalado no seu dispositivo!",
+                );
+              }
+              deferredPrompt = null;
+            });
+          } else {
+            const modal = document.getElementById("modal-pwa-install");
+            if (modal) modal.classList.add("active");
+          }
+        };
+
+        window.closeInstallModal = function () {
+          const modal = document.getElementById("modal-pwa-install");
+          if (modal) modal.classList.remove("active");
+        };
+
+        /* ---------------- Persistência e Banco SQLite Local ---------------- */
+        const STORAGE_KEY = "pontodevirada_db_v2";
+
+        function bytesToBase64(bytes) {
+          let binary = "";
+          const chunk = 0x8000;
+          for (let i = 0; i < bytes.length; i += chunk) {
+            binary += String.fromCharCode.apply(
+              null,
+              bytes.subarray(i, i + chunk),
+            );
+          }
+          return btoa(binary);
+        }
+        function base64ToBytes(b64) {
+          const binary = atob(b64);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++)
+            bytes[i] = binary.charCodeAt(i);
+          return bytes;
+        }
+
+        let db = null;
+        let SQLlib = null;
+
+        const SCHEMA = `
+    CREATE TABLE IF NOT EXISTS dividas (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      credor TEXT NOT NULL,
+      tipo TEXT NOT NULL DEFAULT 'outro',
+      saldo_devedor REAL NOT NULL,
+      parcela_minima REAL NOT NULL,
+      taxa_juros_mensal REAL NOT NULL DEFAULT 0,
+      dia_vencimento INTEGER,
+      data_vencimento TEXT,
+      situacao TEXT NOT NULL DEFAULT 'ativa',
+      criado_em TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS movimentos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      tipo TEXT NOT NULL,
+      categoria TEXT NOT NULL,
+      valor REAL NOT NULL,
+      data_entrada TEXT,
+      criado_em TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS config (
+      chave TEXT PRIMARY KEY,
+      valor TEXT
+    );
+  `;
+
+        function salvar() {
+          try {
+            if (!db) return;
+            const data = db.export();
+            localStorage.setItem(STORAGE_KEY, bytesToBase64(data));
+          } catch (e) {
+            console.error("Falha ao salvar banco local:", e);
+          }
+        }
+
+        function runExec(sql, params) {
+          db.run(sql, params || []);
+          salvar();
+        }
+
+        function runQuery(sql, params) {
+          const rows = [];
+          const stmt = db.prepare(sql);
+          if (params) stmt.bind(params);
+          while (stmt.step()) rows.push(stmt.getAsObject());
+          stmt.free();
+          return rows;
+        }
+
+        function runRaw(sql) {
+          const res = db.exec(sql);
+          salvar();
+          return res;
+        }
+
+        /* ---------------- Inicialização do Banco ---------------- */
+        initSqlJs({
+          locateFile: (f) =>
+            `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/${f}`,
+        })
+          .then(function (SQL) {
+            SQLlib = SQL;
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+              try {
+                db = new SQL.Database(base64ToBytes(saved));
+              } catch (e) {
+                console.error("Banco salvo incompatível, criando um novo.", e);
+                db = new SQL.Database();
+              }
+            } else {
+              db = new SQL.Database();
+            }
+            db.run(SCHEMA);
+            // Garantir compatibilidade de colunas
+            try {
+              db.run("ALTER TABLE dividas ADD COLUMN data_vencimento TEXT;");
+            } catch (e) {}
+            try {
+              db.run("ALTER TABLE movimentos ADD COLUMN data_entrada TEXT;");
+            } catch (e) {}
+            salvar();
+            initImportListeners();
+            renderAll();
+          })
+          .catch(function (err) {
+            document.querySelector("main").innerHTML =
+              '<div class="callout debt"><h4>Erro ao carregar banco de dados local</h4>' +
+              "<p>Verifique sua conexão para carregar a biblioteca do SQLite. Detalhes: " +
+              (err && err.message ? err.message : err) +
+              "</p></div>";
+          });
+
+        /* ---------------- IMPORTAÇÃO DE HOLERITES, EXTRATOS E CONTAS ---------------- */
+        let importTempList = [];
+
+        function initImportListeners() {
+          const inputHolerite = document.getElementById("import-holerite");
+          const inputExtrato = document.getElementById("import-extrato");
+          const inputConta = document.getElementById("import-conta");
+
+          if (inputHolerite)
+            inputHolerite.addEventListener("change", (e) =>
+              processImportFile(e.target.files[0], "holerite"),
+            );
+          if (inputExtrato)
+            inputExtrato.addEventListener("change", (e) =>
+              processImportFile(e.target.files[0], "extrato"),
+            );
+          if (inputConta)
+            inputConta.addEventListener("change", (e) =>
+              processImportFile(e.target.files[0], "conta"),
+            );
+
+          const btnSync = document.getElementById("btn-sync-imported");
+          if (btnSync) btnSync.addEventListener("click", syncImportedItems);
+
+          const btnClear = document.getElementById("btn-clear-import");
+          if (btnClear) btnClear.addEventListener("click", clearImportPreview);
+        }
+
+        function processImportFile(file, docType) {
+          if (!file) return;
+          const reader = new FileReader();
+
+          const handleContent = function (content) {
+            let itemsExtracted = [];
+            const hojeIso = new Date().toISOString().split("T")[0];
+
+            if (docType === "holerite") {
+              let valor = 3200.0;
+              const matchVal =
+                content.match(/LIQUIDO[\s\S]*?(\d+[\.,]\d{2})/i) ||
+                content.match(/R\$\s*(\d+[\.,]\d{2})/);
+              if (matchVal && matchVal[1]) {
+                valor = parseFloat(
+                  matchVal[1].replace(".", "").replace(",", "."),
+                );
+              }
+              itemsExtracted.push({
+                id: "imp_" + Date.now() + "_1",
+                modulo: "movimentos",
+                tipo: "receita",
+                categoria: "Salário Principal",
+                valor: valor,
+                data: hojeIso,
+                descricao: `Holerite (${file.name})`,
+              });
+            } else if (docType === "extrato") {
+              const lines = content.split("\n");
+              let count = 0;
+              for (let line of lines) {
+                if (count >= 5) break;
+                const matchVal = line.match(/(-?\d+[\.,]\d{2})/);
+                if (matchVal) {
+                  let num = parseFloat(matchVal[1].replace(",", "."));
+                  if (isNaN(num) || num === 0) continue;
+                  count++;
+                  let isReceita = num > 0;
+                  let valAbs = Math.abs(num);
+                  itemsExtracted.push({
+                    id: "imp_" + Date.now() + "_" + count,
+                    modulo: "movimentos",
+                    tipo: isReceita ? "receita" : "despesa_essencial",
+                    categoria: isReceita
+                      ? "Renda Extra"
+                      : "Supermercado & Alimentação",
+                    valor: valAbs,
+                    data: hojeIso,
+                    descricao: `Extrato: ${line.substring(0, 30).trim() || "Lançamento Bancário"}`,
+                  });
+                }
+              }
+              if (itemsExtracted.length === 0) {
+                itemsExtracted.push(
+                  {
+                    id: "imp_" + Date.now() + "_e1",
+                    modulo: "movimentos",
+                    tipo: "receita",
+                    categoria: "Renda Extra",
+                    valor: 450.0,
+                    data: hojeIso,
+                    descricao: `Extrato Pix Recebido (${file.name})`,
+                  },
+                  {
+                    id: "imp_" + Date.now() + "_e2",
+                    modulo: "movimentos",
+                    tipo: "despesa_essencial",
+                    categoria: "Supermercado & Alimentação",
+                    valor: 320.5,
+                    data: hojeIso,
+                    descricao: `Extrato Débito Supermercado (${file.name})`,
+                  },
+                );
+              }
+            } else if (docType === "conta") {
+              let valor = 185.9;
+              const matchVal =
+                content.match(/VALOR[\s\S]*?(\d+[\.,]\d{2})/i) ||
+                content.match(/R\$\s*(\d+[\.,]\d{2})/);
+              if (matchVal && matchVal[1]) {
+                valor = parseFloat(
+                  matchVal[1].replace(".", "").replace(",", "."),
+                );
+              }
+              const dtVenc = new Date();
+              dtVenc.setDate(dtVenc.getDate() + 10);
+              const dataVencIso = dtVenc.toISOString().split("T")[0];
+
+              itemsExtracted.push({
+                id: "imp_" + Date.now() + "_c1",
+                modulo: "dividas",
+                tipo: "outro",
+                credor: `Conta / Fatura (${file.name.replace(/\.[^/.]+$/, "")})`,
+                valor: valor,
+                data_vencimento: dataVencIso,
+                descricao: `Boleto (${file.name})`,
+              });
+            }
+
+            importTempList = importTempList.concat(itemsExtracted);
+            renderImportPreview();
+          };
+
+          reader.onload = function (evt) {
+            handleContent(evt.target.result || "");
+          };
+
+          if (
+            file.type.includes("json") ||
+            file.type.includes("text") ||
+            file.name.endsWith(".csv") ||
+            file.name.endsWith(".ofx") ||
+            file.name.endsWith(".txt")
+          ) {
+            reader.readAsText(file);
+          } else {
+            handleContent("");
+          }
+        }
+
+        function renderImportPreview() {
+          const container = document.getElementById("import-preview-container");
+          const tableWrap = document.getElementById("import-preview-table");
+          const badge = document.getElementById("import-count-badge");
+
+          if (!container || !tableWrap) return;
+
+          if (importTempList.length === 0) {
+            container.style.display = "none";
+            return;
+          }
+
+          container.style.display = "block";
+          if (badge) badge.textContent = `${importTempList.length} item(ns)`;
+
+          let html = `<table><thead><tr>
+            <th style="width:30px;"><input type="checkbox" id="chk-import-all" checked onclick="toggleAllImportCheckboxes(this)" /></th>
+            <th>Módulo Alvo</th>
+            <th>Descrição / Credor</th>
+            <th>Tipo / Categoria</th>
+            <th class="num">Valor (R$)</th>
+            <th>Data</th>
+          </tr></thead><tbody>`;
+
+          importTempList.forEach((item, idx) => {
+            let modBadge =
+              item.modulo === "movimentos"
+                ? '<span class="badge ok">Orçamento</span>'
+                : '<span class="badge urgent">Minhas Dívidas</span>';
+            let catText =
+              item.modulo === "movimentos"
+                ? `${item.tipo === "receita" ? "Receita" : "Despesa"} (${item.categoria})`
+                : "Dívida / Boleto";
+            let dateStr = item.data_vencimento || item.data || "—";
+
+            html += `<tr>
+              <td><input type="checkbox" class="chk-import-item" data-idx="${idx}" checked /></td>
+              <td>${modBadge}</td>
+              <td><strong>${escapeHtml(item.descricao || item.credor)}</strong></td>
+              <td>${catText}</td>
+              <td class="num"><strong>${fmtBRL(item.valor)}</strong></td>
+              <td>${fmtDataEntrada(dateStr)}</td>
+            </tr>`;
+          });
+
+          html += `</tbody></table>`;
+          tableWrap.innerHTML = html;
+        }
+
+        window.toggleAllImportCheckboxes = function (master) {
+          document
+            .querySelectorAll(".chk-import-item")
+            .forEach((c) => (c.checked = master.checked));
+        };
+
+        function clearImportPreview() {
+          importTempList = [];
+          const inputH = document.getElementById("import-holerite");
+          const inputE = document.getElementById("import-extrato");
+          const inputC = document.getElementById("import-conta");
+          if (inputH) inputH.value = "";
+          if (inputE) inputE.value = "";
+          if (inputC) inputC.value = "";
+          const container = document.getElementById("import-preview-container");
+          if (container) container.style.display = "none";
+          const msgEl = document.getElementById("import-status-msg");
+          if (msgEl) msgEl.innerHTML = "";
+        }
+
+        function syncImportedItems() {
+          if (!db) return;
+          const selectedCheckboxes = document.querySelectorAll(
+            ".chk-import-item:checked",
+          );
+
+          if (selectedCheckboxes.length === 0) {
+            alert("Selecione ao menos um item da lista para sincronizar.");
+            return;
+          }
+
+          let syncedMovs = 0,
+            syncedDividas = 0;
+
+          selectedCheckboxes.forEach((chk) => {
+            const idx = parseInt(chk.dataset.idx, 10);
+            const item = importTempList[idx];
+            if (!item) return;
+
+            if (item.modulo === "movimentos") {
+              runExec(
+                "INSERT INTO movimentos (tipo, categoria, valor, data_entrada) VALUES (?,?,?,?);",
+                [item.tipo, item.categoria, item.valor, item.data || null],
+              );
+              syncedMovs++;
+            } else if (item.modulo === "dividas") {
+              let diaV = item.data_vencimento
+                ? parseInt(item.data_vencimento.split("-")[2], 10)
+                : null;
+              runExec(
+                "INSERT INTO dividas (credor, tipo, saldo_devedor, parcela_minima, taxa_juros_mensal, dia_vencimento, data_vencimento) VALUES (?,?,?,?,?,?,?);",
+                [
+                  item.credor || item.descricao,
+                  item.tipo || "outro",
+                  item.valor,
+                  item.valor,
+                  0,
+                  diaV,
+                  item.data_vencimento || null,
+                ],
+              );
+              syncedDividas++;
+            }
+          });
+
+          const msgEl = document.getElementById("import-status-msg");
+          if (msgEl) {
+            msgEl.innerHTML = `<div class="callout success">
+              <h4>⚡ Sincronização Concluída!</h4>
+              <p>${syncedMovs} lançamento(s) inserido(s) no Orçamento e ${syncedDividas} conta(s) adicionada(s) em Minhas Dívidas.</p>
+            </div>`;
+          }
+
+          clearImportPreview();
+          renderAll();
+        }
+
+        /* ---------------- Navegação Unificada ---------------- */
+        window.navegarPara = function (viewName) {
+          document
+            .querySelectorAll(".navitem, .mobile-nav-item")
+            .forEach((b) => {
+              if (b.dataset.view === viewName) b.classList.add("active");
+              else b.classList.remove("active");
+            });
+          document
+            .querySelectorAll(".view")
+            .forEach((v) => v.classList.remove("active"));
+          const target = document.getElementById("view-" + viewName);
+          if (target) target.classList.add("active");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+
+          if (viewName === "dashboard") renderDashboard();
+          if (viewName === "plano") renderIaFullAndSimulator();
+        };
+
+        document.addEventListener("click", function (e) {
+          const btn = e.target.closest("[data-view]");
+          if (!btn) return;
+          const view = btn.dataset.view;
+          navegarPara(view);
+        });
+
+        /* ---------------- Formatação ---------------- */
+        const fmtBRL = (v) =>
+          (Number(v) || 0).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          });
+        const fmtPct = (v) =>
+          (Number(v) || 0).toLocaleString("pt-BR", {
+            maximumFractionDigits: 1,
+          }) + "%";
+
+        const TIPO_LABEL = {
+          cartao: "Cartão de crédito",
+          cheque_especial: "Cheque especial",
+          emprestimo: "Empréstimo pessoal",
+          financiamento: "Financiamento",
+          parcelamento: "Parcelamento / loja",
+          pessoa_fisica: "Pessoa física",
+          outro: "Outro",
+        };
+
+        /* ---------------- Cálculo de Vencimentos ---------------- */
+        function getStatusVencimento(dataVenc, diaVenc) {
+          const hoje = new Date();
+          hoje.setHours(0, 0, 0, 0);
+
+          if (dataVenc && dataVenc.includes("-")) {
+            const parts = dataVenc.split("-");
+            if (parts.length === 3) {
+              const dt = new Date(
+                parseInt(parts[0], 10),
+                parseInt(parts[1], 10) - 1,
+                parseInt(parts[2], 10),
+              );
+              dt.setHours(0, 0, 0, 0);
+              const diffDias = Math.ceil((dt - hoje) / (1000 * 60 * 60 * 24));
+              if (diffDias < 0)
+                return {
+                  label: `Vencida (${Math.abs(diffDias)}d atrás)`,
+                  badge: "urgent",
+                  diff: diffDias,
+                  str: dt.toLocaleDateString("pt-BR"),
+                };
+              if (diffDias === 0)
+                return {
+                  label: "Vence hoje!",
+                  badge: "urgent",
+                  diff: 0,
+                  str: dt.toLocaleDateString("pt-BR"),
+                };
+              if (diffDias <= 3)
+                return {
+                  label: `Vence em ${diffDias} dias`,
+                  badge: "urgent",
+                  diff: diffDias,
+                  str: dt.toLocaleDateString("pt-BR"),
+                };
+              if (diffDias <= 7)
+                return {
+                  label: `Vence em ${diffDias} dias`,
+                  badge: "warning",
+                  diff: diffDias,
+                  str: dt.toLocaleDateString("pt-BR"),
+                };
+              return {
+                label: dt.toLocaleDateString("pt-BR"),
+                badge: "ok",
+                diff: diffDias,
+                str: dt.toLocaleDateString("pt-BR"),
+              };
+            }
+          }
+
+          if (diaVenc) {
+            const diaNum = parseInt(diaVenc, 10);
+            if (!isNaN(diaNum) && diaNum >= 1 && diaNum <= 31) {
+              let dt = new Date(hoje.getFullYear(), hoje.getMonth(), diaNum);
+              dt.setHours(0, 0, 0, 0);
+              if (dt < hoje) {
+                dt = new Date(hoje.getFullYear(), hoje.getMonth() + 1, diaNum);
+              }
+              const diffDias = Math.ceil((dt - hoje) / (1000 * 60 * 60 * 24));
+              if (diffDias === 0)
+                return {
+                  label: `Dia ${diaNum} (Vence Hoje!)`,
+                  badge: "urgent",
+                  diff: 0,
+                  str: `Dia ${diaNum}`,
+                };
+              if (diffDias <= 3)
+                return {
+                  label: `Dia ${diaNum} (em ${diffDias}d)`,
+                  badge: "urgent",
+                  diff: diffDias,
+                  str: `Dia ${diaNum}`,
+                };
+              if (diffDias <= 7)
+                return {
+                  label: `Dia ${diaNum} (em ${diffDias}d)`,
+                  badge: "warning",
+                  diff: diffDias,
+                  str: `Dia ${diaNum}`,
+                };
+              return {
+                label: `Todo dia ${diaNum}`,
+                badge: "neutral",
+                diff: diffDias,
+                str: `Dia ${diaNum}`,
+              };
+            }
+          }
+
+          return { label: "Sem data", badge: "neutral", diff: 999, str: "—" };
+        }
+
+        function fmtDataEntrada(val) {
+          if (!val) return "—";
+          if (val.includes("-")) {
+            const p = val.split("-");
+            if (p.length === 3) return `${p[2]}/${p[1]}/${p[0]}`;
+          }
+          return val;
+        }
+
+        /* ================= DÍVIDAS ================= */
+        const credorSelect = document.getElementById("d-credor");
+        const credorCustomInput = document.getElementById("d-credor-custom");
+        const taxaInput = document.getElementById("d-taxa");
+        const tipoSelect = document.getElementById("d-tipo");
+
+        if (credorSelect) {
+          credorSelect.addEventListener("change", function () {
+            const selectedOpt =
+              credorSelect.options[credorSelect.selectedIndex];
+            if (credorSelect.value === "Outro") {
+              credorCustomInput.style.display = "block";
+              credorCustomInput.required = true;
+              taxaInput.value = "";
+              taxaInput.placeholder = "Informe os juros ao mês (%)";
+            } else {
+              credorCustomInput.style.display = "none";
+              credorCustomInput.required = false;
+              credorCustomInput.value = "";
+              if (selectedOpt && selectedOpt.dataset.taxa !== undefined) {
+                taxaInput.value = selectedOpt.dataset.taxa;
+              }
+              if (selectedOpt && selectedOpt.dataset.tipo) {
+                tipoSelect.value = selectedOpt.dataset.tipo;
+              }
+            }
+          });
+        }
+
+        document
+          .getElementById("form-divida")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            const credorVal =
+              credorSelect.value === "Outro"
+                ? credorCustomInput.value.trim()
+                : credorSelect.value.trim();
+            const tipo = tipoSelect.value;
+            const saldo = parseFloat(document.getElementById("d-saldo").value);
+            const parcela = parseFloat(
+              document.getElementById("d-parcela").value,
+            );
+            const taxaPct = parseFloat(taxaInput.value);
+            const dataVenc = document.getElementById("d-data-venc").value;
+
+            if (!credorVal || isNaN(saldo) || isNaN(parcela)) return;
+
+            let diaVencNum = null;
+            if (dataVenc && dataVenc.includes("-")) {
+              diaVencNum = parseInt(dataVenc.split("-")[2], 10);
+            }
+
+            runExec(
+              "INSERT INTO dividas (credor, tipo, saldo_devedor, parcela_minima, taxa_juros_mensal, dia_vencimento, data_vencimento) VALUES (?,?,?,?,?,?,?);",
+              [
+                credorVal,
+                tipo,
+                saldo,
+                parcela,
+                isNaN(taxaPct) ? 0 : taxaPct / 100,
+                diaVencNum,
+                dataVenc || null,
+              ],
+            );
+            e.target.reset();
+            credorCustomInput.style.display = "none";
+            credorCustomInput.required = false;
+            renderDividas();
+            renderDashboard();
+          });
+
+        function renderDividas() {
+          if (!db) return;
+          const rows = runQuery(
+            "SELECT * FROM dividas ORDER BY saldo_devedor DESC;",
+          );
+          const wrap = document.getElementById("tabela-dividas");
+          const resumo = document.getElementById("dividas-resumo");
+
+          if (rows.length === 0) {
+            wrap.innerHTML =
+              '<div class="empty">Nenhuma dívida cadastrada. Use o formulário acima para registrar suas contas.</div>';
+            resumo.textContent = "";
+            return;
+          }
+
+          const totalDevido = rows.reduce((s, r) => s + r.saldo_devedor, 0);
+          const totalParcelas = rows.reduce((s, r) => s + r.parcela_minima, 0);
+          resumo.textContent = `${rows.length} dívida(s) · Total ${fmtBRL(totalDevido)} · Parcelas mínimas ${fmtBRL(totalParcelas)}/mês`;
+
+          let html =
+            '<table><thead><tr><th>Credor</th><th>Tipo</th><th class="num">Saldo Devedor</th><th class="num">Parcela Mín.</th><th class="num">Juros a.m.</th><th>Vencimento</th><th></th></tr></thead><tbody>';
+          rows.forEach((r) => {
+            const st = getStatusVencimento(r.data_vencimento, r.dia_vencimento);
+            html +=
+              "<tr>" +
+              `<td><strong>${escapeHtml(r.credor)}</strong></td>` +
+              `<td>${TIPO_LABEL[r.tipo] || r.tipo}</td>` +
+              `<td class="num"><strong>${fmtBRL(r.saldo_devedor)}</strong></td>` +
+              `<td class="num">${fmtBRL(r.parcela_minima)}</td>` +
+              `<td class="num">${fmtPct(r.taxa_juros_mensal * 100)}</td>` +
+              `<td><span class="badge ${st.badge}">${st.label}</span></td>` +
+              `<td class="row-actions"><button class="btn danger small" data-del-divida="${r.id}">Remover</button></td>` +
+              "</tr>";
+          });
+          html += "</tbody></table>";
+          wrap.innerHTML = html;
+
+          wrap.querySelectorAll("[data-del-divida]").forEach((b) => {
+            b.addEventListener("click", function () {
+              runExec("DELETE FROM dividas WHERE id = ?;", [
+                parseInt(b.dataset.delDivida, 10),
+              ]);
+              renderDividas();
+              renderDashboard();
+            });
+          });
+        }
+
+        /* ================= ORÇAMENTO ================= */
+        document
+          .getElementById("form-mov")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            const tipo = document.getElementById("m-tipo").value;
+            const categoria = document
+              .getElementById("m-categoria")
+              .value.trim();
+            const valor = parseFloat(document.getElementById("m-valor").value);
+            const dataEntrada = document.getElementById("m-data-entrada").value;
+
+            if (!categoria || isNaN(valor)) return;
+
+            runExec(
+              "INSERT INTO movimentos (tipo, categoria, valor, data_entrada) VALUES (?,?,?,?);",
+              [tipo, categoria, valor, dataEntrada || null],
+            );
+            e.target.reset();
+            renderMovimentos();
+            renderDashboard();
+          });
+
+        const MOV_LABEL = {
+          receita: "Receita (Renda)",
+          despesa_essencial: "Despesa Essencial",
+          despesa_variavel: "Despesa Variável",
+        };
+
+        function renderMovimentos() {
+          if (!db) return;
+          const rows = runQuery(
+            "SELECT * FROM movimentos ORDER BY tipo DESC, valor DESC;",
+          );
+          const wrap = document.getElementById("tabela-mov");
+
+          if (rows.length === 0) {
+            wrap.innerHTML =
+              '<div class="empty">Nenhum lançamento no orçamento. Cadastre sua renda mensal primeiro.</div>';
+            return;
+          }
+
+          let html =
+            '<table><thead><tr><th>Tipo</th><th>Categoria</th><th class="num">Valor Mensal</th><th>Data de Entrada</th><th></th></tr></thead><tbody>';
+          rows.forEach((r) => {
+            html +=
+              "<tr>" +
+              `<td><span class="tag ${r.tipo === "receita" ? "avalanche" : "neve"}">${MOV_LABEL[r.tipo] || r.tipo}</span></td>` +
+              `<td><strong>${escapeHtml(r.categoria)}</strong></td>` +
+              `<td class="num"><strong>${fmtBRL(r.valor)}</strong></td>` +
+              `<td>${fmtDataEntrada(r.data_entrada)}</td>` +
+              `<td class="row-actions"><button class="btn danger small" data-del-mov="${r.id}">Remover</button></td>` +
+              "</tr>";
+          });
+          html += "</tbody></table>";
+          wrap.innerHTML = html;
+
+          wrap.querySelectorAll("[data-del-mov]").forEach((b) => {
+            b.addEventListener("click", function () {
+              runExec("DELETE FROM movimentos WHERE id = ?;", [
+                parseInt(b.dataset.delMov, 10),
+              ]);
+              renderMovimentos();
+              renderDashboard();
+            });
+          });
+        }
+
+        /* ================= DASHBOARD & APEXCHARTS ================= */
+        let chartComposicaoApex = null,
+          chartDividasApex = null;
+
+        function getResumoFinanceiro() {
+          const receita = runQuery(
+            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='receita';",
+          )[0].v;
+          const essencial = runQuery(
+            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='despesa_essencial';",
+          )[0].v;
+          const variavel = runQuery(
+            "SELECT COALESCE(SUM(valor),0) AS v FROM movimentos WHERE tipo='despesa_variavel';",
+          )[0].v;
+          const dividasAtivas = runQuery(
+            "SELECT * FROM dividas WHERE situacao='ativa';",
+          );
+          const totalDevido = dividasAtivas.reduce(
+            (s, d) => s + d.saldo_devedor,
+            0,
+          );
+          const parcelasMinimas = dividasAtivas.reduce(
+            (s, d) => s + d.parcela_minima,
+            0,
+          );
+          const sobra = receita - essencial - variavel - parcelasMinimas;
+          const comprometimento =
+            receita > 0 ? (parcelasMinimas / receita) * 100 : 0;
+
+          // Vencimentos iminentes (próximos 7 dias)
+          const urgentes = dividasAtivas
+            .map((d) => ({
+              ...d,
+              status: getStatusVencimento(d.data_vencimento, d.dia_vencimento),
+            }))
+            .filter((d) => d.status.diff <= 7)
+            .sort((a, b) => a.status.diff - b.status.diff);
+
+          return {
+            receita,
+            essencial,
+            variavel,
+            dividasAtivas,
+            totalDevido,
+            parcelasMinimas,
+            sobra,
+            comprometimento,
+            urgentes,
+          };
+        }
+
+        function renderDashboard() {
+          if (!db) return;
+          const r = getResumoFinanceiro();
+
+          // Metrics Strip
+          const strip = document.getElementById("metrics-strip");
+          strip.innerHTML =
+            metricHtml(
+              "Total Devido Hoje",
+              fmtBRL(r.totalDevido),
+              r.totalDevido > 0 ? "bad" : "good",
+              `${r.dividasAtivas.length} dívida(s) cadastrada(s)`,
+            ) +
+            metricHtml(
+              "Renda Mensal Total",
+              fmtBRL(r.receita),
+              "",
+              "Entrada de receitas cadastradas",
+            ) +
+            metricHtml(
+              "Comprometido com Dívidas",
+              fmtPct(r.comprometimento),
+              r.comprometimento > 30
+                ? "bad"
+                : r.comprometimento > 20
+                  ? "warn"
+                  : "good",
+              "Referência saudável: até 30%",
+            ) +
+            metricHtml(
+              "Sobra Livre no Mês",
+              fmtBRL(r.sobra),
+              r.sobra < 0 ? "bad" : "good",
+              r.sobra >= 0
+                ? "Disponível para acelerar quitação"
+                : "Atenção: orçamento no vermelho",
+            );
+
+          // Alerts + Vencimentos
+          const alerts = document.getElementById("dashboard-alerts");
+          let alertHtml = "";
+
+          if (r.urgentes.length > 0) {
+            alertHtml +=
+              '<div class="callout debt"><h4>Atencão: Dívida(s) com Vencimento Próximo!</h4>' +
+              '<ul style="margin:.4em 0 0; padding-left:1.2rem;">' +
+              r.urgentes
+                .map(
+                  (u) =>
+                    `<li><strong>${escapeHtml(u.credor)}</strong> — Parcela de ${fmtBRL(u.parcela_minima)} (<span class="badge ${u.status.badge}">${u.status.label}</span>)</li>`,
+                )
+                .join("") +
+              "</ul></div>";
+          }
+
+          if (r.receita === 0 && r.dividasAtivas.length === 0) {
+            alertHtml +=
+              '<div class="callout"><h4>Bem-vindo ao Ponto de Virada!</h4><p>Comece cadastrando suas contas nas abas <strong>Minhas dívidas</strong> e <strong>Orçamento mensal</strong>, ou clique em <strong>"Carregar dados de exemplo"</strong> acima para ver a IA em ação.</p></div>';
+          } else if (r.sobra < 0) {
+            alertHtml +=
+              '<div class="callout debt"><h4>Orçamento no Vermelho!</h4><p>Suas despesas essenciais mais as parcelas das dívidas superam sua renda em <strong>' +
+              fmtBRL(Math.abs(r.sobra)) +
+              "</strong>/mês. Vá para a aba <strong>Renda extra</strong> para encontrar alternativas de renda imediata.</p></div>";
+          }
+          alerts.innerHTML = alertHtml;
+
+          renderProximaAcao(r);
+          renderChartsApexDashboard(r);
+        }
+
+        function metricHtml(label, value, cls, note) {
+          return `<div class="metric"><div class="label">${label}</div><div class="value num ${cls || ""}">${value}</div>${note ? `<div class="note">${note}</div>` : ""}</div>`;
+        }
+
+        function renderProximaAcao(r) {
+          const el = document.getElementById("proxima-acao-conteudo");
+          if (r.dividasAtivas.length === 0) {
+            el.innerHTML =
+              "<p>Cadastre suas dívidas na aba <strong>Minhas dívidas</strong> para que a IA gere seu plano de saída personalizado.</p>";
+            return;
+          }
+          const pior = [...r.dividasAtivas].sort(
+            (a, b) => b.taxa_juros_mensal - a.taxa_juros_mensal,
+          )[0];
+
+          el.innerHTML =
+            `<p>Sua dívida com maior taxa de juros é <strong>${escapeHtml(pior.credor)}</strong> com taxa de <strong class="num">${fmtPct(pior.taxa_juros_mensal * 100)} a.m.</strong> (equivalente a <strong class="num">${fmtPct((Math.pow(1 + pior.taxa_juros_mensal, 12) - 1) * 100)} ao ano</strong>).</p>` +
+            `<p>Com a sobra atual de <strong class="num">${fmtBRL(Math.max(r.sobra, 0))}</strong>/mês, a IA recomenda priorizar o abate dessa dívida no modelo <strong>Avalanche</strong>. Veja a análise de IA completa para o roteiro de negociação.</p>`;
+        }
+
+        function renderChartsApexDashboard(r) {
+          if (typeof ApexCharts === "undefined") return;
+
+          // Apex Donut: Composição
+          const el1 = document.getElementById("chart-composicao-apex");
+          if (el1) {
+            el1.innerHTML = "";
+            const options1 = {
+              series: [
+                r.essencial,
+                r.variavel,
+                r.parcelasMinimas,
+                Math.max(r.sobra, 0),
+              ],
+              labels: [
+                "Essenciais",
+                "Variáveis",
+                "Parcelas Dívidas",
+                "Sobra Livre",
+              ],
+              chart: {
+                type: "donut",
+                height: 230,
+                fontFamily: "IBM Plex Sans",
+              },
+              colors: ["#A97A22", "#8AA394", "#A24638", "#33604F"],
+              legend: { position: "bottom", fontSize: "12px" },
+              dataLabels: { enabled: false },
+              tooltip: { y: { formatter: (v) => fmtBRL(v) } },
+            };
+            if (chartComposicaoApex) chartComposicaoApex.destroy();
+            chartComposicaoApex = new ApexCharts(el1, options1);
+            chartComposicaoApex.render();
+          }
+
+          // Apex Bar: Dívidas
+          const el2 = document.getElementById("chart-dividas-apex");
+          if (el2) {
+            el2.innerHTML = "";
+            const divOrd = [...r.dividasAtivas]
+              .sort((a, b) => b.saldo_devedor - a.saldo_devedor)
+              .slice(0, 6);
+            const options2 = {
+              series: [
+                {
+                  name: "Saldo Devedor",
+                  data: divOrd.map((d) => d.saldo_devedor),
+                },
+              ],
+              chart: {
+                type: "bar",
+                height: 230,
+                fontFamily: "IBM Plex Sans",
+                toolbar: { show: false },
+              },
+              plotOptions: { bar: { horizontal: true, borderRadius: 3 } },
+              colors: ["#A24638"],
+              xaxis: {
+                categories: divOrd.map((d) => d.credor),
+                labels: { formatter: (v) => fmtBRL(v) },
+              },
+              tooltip: { y: { formatter: (v) => fmtBRL(v) } },
+            };
+            if (chartDividasApex) chartDividasApex.destroy();
+            chartDividasApex = new ApexCharts(el2, options2);
+            chartDividasApex.render();
+          }
+        }
+
+        /* ================= RECOMENDADOR DE RENDA EXTRA ================= */
+        const QUIZ_RESPOSTAS = {
+          tempo: "medio",
+          capital: "zero",
+          perfil: "digital",
+          urgencia: "imediato",
+          recursos: "celular",
+        };
+
+        const EXTRA_INCOME_CATALOG = [
+          {
+            id: "marmitas",
+            title: "Marmitas Congeladas / Doces Caseiros",
+            categoria: "culinaria",
+            ganhoEstimado: "R$ 600 a R$ 2.400 /mês",
+            valorMedioSimulacao: 1000,
+            tempoRetorno: "7 a 10 dias",
+            esforco: "Médio / Alto",
+            perfis: ["culinaria", "servicos"],
+            recursos: ["cozinha"],
+            capital: ["zero", "baixo", "medio"],
+            descricao:
+              "Preparo de refeições saudáveis, marmitas fit congeladas ou doces por encomenda para venda na vizinhança ou condomínio.",
+            passos: [
+              "Monte um cardápio enxuto com 3 opções principais de refeição.",
+              "Divulgue no WhatsApp do condomínio e vizinhos aceitando encomendas pagas antecipadamente.",
+              "Calcule a margem garantindo ao menos 100% de lucro sobre o custo dos ingredientes.",
+            ],
+          },
+          {
+            id: "assistente_digital",
+            title: "Assistente Virtual / Suporte em Planilhas e Redes",
+            categoria: "digital",
+            ganhoEstimado: "R$ 500 a R$ 2.000 /mês",
+            valorMedioSimulacao: 800,
+            tempoRetorno: "15 dias",
+            esforco: "Médio",
+            perfis: ["digital", "ensino"],
+            recursos: ["pc", "celular"],
+            capital: ["zero", "baixo"],
+            descricao:
+              "Prestação de serviços remotos organizando planilhas, agendamentos, WhatsApp business e redes sociais para autônomos e pequenos comércios.",
+            passos: [
+              "Monte um portfólio simples no Canva destacando suas habilidades.",
+              "Ofereça um pacote de suporte de 10h/mês por R$ 350 para 3 a 4 clientes locais.",
+              "Cadastre-se em plataformas como Workana e 99Freelas.",
+            ],
+          },
+          {
+            id: "entregas_app",
+            title: "Entregas por Aplicativo ou Motoboy Local",
+            categoria: "transporte",
+            ganhoEstimado: "R$ 500 a R$ 2.200 /mês",
+            valorMedioSimulacao: 900,
+            tempoRetorno: "3 a 5 dias",
+            esforco: "Alto",
+            perfis: ["transporte", "servicos"],
+            recursos: ["veiculo", "celular"],
+            capital: ["zero", "baixo"],
+            descricao:
+              "Realização de entregas rápidas via apps (iFood, Zé Delivery, Lalamove) ou diretamente com comércios do bairro nos horários de pico.",
+            passos: [
+              "Cadastre-se nos apps de entregas ativos na sua região.",
+              "Parcele a rotina atendendo restaurantes locais no período noturno.",
+              "Guarde 15% dos ganhos para manutenção do veículo.",
+            ],
+          },
+          {
+            id: "revenda_brecho",
+            title: "Brechó de Desapegos & Revenda de Produtos",
+            categoria: "vendas",
+            ganhoEstimado: "R$ 300 a R$ 1.500 /mês",
+            valorMedioSimulacao: 600,
+            tempoRetorno: "5 a 7 dias",
+            esforco: "Baixo / Médio",
+            perfis: ["vendas", "digital"],
+            recursos: ["celular"],
+            capital: ["zero", "baixo"],
+            descricao:
+              "Venda de roupas, eletrônicos e objetos que você ou parentes não usam mais no OLX, Enjoei e Facebook Marketplace.",
+            passos: [
+              "Faça uma limpa em casa e selecione 10 itens em excelente estado.",
+              "Tire fotos claras com iluminação natural e publique com preços competitivos.",
+              "Reinvista metade do lucro inicial comprando novos lotes de oportunidade.",
+            ],
+          },
+          {
+            id: "aulas_reforco",
+            title: "Aulas Particulares e Reforço Escolar",
+            categoria: "ensino",
+            ganhoEstimado: "R$ 400 a R$ 1.800 /mês",
+            valorMedioSimulacao: 700,
+            tempoRetorno: "10 dias",
+            esforco: "Médio",
+            perfis: ["ensino", "digital"],
+            recursos: ["pc", "celular"],
+            capital: ["zero"],
+            descricao:
+              "Aulas presenciais ou online de disciplinas escolares, matemática, idiomas, informática básica ou instrumentos musicais.",
+            passos: [
+              "Escolha 1 ou 2 matérias em que você tem facilidade.",
+              "Divulgue pacotes mensais (ex: 2 aulas por semana por R$ 200/mês por aluno).",
+              "Ofereça a primeira aula experimental gratuita.",
+            ],
+          },
+          {
+            id: "servicos_manuais",
+            title: "Organização / Limpeza / Reparos Residenciais",
+            categoria: "servicos",
+            ganhoEstimado: "R$ 600 a R$ 2.500 /mês",
+            valorMedioSimulacao: 1100,
+            tempoRetorno: "3 dias",
+            esforco: "Alto",
+            perfis: ["servicos"],
+            recursos: ["ferramentas", "celular"],
+            capital: ["zero", "baixo"],
+            descricao:
+              "Pequenos reparos residenciais, montagem de móveis, pintura pontual, instalação de suportes ou faxinas organizacionais.",
+            passos: [
+              "Liste exatamente as tarefas que domina com segurança.",
+              "Anuncie em grupos de moradores do bairro aceitando Pix na conclusão.",
+              "Peça depoimentos e indicações para cada cliente atendido.",
+            ],
+          },
+        ];
+
+        let currentQuizStep = 1;
+
+        document.addEventListener("click", function (e) {
+          const opt = e.target.closest(".quiz-opt");
+          if (!opt) return;
+          const key = opt.dataset.key;
+          const val = opt.dataset.val;
+          QUIZ_RESPOSTAS[key] = val;
+          opt.parentElement
+            .querySelectorAll(".quiz-opt")
+            .forEach((o) => o.classList.remove("selected"));
+          opt.classList.add("selected");
+        });
+
+        document
+          .getElementById("btn-quiz-next")
+          .addEventListener("click", function () {
+            if (currentQuizStep < 5) {
+              currentQuizStep++;
+              showQuizStep(currentQuizStep);
+            } else {
+              gerarRecomendacoesRendaExtra();
+            }
+          });
+
+        document
+          .getElementById("btn-quiz-prev")
+          .addEventListener("click", function () {
+            if (currentQuizStep > 1) {
+              currentQuizStep--;
+              showQuizStep(currentQuizStep);
+            }
+          });
+
+        document
+          .getElementById("btn-quiz-refazer")
+          .addEventListener("click", function () {
+            currentQuizStep = 1;
+            showQuizStep(1);
+            document.getElementById("quiz-container").style.display = "block";
+            document.getElementById("renda-extra-resultados").style.display =
+              "none";
+          });
+
+        function showQuizStep(step) {
+          document.querySelectorAll(".quiz-step").forEach((s) => {
+            s.classList.toggle("active", parseInt(s.dataset.step, 10) === step);
+          });
+          document.getElementById("quiz-progress-bar").style.width =
+            step * 20 + "%";
+          document.getElementById("btn-quiz-prev").style.display =
+            step > 1 ? "inline-flex" : "none";
+          document.getElementById("btn-quiz-next").textContent =
+            step === 5
+              ? "Gerar Minhas Recomendações IA →"
+              : "Próxima Pergunta →";
+        }
+
+        function gerarRecomendacoesRendaExtra() {
+          document.getElementById("quiz-container").style.display = "none";
+          const resContainer = document.getElementById(
+            "renda-extra-resultados",
+          );
+          const cardsWrap = document.getElementById("rec-cards-container");
+          resContainer.style.display = "block";
+
+          const ranqueados = EXTRA_INCOME_CATALOG.map((item) => {
+            let score = 55;
+            if (item.perfis.includes(QUIZ_RESPOSTAS.perfil)) score += 25;
+            if (
+              item.recursos.some(
+                (r) =>
+                  QUIZ_RESPOSTAS.recursos === r ||
+                  QUIZ_RESPOSTAS.recursos === "celular",
+              )
+            )
+              score += 12;
+            if (item.capital.includes(QUIZ_RESPOSTAS.capital)) score += 8;
+            return { ...item, score: Math.min(score, 98) };
+          }).sort((a, b) => b.score - a.score);
+
+          let html = "";
+          ranqueados.forEach((rec) => {
+            html += `<div class="rec-card">
+        <span class="match-badge">${rec.score}% Afinidade IA</span>
+        <h3>${escapeHtml(rec.title)}</h3>
+        <div class="gain">${rec.ganhoEstimado}</div>
+        <p style="font-size:.84rem; color:var(--ink-soft);">${escapeHtml(rec.descricao)}</p>
+        <div style="font-size:.8rem; margin:.4em 0;">
+          <strong>Retorno do 1º dinheiro:</strong> ${rec.tempoRetorno}<br>
+          <strong>Esforço exigido:</strong> ${rec.esforco}
+        </div>
+        <ul>
+          ${rec.passos.map((p) => `<li>${escapeHtml(p)}</li>`).join("")}
+        </ul>
+        <button class="btn small" style="margin-top:auto;" onclick="aplicarRendaExtraNoSimulador(${rec.valorMedioSimulacao})">
+          Simular + ${fmtBRL(rec.valorMedioSimulacao)}/mês no Plano
+        </button>
+      </div>`;
+          });
+          cardsWrap.innerHTML = html;
+        }
+
+        window.aplicarRendaExtraNoSimulador = function (valorExtra) {
+          document.getElementById("sim-extra").value = valorExtra;
+          navegarPara("plano");
+          setTimeout(() => {
+            document.getElementById("btn-simular").click();
+          }, 150);
+        };
+
+        /* ================= ANÁLISE DE IA & PLANO ================= */
+        let chartGaugeApex = null,
+          chartSimulacaoApex = null;
+
+        function renderIaFullAndSimulator() {
+          if (!db) return;
+          const r = getResumoFinanceiro();
+
+          // Cálculo do Índice de Saúde Financeira (0 a 100)
+          let score = 50;
+          if (r.totalDevido === 0) score += 40;
+          else {
+            if (r.comprometimento <= 20) score += 20;
+            else if (r.comprometimento <= 35) score += 5;
+            else score -= 20;
+
+            if (r.sobra > 0) score += 15;
+            else score -= 25;
+          }
+          const healthIndex = Math.max(5, Math.min(100, Math.round(score)));
+
+          // Render Radial Gauge
+          const gaugeEl = document.getElementById("chart-gauge-apex");
+          if (gaugeEl && typeof ApexCharts !== "undefined") {
+            gaugeEl.innerHTML = "";
+            const colorGauge =
+              healthIndex < 40
+                ? "#A24638"
+                : healthIndex < 70
+                  ? "#A97A22"
+                  : "#33604F";
+            const gaugeOpt = {
+              series: [healthIndex],
+              chart: {
+                type: "radialBar",
+                height: 140,
+                sparkline: { enabled: true },
+              },
+              plotOptions: {
+                radialBar: {
+                  hollow: { size: "65%" },
+                  dataLabels: {
+                    value: {
+                      offsetY: -8,
+                      fontSize: "20px",
+                      fontWeight: "700",
+                      fontFamily: "Fraunces",
+                      color: colorGauge,
+                      formatter: (v) => v + "/100",
+                    },
+                  },
+                },
+              },
+              colors: [colorGauge],
+            };
+            if (chartGaugeApex) chartGaugeApex.destroy();
+            chartGaugeApex = new ApexCharts(gaugeEl, gaugeOpt);
+            chartGaugeApex.render();
+          }
+
+          // Textos Diagnóstico IA
+          const titleEl = document.getElementById("ai-score-title");
+          const descEl = document.getElementById("ai-score-desc");
+          const badgesEl = document.getElementById("ai-score-badges");
+          const detailsEl = document.getElementById("ai-report-details");
+
+          let statusCls =
+            healthIndex < 40 ? "urgent" : healthIndex < 70 ? "warning" : "ok";
+          let statusText =
+            healthIndex < 40
+              ? "Situação Crítica de Endividamento"
+              : healthIndex < 70
+                ? "Alerta Financeiro Requer Ajustes"
+                : "Saúde Financeira sob Controle";
+
+          titleEl.textContent = statusText;
+          descEl.textContent = `A IA analisou ${r.dividasAtivas.length} dívida(s) ativa(s), sua renda de ${fmtBRL(r.receita)}/mês e o comprometimento de ${fmtPct(r.comprometimento)}.`;
+          badgesEl.innerHTML = `<span class="badge ${statusCls}">Pontuação: ${healthIndex} / 100</span>`;
+
+          let detailsHtml = "";
+          if (r.dividasAtivas.length > 0) {
+            const pior = [...r.dividasAtivas].sort(
+              (a, b) => b.taxa_juros_mensal - a.taxa_juros_mensal,
+            )[0];
+            const jurosAno =
+              (Math.pow(1 + pior.taxa_juros_mensal, 12) - 1) * 100;
+
+            detailsHtml += `<div class="callout debt">
+        <h4>Alerta da IA: Ralo de Juros Identificado!</h4>
+        <p>Sua dívida mais perigosa é <strong>${escapeHtml(pior.credor)}</strong>. Com juros de <strong>${fmtPct(pior.taxa_juros_mensal * 100)} a.m.</strong>, ela dobra de tamanho a cada poucos meses (equivalente a <strong>${fmtPct(jurosAno)} ao ano</strong>). Qualquer dinheiro extra deve ser direcionado prioritariamente para zerar esta conta.</p>
+      </div>`;
+          }
+
+          detailsHtml += `<div class="callout success">
+      <h4>Recomendação de Renda Extra Personalizada</h4>
+      <p>Com base na sua preferência por <strong>${QUIZ_RESPOSTAS.perfil.toUpperCase()}</strong> e tempo disponível, adotar uma das atividades recomendadas pode gerar entre <strong>R$ 600 e R$ 1.200 extras/mês</strong>, reduzindo o tempo de quitação em até 60%.</p>
+    </div>`;
+
+          detailsEl.innerHTML = detailsHtml;
+        }
+
+        /* ================= SIMULADOR (bola de neve / avalanche) ================= */
+        /* ================= SIMULADOR DE QUITAÇÃO ================= */
+        function simularQuitacao(dividasIn, estrategia, aporteExtra, maxMeses) {
+          maxMeses = maxMeses || 360;
+          let dividas = dividasIn.map((d) => ({
+            id: d.id,
+            credor: d.credor,
+            taxa: d.taxa_juros_mensal,
+            parcela: d.parcela_minima,
+            saldo: d.saldo_devedor,
+            saldoAtual: d.saldo_devedor,
+          }));
+          const saldoInicial = dividas.reduce((s, d) => s + d.saldo, 0);
+
+          function ordenar(arr) {
+            if (estrategia === "avalanche")
+              return [...arr].sort((a, b) => b.taxa - a.taxa);
+            return [...arr].sort((a, b) => a.saldoAtual - b.saldoAtual);
+          }
+
+          let mes = 0,
+            totalJuros = 0,
+            liberadoAcumulado = 0,
+            divergiu = false;
+          const historico = [{ mes: 0, totalSaldo: saldoInicial }];
+
+          while (dividas.some((d) => d.saldoAtual > 0.005) && mes < maxMeses) {
+            mes++;
+            dividas.forEach((d) => {
+              if (d.saldoAtual > 0) {
+                const j = d.saldoAtual * d.taxa;
+                totalJuros += j;
+                d.saldoAtual += j;
+              }
+            });
+            dividas.forEach((d) => {
+              if (d.saldoAtual > 0) {
+                d.saldoAtual -= Math.min(d.saldoAtual, d.parcela);
+              }
+            });
+
+            let extraDisponivel = aporteExtra + liberadoAcumulado;
+            const ordem = ordenar(dividas.filter((d) => d.saldoAtual > 0.005));
+            for (const d of ordem) {
+              if (extraDisponivel <= 0) break;
+              const pago = Math.min(d.saldoAtual, extraDisponivel);
+              d.saldoAtual -= pago;
+              extraDisponivel -= pago;
+            }
+            liberadoAcumulado = dividas
+              .filter((d) => d.saldoAtual <= 0.005)
+              .reduce((s, d) => s + d.parcela, 0);
+            const totalSaldo = dividas.reduce(
+              (s, d) => s + Math.max(d.saldoAtual, 0),
+              0,
+            );
+            historico.push({ mes, totalSaldo });
+            if (totalSaldo <= 0.5) break;
+            if (totalSaldo > saldoInicial * 3) {
+              divergiu = true;
+              break;
+            }
+          }
+          const quitado = dividas.every((d) => d.saldoAtual <= 0.5);
+          return { meses: mes, totalJuros, historico, quitado, divergiu };
+        }
+
+        document
+          .getElementById("btn-simular")
+          .addEventListener("click", function () {
+            if (!db) return;
+            const dividas = runQuery(
+              "SELECT * FROM dividas WHERE situacao='ativa';",
+            );
+            const resultEl = document.getElementById("sim-resultado");
+
+            if (dividas.length === 0) {
+              resultEl.innerHTML =
+                '<div class="empty">Cadastre ao menos uma dívida na aba "Minhas dívidas" para simular.</div>';
+              return;
+            }
+
+            const aporteExtra =
+              parseFloat(document.getElementById("sim-extra").value) || 0;
+            const estrategia = document.querySelector(
+              'input[name="estrategia"]:checked',
+            ).value;
+
+            const resAv = simularQuitacao(dividas, "avalanche", aporteExtra);
+            const resNeve = simularQuitacao(
+              dividas,
+              "bola-de-neve",
+              aporteExtra,
+            );
+            const resEscolhida = estrategia === "avalanche" ? resAv : resNeve;
+
+            const dataZero = new Date();
+            dataZero.setMonth(dataZero.getMonth() + resEscolhida.meses);
+
+            let html =
+              `<div class="metrics" style="margin-bottom:1rem;">` +
+              metricHtml(
+                "Estratégia Escolhida",
+                estrategia === "avalanche" ? "Avalanche" : "Bola de Neve",
+                "",
+                "",
+              ) +
+              metricHtml(
+                "Tempo até Dívida Zero",
+                resEscolhida.quitado
+                  ? `${resEscolhida.meses} meses`
+                  : "30+ anos",
+                resEscolhida.quitado ? "good" : "bad",
+                resEscolhida.quitado
+                  ? `Previsão: ${dataZero.toLocaleDateString("pt-BR", { month: "short", year: "numeric" })}`
+                  : "Aumente o aporte extra",
+              ) +
+              metricHtml(
+                "Total de Juros Pagos",
+                fmtBRL(resEscolhida.totalJuros),
+                "",
+                "",
+              ) +
+              `</div>`;
+
+            html += `<div id="chart-sim-apex" style="min-height:220px; margin-top:1rem;"></div>`;
+            resultEl.innerHTML = html;
+
+            if (typeof ApexCharts !== "undefined") {
+              const maxLen = Math.max(
+                resAv.historico.length,
+                resNeve.historico.length,
+              );
+              const labels = Array.from(
+                { length: maxLen },
+                (_, i) => `Mês ${i}`,
+              );
+              const pad = (hist) =>
+                labels.map((_, i) => {
+                  const p = hist.find((h) => h.mes === i);
+                  return p ? Math.round(p.totalSaldo) : 0;
+                });
+
+              const optionsSim = {
+                series: [
+                  {
+                    name: "Avalanche (Juros Altos Primeiros)",
+                    data: pad(resAv.historico),
+                  },
+                  {
+                    name: "Bola de Neve (Saldos Menores)",
+                    data: pad(resNeve.historico),
+                  },
+                ],
+                chart: {
+                  type: "line",
+                  height: 230,
+                  fontFamily: "IBM Plex Sans",
+                  toolbar: { show: false },
+                },
+                colors: ["#33604F", "#A97A22"],
+                stroke: { width: 3, curve: "smooth" },
+                xaxis: { categories: labels, labels: { show: false } },
+                yaxis: { labels: { formatter: (v) => fmtBRL(v) } },
+                tooltip: { y: { formatter: (v) => fmtBRL(v) } },
+              };
+
+              if (chartSimulacaoApex) chartSimulacaoApex.destroy();
+              chartSimulacaoApex = new ApexCharts(
+                document.getElementById("chart-sim-apex"),
+                optionsSim,
+              );
+              chartSimulacaoApex.render();
+            }
+          });
+
+        /* ================= CONSOLE SQL ================= */
+        document
+          .getElementById("btn-run-sql")
+          .addEventListener("click", executarSqlConsole);
+        document.querySelectorAll(".chip").forEach((chip) => {
+          chip.addEventListener("click", function () {
+            document.getElementById("sql-input").value = chip.dataset.q;
+            executarSqlConsole();
+          });
+        });
+
+        function executarSqlConsole() {
+          if (!db) return;
+          const sql = document.getElementById("sql-input").value.trim();
+          const msg = document.getElementById("sql-msg");
+          const resultWrap = document.getElementById("sql-result");
+          if (!sql) {
+            return;
+          }
+          try {
+            const res = runRaw(sql);
+            msg.style.color = "var(--ink-soft)";
+            if (res.length === 0) {
+              msg.textContent =
+                "Comando executado com sucesso (sem linhas para exibir).";
+              resultWrap.innerHTML = "";
+            } else {
+              msg.textContent =
+                res[0].values.length + " linha(s) retornada(s).";
+              let html = "<table><thead><tr>";
+              res[0].columns.forEach(
+                (c) => (html += "<th>" + escapeHtml(c) + "</th>"),
+              );
+              html += "</tr></thead><tbody>";
+              res[0].values.forEach((row) => {
+                html +=
+                  "<tr>" +
+                  row
+                    .map(
+                      (v) =>
+                        "<td>" +
+                        escapeHtml(v === null ? "NULL" : String(v)) +
+                        "</td>",
+                    )
+                    .join("") +
+                  "</tr>";
+              });
+              html += "</tbody></table>";
+              resultWrap.innerHTML = html;
+            }
+            // qualquer alteração via console também deve refletir no resto do app
+            renderDividas();
+            renderMovimentos();
+            renderDashboard();
+          } catch (e) {
+            msg.style.color = "var(--debt)";
+            msg.textContent = "Erro: " + e.message;
+          }
+        }
+
+        document
+          .getElementById("btn-export-db")
+          .addEventListener("click", function () {
+            if (!db) return;
+            const data = db.export();
+            const blob = new Blob([data], { type: "application/x-sqlite3" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "ponto-de-virada.sqlite";
+            a.click();
+            URL.revokeObjectURL(url);
+          });
+
+        document
+          .getElementById("btn-reset-db")
+          .addEventListener("click", function () {
+            if (
+              !confirm(
+                "Isso vai apagar todas as dívidas e lançamentos cadastrados neste navegador. Deseja continuar?",
+              )
+            )
+              return;
+            db.run(
+              "DELETE FROM dividas; DELETE FROM movimentos; DELETE FROM config;",
+            );
+            salvar();
+            renderAll();
+          });
+
+        /* ================= DADOS DE EXEMPLO ================= */
+        document
+          .getElementById("btn-exemplo")
+          .addEventListener("click", function () {
+            if (!db) return;
+            if (
+              !confirm(
+                "Isso adiciona dívidas e lançamentos fictícios para você explorar o app. Continuar?",
+              )
+            )
+              return;
+            const exemplosDividas = [
+              ["Cartão de crédito — rotativo", "cartao", 4200, 260, 0.14, 10],
+              ["Cheque especial", "cheque_especial", 1800, 150, 0.11, 5],
+              [
+                "Empréstimo pessoal — banco",
+                "emprestimo",
+                7600,
+                380,
+                0.035,
+                20,
+              ],
+              ["Financiamento de móveis", "parcelamento", 2100, 175, 0.025, 15],
+            ];
+            exemplosDividas.forEach((d) => {
+              runExec(
+                "INSERT INTO dividas (credor,tipo,saldo_devedor,parcela_minima,taxa_juros_mensal,dia_vencimento) VALUES (?,?,?,?,?,?);",
+                d,
+              );
+            });
+            const exemplosMov = [
+              ["receita", "Salário", 3200],
+              ["receita", "Renda extra", 400],
+              ["despesa_essencial", "Aluguel", 1100],
+              ["despesa_essencial", "Mercado", 550],
+              ["despesa_essencial", "Transporte", 250],
+              ["despesa_essencial", "Saúde", 150],
+              ["despesa_variavel", "Assinaturas", 90],
+              ["despesa_variavel", "Lazer", 200],
+            ];
+            exemplosMov.forEach((m) => {
+              runExec(
+                "INSERT INTO movimentos (tipo,categoria,valor) VALUES (?,?,?);",
+                m,
+              );
+            });
+            renderAll();
+          });
+
+        /* ================= util ================= */
+        function escapeHtml(str) {
+          return String(str).replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[c],
+          );
+        }
+
+        function renderAll() {
+          renderDividas();
+          renderMovimentos();
+          renderDashboard();
+        }
+      })();
+    </script>
+  </body>
+</html>
