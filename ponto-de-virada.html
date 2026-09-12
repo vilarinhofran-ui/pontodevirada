@@ -674,23 +674,156 @@
         margin-bottom: 0.25em;
       }
 
-      .ai-score-card {
-        display: flex;
-        align-items: center;
-        gap: 1.4rem;
-        padding: 1.2rem;
+      /* ---------- Visual Enhancements for Charts & AI Report ---------- */
+      .chart-card {
+        background: var(--surface);
         border: 1px solid var(--line);
         border-radius: var(--radius);
-        background: var(--surface);
-        margin-bottom: 1.4rem;
-        flex-wrap: wrap;
+        padding: 1.25rem;
         box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
       }
-      .ai-score-gauge {
-        width: 120px;
-        height: 120px;
+      .chart-card:hover {
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      }
+      .chart-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px dashed var(--line-soft);
+      }
+      .chart-card-head h3 {
+        font-size: 0.98rem;
+        margin: 0;
+        color: var(--accent-ink);
+        font-weight: 600;
+      }
+
+      .ai-hero-card {
+        background: linear-gradient(135deg, var(--surface) 0%, #f5f7f4 100%);
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 1.4rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .ai-hero-card.urgent {
+        border-top-color: var(--debt);
+        background: linear-gradient(135deg, var(--surface) 0%, #fcf5f4 100%);
+      }
+      .ai-hero-card.warning {
+        border-top-color: var(--warn);
+        background: linear-gradient(135deg, var(--surface) 0%, #fcfaf2 100%);
+      }
+      .ai-hero-card.ok {
+        border-top-color: var(--success);
+        background: linear-gradient(135deg, var(--surface) 0%, #f3f8f5 100%);
+      }
+
+      .ai-hero-top {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+        flex-wrap: wrap;
+      }
+      .ai-score-gauge-wrap {
+        width: 140px;
+        height: 140px;
         flex: none;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ai-metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 0.8rem;
+        width: 100%;
+        margin-top: 0.4rem;
+        padding-top: 1rem;
+        border-top: 1px dashed var(--line);
+      }
+      .ai-metric-pill {
+        background: var(--surface);
+        border: 1px solid var(--line-soft);
+        border-radius: var(--radius);
+        padding: 0.65rem 0.8rem;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+      }
+      .ai-metric-pill .lbl {
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+        margin-bottom: 0.2em;
+        font-weight: 500;
+      }
+      .ai-metric-pill .val {
+        font-family: "Fraunces", serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--accent-ink);
+      }
+
+      .ai-insights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+        margin-top: 1rem;
+      }
+      .ai-insight-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 1.2rem;
+        box-shadow: var(--shadow);
+        border-left: 4px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        justify-content: space-between;
+      }
+      .ai-insight-card.debt {
+        border-left-color: var(--debt);
+        background: #faf3f1;
+      }
+      .ai-insight-card.success {
+        border-left-color: var(--success);
+        background: #f2f8f4;
+      }
+      .ai-insight-card.warning {
+        border-left-color: var(--warn);
+        background: #faf6eb;
+      }
+      .ai-insight-card.info {
+        border-left-color: var(--accent);
+        background: #f3f6f4;
+      }
+
+      .ai-insight-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .ai-insight-head h4 {
+        margin: 0;
+        font-size: 0.98rem;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 0.4em;
       }
 
       .sim-grid {
@@ -991,34 +1124,31 @@
           <div id="dashboard-alerts"></div>
 
           <div class="panel">
-            <div class="panel-head"><h2>Balanço Visual e Distribuição</h2></div>
+            <div class="panel-head">
+              <h2>Balanço Visual e Distribuição</h2>
+              <span class="badge neutral">Visão Gráfica</span>
+            </div>
             <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.4rem;
+              "
               id="dash-charts-wrap"
             >
-              <div>
-                <h3
-                  style="
-                    font-size: 0.95rem;
-                    margin-bottom: 0.6em;
-                    color: var(--ink-soft);
-                  "
-                >
-                  Composição da renda mensal
-                </h3>
-                <div id="chart-composicao-apex" style="min-height: 220px"></div>
+              <div class="chart-card">
+                <div class="chart-card-head">
+                  <h3>Composição da Renda Mensal</h3>
+                  <span class="tag avalanche">Orçamento</span>
+                </div>
+                <div id="chart-composicao-apex" style="min-height: 250px"></div>
               </div>
-              <div>
-                <h3
-                  style="
-                    font-size: 0.95rem;
-                    margin-bottom: 0.6em;
-                    color: var(--ink-soft);
-                  "
-                >
-                  Dívidas ativas por saldo devedor
-                </h3>
-                <div id="chart-dividas-apex" style="min-height: 220px"></div>
+              <div class="chart-card">
+                <div class="chart-card-head">
+                  <h3>Dívidas Ativas por Saldo Devedor</h3>
+                  <span class="tag neve">Passivos</span>
+                </div>
+                <div id="chart-dividas-apex" style="min-height: 250px"></div>
               </div>
             </div>
           </div>
@@ -1665,26 +1795,60 @@
           </div>
 
           <!-- PAINEL DE DIAGNÓSTICO IA COMPLETO -->
-          <div class="panel" id="panel-ia-full">
-            <div class="panel-head">
+          <div
+            class="panel"
+            id="panel-ia-full"
+            style="
+              background: transparent;
+              border: none;
+              padding: 0;
+              box-shadow: none;
+            "
+          >
+            <div class="panel-head" style="margin-bottom: 1rem">
               <h2 style="margin: 0">Relatório de Inteligência Financeira IA</h2>
               <span class="badge ok">Análise em Tempo Real</span>
             </div>
-            <div class="ai-score-card">
-              <div class="ai-score-gauge">
-                <div id="chart-gauge-apex"></div>
+
+            <div class="ai-hero-card" id="ai-hero-card-element">
+              <div class="ai-hero-top">
+                <div class="ai-score-gauge-wrap">
+                  <div id="chart-gauge-apex"></div>
+                </div>
+                <div style="flex: 1; min-width: 220px">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 0.6em;
+                      margin-bottom: 0.4em;
+                      flex-wrap: wrap;
+                    "
+                  >
+                    <h3
+                      style="margin: 0; font-size: 1.25rem"
+                      id="ai-score-title"
+                    >
+                      Analisando dados...
+                    </h3>
+                    <div id="ai-score-badges"></div>
+                  </div>
+                  <p
+                    style="
+                      margin-bottom: 0;
+                      font-size: 0.92rem;
+                      color: var(--ink-soft);
+                    "
+                    id="ai-score-desc"
+                  ></p>
+                </div>
               </div>
-              <div style="flex: 1">
-                <h3 style="margin-bottom: 0.2em" id="ai-score-title">
-                  Analisando dados...
-                </h3>
-                <p
-                  style="margin-bottom: 0.5em; font-size: 0.9rem"
-                  id="ai-score-desc"
-                ></p>
-                <div id="ai-score-badges"></div>
-              </div>
+
+              <!-- Metrics Summary Grid inside AI Report -->
+              <div class="ai-metrics-grid" id="ai-metrics-grid-element"></div>
             </div>
+
+            <!-- Detail Cards Grid -->
             <div id="ai-report-details"></div>
           </div>
 
@@ -2972,8 +3136,34 @@ SELECT * FROM dividas;</textarea
               ],
               chart: {
                 type: "donut",
-                height: 230,
+                height: 260,
                 fontFamily: "IBM Plex Sans",
+              },
+              plotOptions: {
+                pie: {
+                  donut: {
+                    size: "68%",
+                    labels: {
+                      show: true,
+                      name: { show: true, fontSize: "12px", color: "#4C5A51" },
+                      value: {
+                        show: true,
+                        fontSize: "17px",
+                        fontFamily: "Fraunces",
+                        fontWeight: "600",
+                        color: "#1F3D32",
+                        formatter: (v) => fmtBRL(v),
+                      },
+                      total: {
+                        show: true,
+                        label: "Renda Total",
+                        fontSize: "12px",
+                        color: "#4C5A51",
+                        formatter: () => fmtBRL(r.receita),
+                      },
+                    },
+                  },
+                },
               },
               colors: ["#A97A22", "#8AA394", "#A24638", "#33604F"],
               legend: { position: "bottom", fontSize: "12px" },
@@ -2990,32 +3180,57 @@ SELECT * FROM dividas;</textarea
           if (el2) {
             el2.innerHTML = "";
             const divOrd = [...r.dividasAtivas]
-              .sort((a, b) => b.saldo_devedor - a.saldo_devedor)
+              .sort((a, b) => (b.saldo_devedor || 0) - (a.saldo_devedor || 0))
               .slice(0, 6);
-            const options2 = {
-              series: [
-                {
-                  name: "Saldo Devedor",
-                  data: divOrd.map((d) => d.saldo_devedor),
+
+            if (divOrd.length === 0) {
+              el2.innerHTML =
+                '<div class="empty" style="padding: 2.5rem 1rem;">Nenhuma dívida ativa cadastrada.</div>';
+            } else {
+              const options2 = {
+                series: [
+                  {
+                    name: "Saldo Devedor",
+                    data: divOrd.map((d) => d.saldo_devedor || 0),
+                  },
+                ],
+                chart: {
+                  type: "bar",
+                  height: 260,
+                  fontFamily: "IBM Plex Sans",
+                  toolbar: { show: false },
                 },
-              ],
-              chart: {
-                type: "bar",
-                height: 230,
-                fontFamily: "IBM Plex Sans",
-                toolbar: { show: false },
-              },
-              plotOptions: { bar: { horizontal: true, borderRadius: 3 } },
-              colors: ["#A24638"],
-              xaxis: {
-                categories: divOrd.map((d) => d.credor),
-                labels: { formatter: (v) => fmtBRL(v) },
-              },
-              tooltip: { y: { formatter: (v) => fmtBRL(v) } },
-            };
-            if (chartDividasApex) chartDividasApex.destroy();
-            chartDividasApex = new ApexCharts(el2, options2);
-            chartDividasApex.render();
+                plotOptions: {
+                  bar: {
+                    horizontal: true,
+                    borderRadius: 4,
+                    barHeight: "50%",
+                    distributed: true,
+                  },
+                },
+                colors: [
+                  "#A24638",
+                  "#B85747",
+                  "#C96A58",
+                  "#D97D6A",
+                  "#E68F7B",
+                  "#F0A18C",
+                ],
+                legend: { show: false },
+                grid: { strokeDashArray: 3, borderColor: "#DDE3D6" },
+                xaxis: {
+                  categories: divOrd.map((d) => d.credor),
+                  labels: {
+                    formatter: (v) => fmtBRL(v),
+                    style: { fontSize: "11px" },
+                  },
+                },
+                tooltip: { y: { formatter: (v) => fmtBRL(v) } },
+              };
+              if (chartDividasApex) chartDividasApex.destroy();
+              chartDividasApex = new ApexCharts(el2, options2);
+              chartDividasApex.render();
+            }
           }
         }
 
@@ -3277,6 +3492,21 @@ SELECT * FROM dividas;</textarea
           }
           const healthIndex = Math.max(5, Math.min(100, Math.round(score)));
 
+          let statusCls =
+            healthIndex < 40 ? "urgent" : healthIndex < 70 ? "warning" : "ok";
+          let statusText =
+            healthIndex < 40
+              ? "Situação Crítica de Endividamento"
+              : healthIndex < 70
+                ? "Alerta Financeiro Requer Ajustes"
+                : "Saúde Financeira sob Controle";
+
+          // Update Top Hero Card styling
+          const heroCard = document.getElementById("ai-hero-card-element");
+          if (heroCard) {
+            heroCard.className = `ai-hero-card ${statusCls}`;
+          }
+
           // Render Radial Gauge
           const gaugeEl = document.getElementById("chart-gauge-apex");
           if (gaugeEl && typeof ApexCharts !== "undefined") {
@@ -3291,16 +3521,20 @@ SELECT * FROM dividas;</textarea
               series: [healthIndex],
               chart: {
                 type: "radialBar",
-                height: 140,
+                height: 150,
                 sparkline: { enabled: true },
               },
               plotOptions: {
                 radialBar: {
+                  startAngle: -120,
+                  endAngle: 120,
                   hollow: { size: "65%" },
+                  track: { background: "#DDE3D6", strokeWidth: "100%" },
                   dataLabels: {
+                    name: { show: false },
                     value: {
-                      offsetY: -8,
-                      fontSize: "20px",
+                      offsetY: 6,
+                      fontSize: "22px",
                       fontWeight: "700",
                       fontFamily: "Fraunces",
                       color: colorGauge,
@@ -3320,22 +3554,45 @@ SELECT * FROM dividas;</textarea
           const titleEl = document.getElementById("ai-score-title");
           const descEl = document.getElementById("ai-score-desc");
           const badgesEl = document.getElementById("ai-score-badges");
+          const metricsGridEl = document.getElementById(
+            "ai-metrics-grid-element",
+          );
           const detailsEl = document.getElementById("ai-report-details");
 
-          let statusCls =
-            healthIndex < 40 ? "urgent" : healthIndex < 70 ? "warning" : "ok";
-          let statusText =
-            healthIndex < 40
-              ? "Situação Crítica de Endividamento"
-              : healthIndex < 70
-                ? "Alerta Financeiro Requer Ajustes"
-                : "Saúde Financeira sob Controle";
-
           titleEl.textContent = statusText;
-          descEl.textContent = `A IA analisou ${r.dividasAtivas.length} dívida(s) ativa(s), sua renda de ${fmtBRL(r.receita)}/mês e o comprometimento de ${fmtPct(r.comprometimento)}.`;
+          descEl.textContent = `A Inteligência Financeira analisou ${r.dividasAtivas.length} dívida(s) ativa(s), sua renda mensal de ${fmtBRL(r.receita)} e o comprometimento das parcelas em ${fmtPct(r.comprometimento)}.`;
           badgesEl.innerHTML = `<span class="badge ${statusCls}">Pontuação: ${healthIndex} / 100</span>`;
 
-          let detailsHtml = "";
+          // Fill AI Metrics Pills
+          const totalJurosEst = r.dividasAtivas.reduce(
+            (s, d) => s + (d.saldo_devedor || 0) * (d.taxa_juros_mensal || 0),
+            0,
+          );
+
+          if (metricsGridEl) {
+            metricsGridEl.innerHTML = `
+              <div class="ai-metric-pill">
+                <div class="lbl">Comprometimento</div>
+                <div class="val">${fmtPct(r.comprometimento)}</div>
+              </div>
+              <div class="ai-metric-pill">
+                <div class="lbl">Total Devedor</div>
+                <div class="val">${fmtBRL(r.totalDevido)}</div>
+              </div>
+              <div class="ai-metric-pill">
+                <div class="lbl">Sobra Livre / Mês</div>
+                <div class="val">${fmtBRL(r.sobra)}</div>
+              </div>
+              <div class="ai-metric-pill">
+                <div class="lbl">Juros Estimados / Mês</div>
+                <div class="val">${fmtBRL(totalJurosEst)}</div>
+              </div>
+            `;
+          }
+
+          // Generate AI Insight Cards
+          let detailsHtml = `<div class="ai-insights-grid">`;
+
           if (r.dividasAtivas.length > 0) {
             const pior = [...r.dividasAtivas].sort(
               (a, b) => b.taxa_juros_mensal - a.taxa_juros_mensal,
@@ -3343,17 +3600,60 @@ SELECT * FROM dividas;</textarea
             const jurosAno =
               (Math.pow(1 + pior.taxa_juros_mensal, 12) - 1) * 100;
 
-            detailsHtml += `<div class="callout debt">
-        <h4>Alerta da IA: Ralo de Juros Identificado!</h4>
-        <p>Sua dívida mais perigosa é <strong>${escapeHtml(pior.credor)}</strong>. Com juros de <strong>${fmtPct(pior.taxa_juros_mensal * 100)} a.m.</strong>, ela dobra de tamanho a cada poucos meses (equivalente a <strong>${fmtPct(jurosAno)} ao ano</strong>). Qualquer dinheiro extra deve ser direcionado prioritariamente para zerar esta conta.</p>
-      </div>`;
+            detailsHtml += `<div class="ai-insight-card debt">
+              <div class="ai-insight-head">
+                <h4>⚠️ Ralo de Juros Crítico</h4>
+                <span class="badge urgent">Prioridade #1</span>
+              </div>
+              <p style="font-size: 0.88rem; color: var(--ink); margin: 0;">
+                Sua dívida mais perigosa é <strong>${escapeHtml(pior.credor)}</strong>. Com juros de <strong>${fmtPct(pior.taxa_juros_mensal * 100)} a.m.</strong> (equivalente a <strong>${fmtPct(jurosAno)} a.a.</strong>), ela dobra rapidamente.
+              </p>
+              <div style="font-size: 0.82rem; color: var(--debt); font-weight: 600; margin-top: auto;">
+                👉 Recomendação: Direcionar 100% da sobra livre para quitar ou renegociar esta conta primeiro.
+              </div>
+            </div>`;
           }
 
-          detailsHtml += `<div class="callout success">
-      <h4>Recomendação de Renda Extra Personalizada</h4>
-      <p>Com base na sua preferência por <strong>${QUIZ_RESPOSTAS.perfil.toUpperCase()}</strong> e tempo disponível, adotar uma das atividades recomendadas pode gerar entre <strong>R$ 600 e R$ 1.200 extras/mês</strong>, reduzindo o tempo de quitação em até 60%.</p>
-    </div>`;
+          detailsHtml += `<div class="ai-insight-card success">
+            <div class="ai-insight-head">
+              <h4>🚀 Aceleração por Renda Extra</h4>
+              <span class="badge ok">Oportunidade</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--ink); margin: 0;">
+              Com base no seu perfil <strong>${QUIZ_RESPOSTAS.perfil.toUpperCase()}</strong>, adotar uma das atividades recomendadas pode gerar entre <strong>R$ 600 e R$ 1.200 extras/mês</strong>.
+            </p>
+            <div style="font-size: 0.82rem; color: var(--success); font-weight: 600; margin-top: auto;">
+              👉 Impacto: Redução de até 60% no tempo necessário para zerar todas as dívidas.
+            </div>
+          </div>`;
 
+          detailsHtml += `<div class="ai-insight-card ${r.comprometimento > 30 ? "warning" : "info"}">
+            <div class="ai-insight-head">
+              <h4>📊 Análise do Comprometimento</h4>
+              <span class="badge ${r.comprometimento > 30 ? "warning" : "ok"}">Parâmetro de Crédito</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--ink); margin: 0;">
+              Seu comprometimento atual é de <strong>${fmtPct(r.comprometimento)}</strong> da renda. O limite recomendado por especialistas para manter a saúde financeira é de no máximo <strong>30%</strong>.
+            </p>
+            <div style="font-size: 0.82rem; color: var(--ink-soft); font-weight: 600; margin-top: auto;">
+              👉 ${r.comprometimento > 30 ? "Atenção: Evite novos parcelamentos até reduzir este índice." : "Situação sob controle dentro da margem de segurança."}
+            </div>
+          </div>`;
+
+          detailsHtml += `<div class="ai-insight-card info">
+            <div class="ai-insight-head">
+              <h4>⚖️ Mínimo Existencial (Lei 14.181/21)</h4>
+              <span class="badge neutral">Garantia Legal</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--ink); margin: 0;">
+              A Lei do Superendividamento assegura que cobranças de consumo não podem afetar sua moradia, alimentação e saúde.
+            </p>
+            <div style="font-size: 0.82rem; color: var(--accent-ink); font-weight: 600; margin-top: auto;">
+              👉 Direito: Se necessário, solicite repactuação global de dívidas via Procon ou Defensoria.
+            </div>
+          </div>`;
+
+          detailsHtml += `</div>`;
           detailsEl.innerHTML = detailsHtml;
         }
 
