@@ -1393,16 +1393,15 @@
                   onclick="downloadProductCover('300x250')"
                   style="background: #8fc6a9; color: #1f3d32; border: none; font-weight: 700; flex: 1; justify-content: center; padding: 0.5em; font-size: 0.76rem;"
                 >
-                  📥 Baixar Capa 300x250px (SVG)
+                  📥 Capa 300x250 (SVG)
                 </button>
                 <button
                   type="button"
                   class="btn small"
-                  onclick="downloadProductCover('1200x630')"
-                  style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid #8fc6a9; font-weight: 600; padding: 0.5em; font-size: 0.76rem;"
-                  title="Baixar Banner 1200x630px"
+                  onclick="downloadOfferCard()"
+                  style="background: #f1e6cb; color: #1f3d32; border: none; font-weight: 700; flex: 1; justify-content: center; padding: 0.5em; font-size: 0.76rem;"
                 >
-                  🖼️ 1200x630
+                  🎁 Oferta 300x250 (SVG)
                 </button>
               </div>
             </div>
@@ -3349,6 +3348,77 @@ SELECT * FROM dividas;</textarea
           URL.revokeObjectURL(url);
           alert(
             `✅ Capa Oficial ${size === "1200x630" ? "1200x630px" : "300x250px"} baixada com sucesso! Utilize no cadastro do produto na Kiwify, Hotmart ou Eduzz.`,
+          );
+        };
+
+        window.downloadOfferCard = function () {
+          const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
+    <defs>
+      <linearGradient id="bgOff" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1F3D32"/>
+        <stop offset="50%" stop-color="#122820"/>
+        <stop offset="100%" stop-color="#0B1A14"/>
+      </linearGradient>
+      <linearGradient id="goldOff" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F1E6CB"/>
+        <stop offset="100%" stop-color="#A97A22"/>
+      </linearGradient>
+      <linearGradient id="greenOff" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#2A724E"/>
+        <stop offset="100%" stop-color="#8FC6A9"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Background Card -->
+    <rect width="300" height="250" rx="10" fill="url(#bgOff)"/>
+    <rect x="5" y="5" width="290" height="240" rx="8" fill="none" stroke="url(#greenOff)" stroke-width="1.2" opacity="0.8"/>
+
+    <!-- Header Badge -->
+    <rect x="12" y="10" width="276" height="20" rx="4" fill="#2A724E"/>
+    <text x="150" y="24" font-family="sans-serif" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">✨ PACOTE PREMIUM COM ACESSO VITALÍCIO</text>
+
+    <!-- Subtitle & Dev -->
+    <text x="150" y="40" font-family="sans-serif" font-size="7.5" font-weight="600" fill="#F1E6CB" text-anchor="middle">Pague Uma Única Vez · Sem Mensalidades · Acesso Para Sempre</text>
+    <text x="150" y="50" font-family="sans-serif" font-size="6.5" font-weight="500" fill="#8FC6A9" text-anchor="middle">DESENVOLVIDO POR VILARINHO TECH SOLUTIONS</text>
+
+    <!-- Bonus List Box -->
+    <rect x="12" y="56" width="276" height="114" rx="5" fill="rgba(255,255,255,0.05)" stroke="rgba(143,198,169,0.3)" stroke-width="0.8"/>
+    <text x="18" y="68" font-family="sans-serif" font-size="8" font-weight="700" fill="url(#goldOff)">🎁 BÔNUS EXCLUSIVOS INCLUSOS HOJE:</text>
+
+    <text x="18" y="82" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 1: Roteiro Prático de Negociação com Credores (80% desc.)</text>
+    <text x="18" y="94" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 2: Leitor Inteligente de Extratos, Holerites e Faturas (PDF/OFX)</text>
+    <text x="18" y="106" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 3: Quiz &amp; Recomendador de Renda Extra Personalizado</text>
+    <text x="18" y="118" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 4: Diagnóstico de IA Diário &amp; Simulador Avalanche</text>
+    <text x="18" y="130" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 5: Atualizações Tecnológicas &amp; Suporte Prioritário Vitalício</text>
+
+    <text x="18" y="146" font-family="sans-serif" font-size="6.8" font-weight="600" fill="#8FC6A9">✔ IA em Tempo Real  ✔ Saldos Diários  ✔ 100% LGPD Protegido</text>
+
+    <!-- Price Box -->
+    <rect x="12" y="174" width="276" height="66" rx="6" fill="url(#goldOff)"/>
+    <text x="20" y="188" font-family="sans-serif" font-size="7.5" fill="#1F3D32" text-decoration="line-through">De R$ 297,00</text>
+    <text x="20" y="202" font-family="'Fraunces', Georgia, serif" font-size="11.5" font-weight="700" fill="#1F3D32">Por Apenas 12x de R$ 9,74</text>
+    <text x="20" y="214" font-family="sans-serif" font-size="7.5" font-weight="600" fill="#122820">ou R$ 97,00 à vista no PIX / Cartão</text>
+
+    <text x="280" y="196" font-family="'Fraunces', Georgia, serif" font-size="16" font-weight="700" fill="#1F3D32" text-anchor="end">R$ 97,00</text>
+    <text x="280" y="208" font-family="sans-serif" font-size="7" font-weight="600" fill="#1F3D32" text-anchor="end">/ acesso vitalício único</text>
+
+    <!-- Badges -->
+    <text x="150" y="230" font-family="sans-serif" font-size="6.8" font-weight="700" fill="#1F3D32" text-anchor="middle">💳 Cartão 12x de R$ 9,74  |  ⚡ PIX Liberação Imediata  |  📄 Boleto</text>
+  </svg>`;
+
+          const blob = new Blob([svgContent], {
+            type: "image/svg+xml;charset=utf-8",
+          });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "ponto-de-virada-card-oferta-300x250.svg";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          alert(
+            "✅ Card Oficial da Oferta e Bônus (300x250px SVG) baixado com sucesso! Pronto para cadastrar nas plataformas de vendas.",
           );
         };
 
