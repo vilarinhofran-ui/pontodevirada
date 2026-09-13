@@ -1329,6 +1329,124 @@
         text-decoration: underline;
         cursor: pointer;
       }
+
+      /* ---------- Estilos de Destaque do Simulador de Usabilidade (Showcase) ---------- */
+      .landing-showcase-container {
+        background: linear-gradient(180deg, #ffffff 0%, #f7fbf8 100%);
+        border: 2px solid var(--accent);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 12px 32px rgba(31, 61, 50, 0.12);
+        position: relative;
+        overflow: hidden;
+      }
+      .landing-showcase-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(
+          90deg,
+          #2a724e 0%,
+          #8fc6a9 50%,
+          #2a724e 100%
+        );
+      }
+      .sim-module-tabs {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1.4rem;
+        flex-wrap: wrap;
+      }
+      .sim-tab-btn {
+        font-weight: 600 !important;
+        font-size: 0.88rem !important;
+        padding: 0.65em 1.2em !important;
+        border-radius: 30px !important;
+        white-space: nowrap !important;
+        transition: all 0.2s ease !important;
+        border: 1px solid var(--line) !important;
+      }
+      .sim-tab-btn.active {
+        background: var(--accent-ink) !important;
+        color: #ffffff !important;
+        border-color: var(--accent-ink) !important;
+        box-shadow: 0 4px 14px rgba(31, 61, 50, 0.25) !important;
+      }
+      .sim-card-metric {
+        background: #ffffff;
+        padding: 1rem 1.1rem;
+        border-radius: 8px;
+        border: 1px solid var(--line-soft);
+        border-left: 4px solid var(--accent);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .sim-card-metric:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      }
+      .sim-card-metric.debt {
+        border-left-color: var(--debt);
+      }
+      .sim-card-metric.success {
+        border-left-color: var(--success);
+      }
+      .sim-card-metric.ink {
+        border-left-color: var(--ink-soft);
+      }
+      .sim-card-metric.accent {
+        border-left-color: var(--accent-ink);
+      }
+
+      /* ---------- Ajustes de Responsividade Mobile Completa ---------- */
+      @media (max-width: 768px) {
+        .landing-showcase-container {
+          padding: 1.2rem 1rem;
+          border-radius: 10px;
+        }
+        .sim-module-tabs {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          flex-wrap: nowrap;
+          padding-bottom: 0.5rem;
+          margin-bottom: 1rem;
+          scrollbar-width: none;
+        }
+        .sim-module-tabs::-webkit-scrollbar {
+          display: none;
+        }
+        .sim-metrics-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 0.6rem !important;
+        }
+        .sim-card-metric {
+          padding: 0.75rem !important;
+        }
+        .sim-card-metric .value {
+          font-size: 1.15rem !important;
+        }
+        .modal-card {
+          max-width: 94vw !important;
+          padding: 1.1rem !important;
+          margin: 0.5rem !important;
+        }
+        .table-wrap {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          display: block;
+          width: 100%;
+        }
+      }
+      @media (max-width: 480px) {
+        .sim-metrics-grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -2128,16 +2246,7 @@
           width: 100%;
         "
       >
-        <div
-          class="sales-hero-card"
-          style="
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: 1.8rem;
-            box-shadow: var(--shadow);
-          "
-        >
+        <div class="landing-showcase-container">
           <div
             style="
               display: flex;
@@ -2153,28 +2262,37 @@
             <div>
               <span
                 class="eyebrow"
-                style="color: var(--accent-ink); font-weight: 700"
-                >SIMULADOR DE USABILIDADE</span
+                style="
+                  color: var(--accent-ink);
+                  font-weight: 700;
+                  letter-spacing: 0.06em;
+                "
+                >⚡ DEMONSTRAÇÃO INTERATIVA</span
               >
-              <h2 style="margin: 0.2rem 0 0; color: var(--accent-ink)">
+              <h2
+                style="
+                  margin: 0.2rem 0 0;
+                  color: var(--accent-ink);
+                  font-size: 1.45rem;
+                "
+              >
                 Conheça por Dentro os Módulos do Ponto de Virada
               </h2>
             </div>
-            <span class="badge ok" style="font-size: 0.78rem; font-weight: 600"
+            <span
+              class="badge ok"
+              style="
+                font-size: 0.82rem;
+                font-weight: 600;
+                padding: 0.4em 0.8em;
+                box-shadow: 0 2px 6px rgba(42, 114, 78, 0.15);
+              "
               >📊 Visão Interna com Dados Fictícios de Demonstração</span
             >
           </div>
 
           <!-- NAVEGAÇÃO DOS MÓDULOS NO SIMULADOR -->
-          <div
-            class="sim-module-tabs"
-            style="
-              display: flex;
-              gap: 0.5rem;
-              flex-wrap: wrap;
-              margin-bottom: 1.2rem;
-            "
-          >
+          <div class="sim-module-tabs">
             <button
               type="button"
               class="btn small sim-tab-btn active"
@@ -2215,13 +2333,15 @@
             style="
               background: var(--paper);
               border: 1px solid var(--line);
-              border-radius: var(--radius);
+              border-radius: 8px;
               padding: 1.2rem;
+              box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
             "
           >
             <!-- ABA 1: BALANÇO E SAÚDE -->
             <div class="sim-view-pane active" id="sim-pane-balanco">
               <div
+                class="sim-metrics-grid"
                 style="
                   display: grid;
                   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -2229,18 +2349,14 @@
                   margin-bottom: 1rem;
                 "
               >
-                <div
-                  class="metric"
-                  style="
-                    background: #fff;
-                    padding: 0.8rem;
-                    border-radius: 4px;
-                    border: 1px solid var(--line-soft);
-                  "
-                >
+                <div class="sim-card-metric debt">
                   <div
                     class="label"
-                    style="font-size: 0.75rem; color: var(--ink-soft)"
+                    style="
+                      font-size: 0.78rem;
+                      color: var(--ink-soft);
+                      font-weight: 500;
+                    "
                   >
                     Total Devedor Atualizado
                   </div>
@@ -2248,87 +2364,81 @@
                     class="value num"
                     id="sim-val-devido"
                     style="
-                      font-size: 1.3rem;
+                      font-size: 1.35rem;
                       font-weight: 700;
                       color: var(--debt);
                     "
                   >
                     R$ 12.450,00
                   </div>
-                  <div style="font-size: 0.7rem; color: var(--warn)">
+                  <div
+                    style="
+                      font-size: 0.72rem;
+                      color: var(--warn);
+                      font-weight: 600;
+                    "
+                  >
                     ⚡ Atualização Diária
                   </div>
                 </div>
-                <div
-                  class="metric"
-                  style="
-                    background: #fff;
-                    padding: 0.8rem;
-                    border-radius: 4px;
-                    border: 1px solid var(--line-soft);
-                  "
-                >
+                <div class="sim-card-metric success">
                   <div
                     class="label"
-                    style="font-size: 0.75rem; color: var(--ink-soft)"
+                    style="
+                      font-size: 0.78rem;
+                      color: var(--ink-soft);
+                      font-weight: 500;
+                    "
                   >
                     Renda Mensal Líquida
                   </div>
                   <div
                     class="value num"
                     style="
-                      font-size: 1.3rem;
+                      font-size: 1.35rem;
                       font-weight: 700;
                       color: var(--success);
                     "
                   >
                     R$ 5.200,00
                   </div>
-                  <div style="font-size: 0.7rem; color: var(--ink-soft)">
+                  <div style="font-size: 0.72rem; color: var(--ink-soft)">
                     Salário + Renda Extra
                   </div>
                 </div>
-                <div
-                  class="metric"
-                  style="
-                    background: #fff;
-                    padding: 0.8rem;
-                    border-radius: 4px;
-                    border: 1px solid var(--line-soft);
-                  "
-                >
+                <div class="sim-card-metric ink">
                   <div
                     class="label"
-                    style="font-size: 0.75rem; color: var(--ink-soft)"
+                    style="
+                      font-size: 0.78rem;
+                      color: var(--ink-soft);
+                      font-weight: 500;
+                    "
                   >
                     Gastos Essenciais
                   </div>
                   <div
                     class="value num"
                     style="
-                      font-size: 1.3rem;
+                      font-size: 1.35rem;
                       font-weight: 700;
                       color: var(--ink);
                     "
                   >
                     R$ 2.950,00
                   </div>
-                  <div style="font-size: 0.7rem; color: var(--ink-soft)">
+                  <div style="font-size: 0.72rem; color: var(--ink-soft)">
                     Contas, Alimentação
                   </div>
                 </div>
-                <div
-                  class="metric"
-                  style="
-                    background: #fff;
-                    padding: 0.8rem;
-                    border-radius: 4px;
-                    border: 1px solid var(--line-soft);
-                  "
-                >
+                <div class="sim-card-metric accent">
                   <div
                     class="label"
-                    style="font-size: 0.75rem; color: var(--ink-soft)"
+                    style="
+                      font-size: 0.78rem;
+                      color: var(--ink-soft);
+                      font-weight: 500;
+                    "
                   >
                     Sobra Operacional
                   </div>
@@ -2336,14 +2446,20 @@
                     class="value num"
                     id="sim-val-sobra"
                     style="
-                      font-size: 1.3rem;
+                      font-size: 1.35rem;
                       font-weight: 700;
                       color: var(--accent-ink);
                     "
                   >
                     R$ 1.100,00
                   </div>
-                  <div style="font-size: 0.7rem; color: var(--success)">
+                  <div
+                    style="
+                      font-size: 0.72rem;
+                      color: var(--success);
+                      font-weight: 600;
+                    "
+                  >
                     Disponível p/ Quitação
                   </div>
                 </div>
@@ -2351,10 +2467,12 @@
 
               <div
                 style="
-                  background: #fff;
-                  padding: 1rem;
-                  border-radius: 4px;
+                  background: #ffffff;
+                  padding: 1.1rem 1.3rem;
+                  border-radius: 8px;
                   border: 1px solid var(--line-soft);
+                  border-left: 4px solid var(--success);
+                  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
                   display: flex;
                   align-items: center;
                   justify-content: space-between;
@@ -2362,10 +2480,47 @@
                   gap: 1rem;
                 "
               >
-                <div>
-                  <h4 style="margin: 0; color: var(--accent-ink)">
-                    Score de Saúde Financeira: 82 / 100
-                  </h4>
+                <div style="flex: 1; min-width: 240px">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 0.6em;
+                      margin-bottom: 0.3em;
+                    "
+                  >
+                    <h4
+                      style="
+                        margin: 0;
+                        color: var(--accent-ink);
+                        font-size: 1.05rem;
+                        font-weight: 700;
+                      "
+                    >
+                      Score de Saúde Financeira: 82 / 100
+                    </h4>
+                  </div>
+                  <!-- Barra Visual de Progresso do Score -->
+                  <div
+                    style="
+                      width: 100%;
+                      max-width: 320px;
+                      height: 8px;
+                      background: var(--line-soft);
+                      border-radius: 4px;
+                      overflow: hidden;
+                      margin: 0.4em 0 0.4em 0;
+                    "
+                  >
+                    <div
+                      style="
+                        width: 82%;
+                        height: 100%;
+                        background: linear-gradient(90deg, #2a724e, #8fc6a9);
+                        border-radius: 4px;
+                      "
+                    ></div>
+                  </div>
                   <p
                     style="
                       margin: 0.2rem 0 0;
@@ -2373,13 +2528,18 @@
                       color: var(--ink-soft);
                     "
                   >
-                    Situação sob controle. 21.1% da renda alocada em dívidas
-                    ativas.
+                    Situação sob controle. Apenas 21.1% da renda alocada em
+                    dívidas ativas.
                   </p>
                 </div>
                 <span
                   class="badge ok"
-                  style="font-size: 0.85rem; padding: 0.4em 0.8em"
+                  style="
+                    font-size: 0.85rem;
+                    padding: 0.45em 0.9em;
+                    font-weight: 700;
+                    box-shadow: 0 2px 6px rgba(42, 114, 78, 0.15);
+                  "
                   >🟢 Nível Seguro</span
                 >
               </div>
