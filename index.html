@@ -1357,36 +1357,55 @@
             O <strong>Ponto de Virada</strong> é o sistema definitivo de inteligência financeira pessoal. Organize suas contas, identifique ralos de juros e simule seu caminho até a dívida zero com total privacidade e sem mensalidades.
           </p>
 
-          <!-- CARD MOCKUP CAPA DO PRODUTO DIGITAL -->
-          <div class="product-mockup-card" id="product-cover-mockup">
-            <div class="product-mockup-header">
-              <svg viewBox="0 0 32 32" width="36" height="32" fill="none">
-                <rect width="32" height="32" rx="8" fill="#8FC6A9"/>
-                <path d="M8 22L14 15L18 19L24 10" stroke="#1F3D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M19 10H24V15" stroke="#1F3D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="24" cy="10" r="2.2" fill="#1F3D32"/>
-              </svg>
-              <div>
-                <span class="product-mockup-badge">Capa do Produto Digital</span>
-                <h3 style="margin: 0.2rem 0 0; color: #ffffff; font-size: 1.15rem;">Ponto de Virada — Edição Premium</h3>
+          <!-- CARD MOCKUP CAPA DO PRODUTO DIGITAL (FORMATO 300x250px) -->
+          <div class="product-mockup-card" id="product-cover-mockup" style="max-width: 320px; width: 100%; min-height: 250px; margin: 0 auto 1.2rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: 10px; padding: 1.1rem; box-shadow: 0 8px 24px rgba(31,61,50,0.25);">
+            <div>
+              <div class="product-mockup-header" style="gap: 0.5rem; margin-bottom: 0.5rem;">
+                <svg viewBox="0 0 32 32" width="30" height="30" fill="none">
+                  <rect width="32" height="32" rx="7" fill="#8FC6A9"/>
+                  <path d="M8 22L14 15L18 19L24 10" stroke="#1F3D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M19 10H24V15" stroke="#1F3D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="24" cy="10" r="2" fill="#1F3D32"/>
+                </svg>
+                <div>
+                  <span class="product-mockup-badge" style="font-size: 0.65rem; padding: 0.2em 0.55em;">Format 300x250 px · Capa Digital</span>
+                  <h3 style="margin: 0.1rem 0 0; color: #ffffff; font-size: 1.05rem; font-weight: 700;">Ponto de Virada — Premium</h3>
+                </div>
+              </div>
+              <p style="font-size: 0.78rem; color: #dce7de; margin-bottom: 0.55rem; line-height: 1.35;">
+                Pacote Completo de Inteligência Financeira · Diagnóstico IA · Método Avalanche · Leitor de Comprovantes · Renda Extra
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.74rem; color: #ffffff; margin-bottom: 0.6rem;">
+                <span>✔ Diagnóstico IA em Tempo Real</span>
+                <span>✔ Simulador Avalanche &amp; Bola de Neve</span>
+                <span>✔ Leitor de Comprovantes (PDF/OFX/CSV)</span>
+                <span>✔ 100% LGPD Protegido · Acesso Vitalício</span>
               </div>
             </div>
-            <p style="font-size: 0.82rem; color: #dce7de; margin-bottom: 0.8rem;">
-              Pacote Completo de Inteligência Financeira · Diagnóstico IA · Método Avalanche · Leitor de Comprovantes · Renda Extra
-            </p>
-            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem;">
-              <span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.72rem; padding: 0.25em 0.6em; border-radius: 4px;">✔ Acesso Vitalício</span>
-              <span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.72rem; padding: 0.25em 0.6em; border-radius: 4px;">✔ LGPD 100% Protegido</span>
-              <span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.72rem; padding: 0.25em 0.6em; border-radius: 4px;">✔ Instalação PWA Mobile</span>
+            <div>
+              <div style="font-size: 0.68rem; color: #8fc6a9; font-weight: 600; text-align: center; margin-bottom: 0.45rem;">
+                PRODUTO DESENVOLVIDO POR VILARINHO TECH SOLUTIONS
+              </div>
+              <div style="display: flex; gap: 0.35rem;">
+                <button
+                  type="button"
+                  class="btn small"
+                  onclick="downloadProductCover('300x250')"
+                  style="background: #8fc6a9; color: #1f3d32; border: none; font-weight: 700; flex: 1; justify-content: center; padding: 0.5em; font-size: 0.76rem;"
+                >
+                  📥 Baixar Capa 300x250px (SVG)
+                </button>
+                <button
+                  type="button"
+                  class="btn small"
+                  onclick="downloadProductCover('1200x630')"
+                  style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid #8fc6a9; font-weight: 600; padding: 0.5em; font-size: 0.76rem;"
+                  title="Baixar Banner 1200x630px"
+                >
+                  🖼️ 1200x630
+                </button>
+              </div>
             </div>
-            <button
-              type="button"
-              class="btn small"
-              onclick="downloadProductCover()"
-              style="background: #8fc6a9; color: #1f3d32; border: none; font-weight: 700; width: 100%; justify-content: center; padding: 0.55em;"
-            >
-              📥 Baixar Capa Oficial do Produto (PNG/SVG) para Plataformas de Vendas
-            </button>
           </div>
 
           <ul class="feature-list">
@@ -3227,8 +3246,13 @@ SELECT * FROM dividas;</textarea
           });
         });
 
-        window.downloadProductCover = function () {
-          const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+        window.downloadProductCover = function (size) {
+          let svgContent = "";
+          let fileName = "ponto-de-virada-capa-300x250.svg";
+
+          if (size === "1200x630") {
+            fileName = "ponto-de-virada-banner-1200x630.svg";
+            svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
     <defs>
       <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#1F3D32"/>
@@ -3268,6 +3292,49 @@ SELECT * FROM dividas;</textarea
     <text x="960" y="490" font-family="sans-serif" font-size="18" font-weight="700" fill="#1F3D32" text-anchor="middle">ACESSO VITALÍCIO</text>
     <text x="960" y="515" font-family="sans-serif" font-size="14" font-weight="600" fill="#1F3D32" text-anchor="middle">Sem Mensalidades · 100% LGPD</text>
   </svg>`;
+          } else {
+            // Padrão: 300x250 pixels
+            svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
+    <defs>
+      <linearGradient id="bg300" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1F3D32"/>
+        <stop offset="60%" stop-color="#122820"/>
+        <stop offset="100%" stop-color="#0B1A14"/>
+      </linearGradient>
+      <linearGradient id="gold300" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F1E6CB"/>
+        <stop offset="100%" stop-color="#A97A22"/>
+      </linearGradient>
+      <linearGradient id="green300" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#2A724E"/>
+        <stop offset="100%" stop-color="#8FC6A9"/>
+      </linearGradient>
+    </defs>
+    <rect width="300" height="250" rx="12" fill="url(#bg300)"/>
+    <rect x="8" y="8" width="284" height="234" rx="8" fill="none" stroke="url(#green300)" stroke-width="1.5" opacity="0.6"/>
+    <rect x="12" y="12" width="276" height="226" rx="6" fill="none" stroke="url(#green300)" stroke-width="1"/>
+
+    <rect x="22" y="20" width="32" height="32" rx="7" fill="#2A724E"/>
+    <path d="M28 40 L36 31 L41 36 L48 25" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M42 25 H48 V31" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="48" cy="25" r="1.8" fill="#8FC6A9"/>
+
+    <text x="62" y="36" font-family="'Fraunces', Georgia, serif" font-size="14.5" font-weight="700" fill="#FFFFFF">PONTO DE VIRADA</text>
+    <text x="62" y="47" font-family="sans-serif" font-size="8" font-weight="600" fill="#8FC6A9">ED. PREMIUM · INTELIGÊNCIA IA</text>
+
+    <text x="22" y="76" font-family="'Fraunces', Georgia, serif" font-size="15" font-weight="700" fill="#FFFFFF">Saia das Dívidas com IA e</text>
+    <text x="22" y="94" font-family="'Fraunces', Georgia, serif" font-size="15" font-weight="700" fill="url(#gold300)">Alcance a Liberdade</text>
+
+    <text x="22" y="118" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Diagnóstico IA em Tempo Real</text>
+    <text x="22" y="134" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Simulador Avalanche &amp; Bola de Neve</text>
+    <text x="22" y="150" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Leitor de Holerites/Extratos (PDF/CSV)</text>
+    <text x="22" y="166" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Acesso Vitalício · 100% LGPD</text>
+
+    <rect x="18" y="186" width="264" height="30" rx="6" fill="url(#gold300)"/>
+    <text x="150" y="200" font-family="sans-serif" font-size="9.5" font-weight="700" fill="#1F3D32" text-anchor="middle">ACESSO VITALÍCIO — SEM MENSALIDADES</text>
+    <text x="150" y="211" font-family="sans-serif" font-size="7" font-weight="600" fill="#1F3D32" text-anchor="middle">DESENVOLVIDO POR VILARINHO TECH SOLUTIONS</text>
+  </svg>`;
+          }
 
           const blob = new Blob([svgContent], {
             type: "image/svg+xml;charset=utf-8",
@@ -3275,13 +3342,13 @@ SELECT * FROM dividas;</textarea
           const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = "ponto-de-virada-capa-produto-digital.svg";
+          a.download = fileName;
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
           alert(
-            "✅ Capa Oficial do Produto Digital (SVG) baixada com sucesso! Você pode usá-la para cadastrar o produto na Kiwify, Hotmart ou Eduzz.",
+            `✅ Capa Oficial ${size === "1200x630" ? "1200x630px" : "300x250px"} baixada com sucesso! Utilize no cadastro do produto na Kiwify, Hotmart ou Eduzz.`,
           );
         };
 
