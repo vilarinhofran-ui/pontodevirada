@@ -2897,6 +2897,38 @@
           <div class="metrics" id="metrics-strip"></div>
           <div id="dashboard-alerts"></div>
 
+          <!-- CAIXA DE DIÁLOGO / INPUTS EM DESTAQUE PARA + LANÇAR ENTRADA OU - LANÇAR SAÍDA -->
+          <div class="panel" style="background: linear-gradient(135deg, #ffffff 0%, #f4f8f5 100%); border: 2px solid var(--accent); margin-bottom: 1.5rem; box-shadow: var(--shadow);">
+            <div class="panel-head" style="margin-bottom: 0.6rem;">
+              <h2 style="margin: 0; color: var(--accent-ink); display: flex; align-items: center; gap: 0.4em;">
+                ⚡ Lançamento Rápido no Orçamento e Dívidas
+              </h2>
+              <span class="badge ok" style="font-weight: 600;">Sincronização Instantânea em Todos os Módulos</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 1rem;">
+              Registre receitas, contas ou dívidas com praticidade e agilidade para atualizar o balanço, os gráficos e a inteligência financeira em tempo real.
+            </p>
+
+            <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+              <button
+                type="button"
+                class="btn btn-shine"
+                onclick="openQuickLancamentoModal('receita')"
+                style="background: var(--success); border-color: var(--success); font-weight: 700; padding: 0.8em 1.4em; font-size: 0.98rem; flex: 1; min-width: 220px; justify-content: center;"
+              >
+                🟢 + Lançar Entrada (Renda)
+              </button>
+              <button
+                type="button"
+                class="btn"
+                onclick="openQuickLancamentoModal('saida')"
+                style="background: var(--debt); border-color: var(--debt); color: #ffffff; font-weight: 700; padding: 0.8em 1.4em; font-size: 0.98rem; flex: 1; min-width: 220px; justify-content: center;"
+              >
+                🔴 - Lançar Saída / Dívida
+              </button>
+            </div>
+          </div>
+
           <div class="panel">
             <div class="panel-head">
               <h2>Balanço Visual e Distribuição</h2>
@@ -4003,6 +4035,64 @@ SELECT * FROM dividas;</textarea
       </div>
     </div>
 
+    <!-- MODAL DE CAIXA DE DIÁLOGO: LANÇAMENTO RÁPIDO (+ ENTRADA / - SAÍDA) -->
+    <div class="modal-overlay" id="modal-quick-lancamento">
+      <div class="modal-card" style="max-width: 500px">
+        <div class="panel-head" style="margin-bottom: 0.8rem; border-bottom: 1px solid var(--line-soft); padding-bottom: 0.6rem;">
+          <h3 id="quick-modal-title" style="margin: 0; color: var(--accent-ink)">+ Lançar Entrada ou Saída</h3>
+          <button type="button" class="btn secondary small" onclick="closeQuickLancamentoModal()">✕ Fechar</button>
+        </div>
+
+        <form id="form-quick-lancamento">
+          <input type="hidden" id="q-tipo-operacao" value="receita" />
+
+          <div style="margin-bottom: 0.8rem">
+            <label for="q-categoria" id="q-label-categoria">Categoria / Credor</label>
+            <input type="text" id="q-categoria" required placeholder="Ex.: Salário, Renda Extra, Aluguel, Cartão Nubank..." />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem">
+            <div>
+              <label for="q-valor">Valor Mensal (R$)</label>
+              <input type="number" id="q-valor" min="0.01" step="0.01" required placeholder="0,00" />
+            </div>
+            <div>
+              <label id="q-label-data" for="q-data">Data de Entrada/Vencimento</label>
+              <input type="date" id="q-data" />
+            </div>
+          </div>
+
+          <!-- Campos extras específicos quando o tipo é Saída / Dívida -->
+          <div id="q-saida-options" style="display: none; background: var(--paper); border: 1px solid var(--line-soft); border-radius: 4px; padding: 0.85rem; margin-bottom: 0.8rem;">
+            <div style="margin-bottom: 0.6rem">
+              <label for="q-subtipo-saida">Tipo de Saída</label>
+              <select id="q-subtipo-saida" onchange="toggleQuickDebtFields()">
+                <option value="despesa_essencial">Despesa Essencial (Aluguel, Luz, Mercado...)</option>
+                <option value="despesa_variavel">Despesa Variável (Lazer, Compras...)</option>
+                <option value="divida" selected>Dívida / Conta com Juros (Cartão, Empréstimo, Financiamento)</option>
+              </select>
+            </div>
+            <div id="q-divida-fields" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem">
+              <div>
+                <label for="q-saldo-inicial">Saldo Devedor Inicial (R$)</label>
+                <input type="number" id="q-saldo-inicial" min="0" step="0.01" placeholder="0,00 (Opcional)" />
+              </div>
+              <div>
+                <label for="q-juros">Juros ao mês (%)</label>
+                <input type="number" id="q-juros" min="0" step="0.01" placeholder="Ex.: 12" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions" style="margin-top: 1.2rem">
+            <button type="submit" id="q-btn-submit" class="btn btn-shine" style="width: 100%; justify-content: center; padding: 0.85em; font-weight: 700;">
+              ✨ Salvar e Sincronizar Módulos
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script>
       (function () {
         "use strict";
@@ -4120,6 +4210,112 @@ SELECT * FROM dividas;</textarea
           const modal = document.getElementById("modal-pwa-install");
           if (modal) modal.classList.remove("active");
         };
+
+        /* ---------------- LANÇAMENTO RÁPIDO (MODAL DIÁLOGO) ---------------- */
+        window.openQuickLancamentoModal = function (tipo) {
+          const modal = document.getElementById("modal-quick-lancamento");
+          const title = document.getElementById("quick-modal-title");
+          const tipoOp = document.getElementById("q-tipo-operacao");
+          const btnSubmit = document.getElementById("q-btn-submit");
+          const saidaOpts = document.getElementById("q-saida-options");
+          const labelData = document.getElementById("q-label-data");
+          const form = document.getElementById("form-quick-lancamento");
+
+          if (form) form.reset();
+
+          if (tipo === "receita") {
+            tipoOp.value = "receita";
+            title.textContent = "🟢 + Lançar Entrada (Renda)";
+            title.style.color = "var(--success)";
+            btnSubmit.style.background = "var(--success)";
+            btnSubmit.style.borderColor = "var(--success)";
+            saidaOpts.style.display = "none";
+            labelData.textContent = "Data de Recebimento";
+          } else {
+            tipoOp.value = "saida";
+            title.textContent = "🔴 - Lançar Saída / Dívida";
+            title.style.color = "var(--debt)";
+            btnSubmit.style.background = "var(--debt)";
+            btnSubmit.style.borderColor = "var(--debt)";
+            saidaOpts.style.display = "block";
+            labelData.textContent = "Data de Vencimento";
+            toggleQuickDebtFields();
+          }
+
+          if (modal) modal.classList.add("active");
+        };
+
+        window.closeQuickLancamentoModal = function () {
+          const modal = document.getElementById("modal-quick-lancamento");
+          if (modal) modal.classList.remove("active");
+        };
+
+        window.toggleQuickDebtFields = function () {
+          const subtipoEl = document.getElementById("q-subtipo-saida");
+          const debtFields = document.getElementById("q-divida-fields");
+          if (subtipoEl && debtFields) {
+            debtFields.style.display =
+              subtipoEl.value === "divida" ? "grid" : "none";
+          }
+        };
+
+        const formQuick = document.getElementById("form-quick-lancamento");
+        if (formQuick) {
+          formQuick.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const tipoOp = document.getElementById("q-tipo-operacao").value;
+            const categoria = document
+              .getElementById("q-categoria")
+              .value.trim();
+            const valor =
+              parseFloat(document.getElementById("q-valor").value) || 0;
+            const dataVal = document.getElementById("q-data").value;
+
+            if (!categoria || valor <= 0) return;
+
+            if (tipoOp === "receita") {
+              runExec(
+                "INSERT INTO movimentos (tipo, categoria, valor, data_entrada) VALUES (?,?,?,?);",
+                ["receita", categoria, valor, dataVal || null],
+              );
+            } else {
+              const subtipo = document.getElementById("q-subtipo-saida").value;
+              if (subtipo === "divida") {
+                const saldoRaw =
+                  document.getElementById("q-saldo-inicial").value;
+                const saldo = parseFloat(saldoRaw) || 0;
+                const jurosRaw = document.getElementById("q-juros").value;
+                const juros = parseFloat(jurosRaw) || 0;
+
+                let diaVencNum = null;
+                if (dataVal && dataVal.includes("-")) {
+                  diaVencNum = parseInt(dataVal.split("-")[2], 10);
+                }
+
+                runExec(
+                  "INSERT INTO dividas (credor, tipo, saldo_devedor, parcela_minima, taxa_juros_mensal, dia_vencimento, data_vencimento) VALUES (?,?,?,?,?,?,?);",
+                  [
+                    categoria,
+                    "outro",
+                    saldo,
+                    valor,
+                    juros / 100,
+                    diaVencNum,
+                    dataVal || null,
+                  ],
+                );
+              } else {
+                runExec(
+                  "INSERT INTO movimentos (tipo, categoria, valor, data_entrada) VALUES (?,?,?,?);",
+                  [subtipo, categoria, valor, dataVal || null],
+                );
+              }
+            }
+
+            closeQuickLancamentoModal();
+            renderAll();
+          });
+        }
 
         /* ---------------- TERMOS E PRIVACIDADE MODAL HANDLERS ---------------- */
         window.openTermsModal = function () {
@@ -5236,6 +5432,36 @@ SELECT * FROM dividas;</textarea
             renderDashboard();
           });
 
+        function calcularValorAtualizado(d) {
+          if (!d || d.situacao === "paga") return 0;
+
+          // Base: Saldo Devedor se > 0, senao Valor no Vencimento (Parcela Mínima)
+          const baseVal =
+            d.saldo_devedor > 0 ? d.saldo_devedor : d.parcela_minima || 0;
+          if (baseVal <= 0) return 0;
+
+          const st = getStatusVencimento(d.data_vencimento, d.dia_vencimento);
+          let dias = 1;
+
+          if (st && st.diff < 0) {
+            dias = Math.max(1, Math.abs(st.diff));
+          } else if (d.criado_em) {
+            const diffMs = Date.now() - new Date(d.criado_em).getTime();
+            dias = Math.max(1, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+          } else {
+            dias = new Date().getDate();
+          }
+
+          const taxaDiaria = (d.taxa_juros_mensal || 0) / 30;
+          let valorAtualizado = baseVal * (1 + taxaDiaria * dias);
+
+          if (d.situacao === "atrasada" || (st && st.diff < 0)) {
+            valorAtualizado *= 1.02; // Multa por atraso de 2%
+          }
+
+          return valorAtualizado;
+        }
+
         function renderDividas() {
           if (!db) return;
           const rows = runQuery(
@@ -5253,8 +5479,8 @@ SELECT * FROM dividas;</textarea
 
           const activeRows = rows.filter((r) => r.situacao !== "paga");
 
-          const totalDevidoInicial = activeRows.reduce(
-            (s, r) => s + (r.saldo_devedor || 0),
+          const totalDevidoAtualizado = activeRows.reduce(
+            (s, r) => s + calcularValorAtualizado(r),
             0,
           );
           const totalParcelas = activeRows.reduce(
@@ -5262,7 +5488,7 @@ SELECT * FROM dividas;</textarea
             0,
           );
 
-          resumo.textContent = `${activeRows.length} dívida(s) ativa(s) · Total devedor ${fmtBRL(totalDevidoInicial)} · Valor no Vencimento ${fmtBRL(totalParcelas)}/mês`;
+          resumo.textContent = `${activeRows.length} dívida(s) ativa(s) · Total devedor ${fmtBRL(totalDevidoAtualizado)} · Valor no Vencimento ${fmtBRL(totalParcelas)}/mês`;
 
           let html =
             '<table><thead><tr><th>Credor</th><th>Tipo</th><th class="num">Saldo Inicial</th><th class="num">Valor no Vencimento</th><th class="num">Valor Atualizado Hoje ⚡</th><th class="num">Juros a.m.</th><th>Vencimento</th><th>Status (Controle)</th><th></th></tr></thead><tbody>';
@@ -5273,23 +5499,7 @@ SELECT * FROM dividas;</textarea
               r.saldo_devedor > 0 ? fmtBRL(r.saldo_devedor) : "—";
 
             // Cálculo da atualização automática diária de saldo com juros
-            let valorAtualizado = r.saldo_devedor || 0;
-            if (
-              r.saldo_devedor > 0 &&
-              r.taxa_juros_mensal > 0 &&
-              r.situacao !== "paga"
-            ) {
-              let dias = 1;
-              if (r.criado_em) {
-                const diffMs = Date.now() - new Date(r.criado_em).getTime();
-                dias = Math.max(1, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
-              } else {
-                dias = new Date().getDate();
-              }
-              const taxaDiaria = (r.taxa_juros_mensal || 0) / 30;
-              valorAtualizado =
-                (r.saldo_devedor || 0) * (1 + taxaDiaria * dias);
-            }
+            const valorAtualizado = calcularValorAtualizado(r);
 
             const valAtualizadoDisplay =
               r.situacao === "paga"
@@ -5458,22 +5668,10 @@ SELECT * FROM dividas;</textarea
           );
 
           // Total devido recalculado com a taxa de juros diária atualizada
-          const totalDevido = dividasAtivas.reduce((s, d) => {
-            let valorAtualizado = d.saldo_devedor || 0;
-            if (d.saldo_devedor > 0 && d.taxa_juros_mensal > 0) {
-              let dias = 1;
-              if (d.criado_em) {
-                const diffMs = Date.now() - new Date(d.criado_em).getTime();
-                dias = Math.max(1, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
-              } else {
-                dias = new Date().getDate();
-              }
-              const taxaDiaria = (d.taxa_juros_mensal || 0) / 30;
-              valorAtualizado =
-                (d.saldo_devedor || 0) * (1 + taxaDiaria * dias);
-            }
-            return s + valorAtualizado;
-          }, 0);
+          const totalDevido = dividasAtivas.reduce(
+            (s, d) => s + calcularValorAtualizado(d),
+            0,
+          );
 
           const parcelasMinimas = dividasAtivas.reduce(
             (s, d) => s + (d.parcela_minima || 0),
