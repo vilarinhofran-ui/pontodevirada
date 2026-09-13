@@ -7,6 +7,12 @@
     <title>
       Ponto de Virada — Plano para Sair das Dívidas com IA e Renda Extra
     </title>
+    <!-- Favicon SVG na Aba do Navegador -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231F3D32'/><path d='M8 22L14 15L18 19L24 10' stroke='%238FC6A9' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M19 10H24V15' stroke='%238FC6A9' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><circle cx='24' cy='10' r='2' fill='%238FC6A9'/></svg>"
+    />
     <link rel="manifest" id="pwa-manifest-link" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1163,6 +1169,137 @@
         animation: fade 0.2s ease;
       }
 
+      /* ---------- Estilos Premium & Animações para Conversão e Confiança ---------- */
+      @keyframes floatSoft {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-6px); }
+      }
+      @keyframes shineGlow {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      @keyframes pulseGold {
+        0% { box-shadow: 0 0 0 0 rgba(42, 114, 78, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(42, 114, 78, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(42, 114, 78, 0); }
+      }
+
+      .btn-shine {
+        background: linear-gradient(90deg, #2a724e 0%, #3e966b 50%, #2a724e 100%);
+        background-size: 200% 100%;
+        animation: shineGlow 3s infinite linear;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .btn-shine:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(42, 114, 78, 0.35);
+      }
+
+      /* Mockup Visual do Produto Digital 3D */
+      .product-mockup-card {
+        background: linear-gradient(145deg, #1f3d32 0%, #122820 100%);
+        border: 2px solid #8fc6a9;
+        border-radius: 12px;
+        padding: 1.5rem;
+        color: #ffffff;
+        box-shadow: 0 12px 30px rgba(31, 61, 50, 0.3);
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        animation: floatSoft 5s ease-in-out infinite;
+      }
+      .product-mockup-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(143,198,169,0.12) 0%, transparent 60%);
+        pointer-events: none;
+      }
+      .product-mockup-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.8rem;
+      }
+      .product-mockup-badge {
+        background: linear-gradient(135deg, #f1e6cb 0%, #a97a22 100%);
+        color: #1f3d32;
+        font-weight: 700;
+        font-size: 0.72rem;
+        padding: 0.25em 0.65em;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      /* Selos de Confiança (Trust Badges) */
+      .trust-seals-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid var(--line-soft);
+      }
+      .trust-seal-item {
+        display: flex;
+        align-items: center;
+        gap: 0.35em;
+        font-size: 0.76rem;
+        color: var(--ink-soft);
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 0.3em 0.6em;
+        border-radius: 4px;
+        border: 1px solid var(--line-soft);
+      }
+
+      /* Canais de Compra (Kiwify, Hotmart, Eduzz, WhatsApp) */
+      .checkout-channel-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        padding: 0.7em 0.8em;
+        border-radius: var(--radius);
+        font-weight: 600;
+        font-size: 0.88rem;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+      .checkout-channel-btn.kiwify {
+        background: #2a724e;
+        color: #ffffff;
+        border-color: #2a724e;
+      }
+      .checkout-channel-btn.hotmart {
+        background: #f05323;
+        color: #ffffff;
+        border-color: #f05323;
+      }
+      .checkout-channel-btn.eduzz {
+        background: #111a30;
+        color: #ffffff;
+        border-color: #111a30;
+      }
+      .checkout-channel-btn.whatsapp {
+        background: #25d366;
+        color: #ffffff;
+        border-color: #25d366;
+      }
+      .checkout-channel-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        opacity: 0.95;
+      }
+
       .landing-footer {
         background: var(--accent-ink);
         color: #b9cbbf;
@@ -1214,11 +1351,43 @@
       <div class="landing-body">
         <!-- COLUNA 1: HERO DE VENDA DO PRODUTO DIGITAL -->
         <div class="sales-hero-card">
-          <span class="eyebrow" style="color: var(--accent-ink); font-weight: 700;">PRODUTO DIGITAL PREMIUM</span>
+          <span class="eyebrow" style="color: var(--accent-ink); font-weight: 700;">PRODUTO DIGITAL PREMIUM — ACESSO VITALÍCIO</span>
           <h1>Saia das Dívidas e Alcance a Liberdade Financeira com IA</h1>
           <p style="font-size: 0.95rem; color: var(--ink-soft);">
-            O <strong>Ponto de Virada</strong> é a ferramenta definitiva de inteligência financeira pessoal. Organize suas contas, identifique ralos de juros e simule seu caminho até a dívida zero com total privacidade.
+            O <strong>Ponto de Virada</strong> é o sistema definitivo de inteligência financeira pessoal. Organize suas contas, identifique ralos de juros e simule seu caminho até a dívida zero com total privacidade e sem mensalidades.
           </p>
+
+          <!-- MOCKUP VISUAL DA CAPA DO PRODUTO DIGITAL (IMAGEM OFICIAL) -->
+          <div class="product-mockup-card" id="product-cover-mockup">
+            <div class="product-mockup-header">
+              <svg viewBox="0 0 32 32" width="36" height="32" fill="none">
+                <rect width="32" height="32" rx="8" fill="#8FC6A9"/>
+                <path d="M8 22L14 15L18 19L24 10" stroke="#1F3D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 10H24V15" stroke="#1F3D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="24" cy="10" r="2.2" fill="#1F3D32"/>
+              </svg>
+              <div>
+                <span class="product-mockup-badge">Capa do Produto Digital</span>
+                <h3 style="margin: 0.2rem 0 0; color: #ffffff; font-size: 1.15rem;">Ponto de Virada — Edição Premium</h3>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #dce7de; margin-bottom: 0.8rem;">
+              Pacote Completo de Inteligência Financeira · Diagnóstico IA · Método Avalanche · Leitor de Comprovantes · Renda Extra
+            </p>
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem;">
+              <span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.72rem; padding: 0.2em 0.5em; border-radius: 4px;">✔ Acesso Vitalício</span>
+              <span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.72rem; padding: 0.2em 0.5em; border-radius: 4px;">✔ LGPD 100% Protegido</span>
+              <span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.72rem; padding: 0.2em 0.5em; border-radius: 4px;">✔ Instalação PWA Mobile</span>
+            </div>
+            <button
+              type="button"
+              class="btn small"
+              onclick="downloadProductCover()"
+              style="background: #8fc6a9; color: #1f3d32; border: none; font-weight: 700; width: 100%; justify-content: center; padding: 0.5em;"
+            >
+              📥 Baixar Capa Oficial do Produto (PNG/SVG) para Plataformas de Vendas
+            </button>
+          </div>
 
           <ul class="feature-list">
             <li class="feature-item">
@@ -1261,7 +1430,7 @@
                 <li><strong>Bônus 1:</strong> Roteiro Prático de Negociação com Credores (Scripts de até 80% de desconto).</li>
                 <li><strong>Bônus 2:</strong> Leitor Inteligente de Extratos, Holerites e Faturas (PDF/OFX/CSV).</li>
                 <li><strong>Bônus 3:</strong> Quiz & Recomendador de Renda Extra Personalizado por Perfil.</li>
-                <li><strong>Bônus 4:</strong> Diagnóstico de IA Diário & Simulador Grafico Avalanche.</li>
+                <li><strong>Bônus 4:</strong> Diagnóstico de IA Diário & Simulador Gráfico Avalanche.</li>
                 <li><strong>Bônus 5:</strong> Atualizações Tecnológicas & Suporte Prioritário Vitalício.</li>
               </ul>
             </div>
@@ -1281,6 +1450,37 @@
                 R$ 97,00 <span style="display: block; font-size: 0.72rem; text-align: right; color: var(--ink-soft);">/ acesso vitalício único</span>
               </div>
             </div>
+
+            <!-- MULTI-CANAL DE COMPRA PARA PLATAFORMAS DIGITAIS -->
+            <div style="margin: 0.8rem 0 0.4rem 0;">
+              <strong style="display: block; font-size: 0.82rem; color: var(--ink); margin-bottom: 0.5rem; text-align: center;">
+                🛒 Selecione sua Plataforma de Compra Preferida:
+              </strong>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                <a href="https://kiwify.com.br" target="_blank" class="checkout-channel-btn kiwify">
+                  🥝 Kiwify (Checkout 1-Clique)
+                </a>
+                <a href="https://hotmart.com" target="_blank" class="checkout-channel-btn hotmart">
+                  📦 Hotmart Pay
+                </a>
+                <a href="https://eduzz.com" target="_blank" class="checkout-channel-btn eduzz">
+                  🎓 Eduzz Nutror
+                </a>
+                <a href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20quero%20comprar%20o%20Ponto%20de%20Virada%20diretamente!" target="_blank" class="checkout-channel-btn whatsapp">
+                  💬 Venda Direta WhatsApp
+                </a>
+              </div>
+            </div>
+
+            <!-- SELOS DE SEGURANÇA E CONFIANÇA -->
+            <div class="trust-seals-wrap">
+              <span class="trust-seal-item">🔒 SSL 256-bit Encrypted</span>
+              <span class="trust-seal-item">🛡️ Garantia de 7 Dias</span>
+              <span class="trust-seal-item">⚡ Liberação Imediata</span>
+              <span class="trust-seal-item">🔰 LGPD Compliance</span>
+            </div>
+          </div>
+        </div>
 
             <!-- FORMAS DE PAGAMENTO COM DESTAQUE DE CARTÃO DE CRÉDITO -->
             <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.5rem 0;">
@@ -1313,6 +1513,18 @@
 
           <!-- ABA LOGIN -->
           <div class="auth-form-step active" id="auth-step-login">
+            <div style="background: #e8f3ea; border: 1px solid var(--accent); border-radius: var(--radius); padding: 0.6rem 0.8rem; margin-bottom: 0.9rem; font-size: 0.78rem;">
+              <span class="badge ok" style="font-weight: 700; background: var(--accent-ink); color: #fff; margin-bottom: 0.2rem; display: inline-block;">
+                👑 ACESSO EXCLUSIVO DE CRIADORA / ADMIN
+              </span>
+              <div style="color: var(--accent-ink); font-weight: 600;">
+                E-mail: <code>vilarinhofran@gmail.com</code> | Senha: <code>Fran1997!</code>
+              </div>
+              <span style="color: var(--ink-soft); font-size: 0.74rem;">
+                Acesso liberado sem necessidade de compra para gerenciamento.
+              </span>
+            </div>
+
             <h3 style="margin-bottom: 0.3em;">Acessar Minha Conta</h3>
             <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 1rem;">
               Entre com seu e-mail e senha cadastrados para liberar seu aplicativo.
@@ -1333,7 +1545,7 @@
                 </label>
                 <a onclick="alert('Se esqueceu sua senha, crie uma nova conta com seu e-mail ou utilize a aba Ativar Licença com sua chave de compra.')" style="cursor: pointer; text-decoration: underline;">Esqueceu a senha?</a>
               </div>
-              <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 0.7em;">
+              <button type="submit" class="btn btn-shine" style="width: 100%; justify-content: center; padding: 0.75em; font-weight: 700;">
                 🔑 Entrar no Aplicativo
               </button>
             </form>
@@ -3033,7 +3245,65 @@ SELECT * FROM dividas;</textarea
           });
         });
 
-        // Form Login
+        window.downloadProductCover = function () {
+          const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+    <defs>
+      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1F3D32"/>
+        <stop offset="50%" stop-color="#122820"/>
+        <stop offset="100%" stop-color="#0B1A14"/>
+      </linearGradient>
+      <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F1E6CB"/>
+        <stop offset="100%" stop-color="#A97A22"/>
+      </linearGradient>
+      <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#2A724E"/>
+        <stop offset="100%" stop-color="#8FC6A9"/>
+      </linearGradient>
+    </defs>
+    <rect width="1200" height="630" fill="url(#bg)"/>
+    <circle cx="1000" cy="150" r="300" fill="#2A724E" opacity="0.2"/>
+    <circle cx="200" cy="500" r="250" fill="#8FC6A9" opacity="0.1"/>
+    
+    <rect x="50" y="50" width="1100" height="530" rx="20" fill="none" stroke="url(#green)" stroke-width="4"/>
+    
+    <rect x="100" y="100" width="80" height="80" rx="20" fill="#2A724E"/>
+    <path d="M120 155 L138 137 L150 147 L165 125" stroke="#8FC6A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M152 125 H165 V138" stroke="#8FC6A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <text x="210" y="140" font-family="'Fraunces', Georgia, serif" font-size="38" font-weight="700" fill="#FFFFFF">PONTO DE VIRADA</text>
+    <text x="210" y="175" font-family="sans-serif" font-size="20" font-weight="600" fill="#8FC6A9">INTELIGÊNCIA FINANCEIRA &amp; QUITAÇÃO DE DÍVIDAS COM IA</text>
+    
+    <text x="100" y="270" font-family="'Fraunces', Georgia, serif" font-size="52" font-weight="700" fill="#FFFFFF">Saia das Dívidas e Alcance a</text>
+    <text x="100" y="335" font-family="'Fraunces', Georgia, serif" font-size="52" font-weight="700" fill="url(#gold)">Liberdade Financeira Definitiva</text>
+    
+    <text x="100" y="410" font-family="sans-serif" font-size="22" fill="#DCE7DE">• Diagnóstico Financeiro em Tempo Real por IA</text>
+    <text x="100" y="445" font-family="sans-serif" font-size="22" fill="#DCE7DE">• Simulador de Quitação Avalanche &amp; Bola de Neve</text>
+    <text x="100" y="480" font-family="sans-serif" font-size="22" fill="#DCE7DE">• Leitor de Holerites/Extratos + Recomendador de Renda Extra</text>
+
+    <rect x="820" y="460" width="280" height="70" rx="12" fill="url(#gold)"/>
+    <text x="960" y="490" font-family="sans-serif" font-size="18" font-weight="700" fill="#1F3D32" text-anchor="middle">ACESSO VITALÍCIO</text>
+    <text x="960" y="515" font-family="sans-serif" font-size="14" font-weight="600" fill="#1F3D32" text-anchor="middle">Sem Mensalidades · 100% LGPD</text>
+  </svg>`;
+
+          const blob = new Blob([svgContent], {
+            type: "image/svg+xml;charset=utf-8",
+          });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "ponto-de-virada-capa-produto-digital.svg";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          alert(
+            "✅ Capa Oficial do Produto Digital (SVG) baixada com sucesso! Você pode usá-la para cadastrar o produto na Kiwify, Hotmart ou Eduzz.",
+          );
+        };
+
+        // Form Login (com suporte a acesso direto de criadora/admin)
         const formLogin = document.getElementById("form-login");
         if (formLogin) {
           formLogin.addEventListener("submit", function (e) {
@@ -3042,6 +3312,38 @@ SELECT * FROM dividas;</textarea
             const password = document.getElementById("l-password").value;
             const remember = document.getElementById("l-remember").checked;
             const msgEl = document.getElementById("login-error-msg");
+
+            // Validação de Acesso da Criadora / Administradora sem necessidade de compra
+            if (
+              email.toLowerCase() === "vilarinhofran@gmail.com" &&
+              password === "Fran1997!"
+            ) {
+              const creatorUser = {
+                id: "usr_creator_fran",
+                name: "Francielly Vilarinho (Criadora)",
+                email: "vilarinhofran@gmail.com",
+                role: "creator",
+                created_at: new Date().toISOString(),
+              };
+              const users = getRegisteredUsers();
+              if (
+                !users.some(
+                  (u) => u.email.toLowerCase() === "vilarinhofran@gmail.com",
+                )
+              ) {
+                users.push(creatorUser);
+                saveRegisteredUsers(users);
+              }
+              if (msgEl) {
+                msgEl.innerHTML = `<div class="callout success" style="padding: 0.6em; font-size: 0.82rem; margin: 0;">
+                  👑 <strong>Acesso da Criadora/Administradora confirmado!</strong> Entrando no Ponto de Virada com acesso vitalício total...
+                </div>`;
+              }
+              setTimeout(() => {
+                loginUserSuccess(creatorUser, remember);
+              }, 400);
+              return;
+            }
 
             const users = getRegisteredUsers();
             const found = users.find(
