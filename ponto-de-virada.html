@@ -1171,24 +1171,46 @@
 
       /* ---------- Estilos Premium & Animações para Conversão e Confiança ---------- */
       @keyframes floatSoft {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-6px); }
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
       }
       @keyframes shineGlow {
-        0% { background-position: -200% 0; }
-        100% { background-position: 200% 0; }
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
       }
       @keyframes pulseGold {
-        0% { box-shadow: 0 0 0 0 rgba(42, 114, 78, 0.4); }
-        70% { box-shadow: 0 0 0 10px rgba(42, 114, 78, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(42, 114, 78, 0); }
+        0% {
+          box-shadow: 0 0 0 0 rgba(42, 114, 78, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(42, 114, 78, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(42, 114, 78, 0);
+        }
       }
 
       .btn-shine {
-        background: linear-gradient(90deg, #2a724e 0%, #3e966b 50%, #2a724e 100%);
+        background: linear-gradient(
+          90deg,
+          #2a724e 0%,
+          #3e966b 50%,
+          #2a724e 100%
+        );
         background-size: 200% 100%;
         animation: shineGlow 3s infinite linear;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
       }
       .btn-shine:hover {
         transform: translateY(-2px);
@@ -1215,7 +1237,11 @@
         right: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(143,198,169,0.12) 0%, transparent 60%);
+        background: radial-gradient(
+          circle,
+          rgba(143, 198, 169, 0.12) 0%,
+          transparent 60%
+        );
         pointer-events: none;
       }
       .product-mockup-header {
@@ -1320,14 +1346,34 @@
     <div id="view-auth-landing" class="auth-landing-wrap active">
       <header class="landing-nav">
         <div class="logo">
-          <svg viewBox="0 0 32 32" width="28" height="28" fill="none" style="flex: none;">
-            <rect width="32" height="32" rx="7" fill="#2A724E"/>
-            <path d="M8 22L14 15L18 19L24 10" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M19 10H24V15" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="24" cy="10" r="2" fill="#8FC6A9"/>
+          <svg
+            viewBox="0 0 32 32"
+            width="28"
+            height="28"
+            fill="none"
+            style="flex: none"
+          >
+            <rect width="32" height="32" rx="7" fill="#2A724E" />
+            <path
+              d="M8 22L14 15L18 19L24 10"
+              stroke="#8FC6A9"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M19 10H24V15"
+              stroke="#8FC6A9"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <circle cx="24" cy="10" r="2" fill="#8FC6A9" />
           </svg>
           <span>Ponto de Virada</span>
-          <span class="badge ok" style="font-size: 0.65rem;">Versão Premium</span>
+          <span class="badge ok" style="font-size: 0.65rem"
+            >Versão Premium</span
+          >
         </div>
         <div class="landing-nav-actions">
           <button
@@ -1341,7 +1387,7 @@
             href="https://kiwify.com.br"
             target="_blank"
             class="btn small"
-            style="background: #2A724E; border-color: #2A724E;"
+            style="background: #2a724e; border-color: #2a724e"
           >
             🛒 Comprar Acesso
           </a>
@@ -1351,30 +1397,94 @@
       <div class="landing-body">
         <!-- COLUNA 1: HERO DE VENDA DO PRODUTO DIGITAL -->
         <div class="sales-hero-card">
-          <span class="eyebrow" style="color: var(--accent-ink); font-weight: 700;">PRODUTO DIGITAL PREMIUM — ACESSO VITALÍCIO</span>
+          <span
+            class="eyebrow"
+            style="color: var(--accent-ink); font-weight: 700"
+            >PRODUTO DIGITAL PREMIUM — ACESSO VITALÍCIO</span
+          >
           <h1>Saia das Dívidas e Alcance a Liberdade Financeira com IA</h1>
-          <p style="font-size: 0.95rem; color: var(--ink-soft);">
-            O <strong>Ponto de Virada</strong> é o sistema definitivo de inteligência financeira pessoal. Organize suas contas, identifique ralos de juros e simule seu caminho até a dívida zero com total privacidade e sem mensalidades.
+          <p style="font-size: 0.95rem; color: var(--ink-soft)">
+            O <strong>Ponto de Virada</strong> é o sistema definitivo de
+            inteligência financeira pessoal. Organize suas contas, identifique
+            ralos de juros e simule seu caminho até a dívida zero com total
+            privacidade e sem mensalidades.
           </p>
 
           <!-- CARD MOCKUP CAPA DO PRODUTO DIGITAL (FORMATO 300x250px) -->
-          <div class="product-mockup-card" id="product-cover-mockup" style="max-width: 320px; width: 100%; min-height: 250px; margin: 0 auto 1.2rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: 10px; padding: 1.1rem; box-shadow: 0 8px 24px rgba(31,61,50,0.25);">
+          <div
+            class="product-mockup-card"
+            id="product-cover-mockup"
+            style="
+              max-width: 320px;
+              width: 100%;
+              min-height: 250px;
+              margin: 0 auto 1.2rem;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              border-radius: 10px;
+              padding: 1.1rem;
+              box-shadow: 0 8px 24px rgba(31, 61, 50, 0.25);
+            "
+          >
             <div>
-              <div class="product-mockup-header" style="gap: 0.5rem; margin-bottom: 0.5rem;">
+              <div
+                class="product-mockup-header"
+                style="gap: 0.5rem; margin-bottom: 0.5rem"
+              >
                 <svg viewBox="0 0 32 32" width="30" height="30" fill="none">
-                  <rect width="32" height="32" rx="7" fill="#8FC6A9"/>
-                  <path d="M8 22L14 15L18 19L24 10" stroke="#1F3D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M19 10H24V15" stroke="#1F3D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="24" cy="10" r="2" fill="#1F3D32"/>
+                  <rect width="32" height="32" rx="7" fill="#8FC6A9" />
+                  <path
+                    d="M8 22L14 15L18 19L24 10"
+                    stroke="#1F3D32"
+                    stroke-width="2.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M19 10H24V15"
+                    stroke="#1F3D32"
+                    stroke-width="2.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle cx="24" cy="10" r="2" fill="#1F3D32" />
                 </svg>
                 <div>
-                  <h3 style="margin: 0.1rem 0 0; color: #ffffff; font-size: 1.1rem; font-weight: 700;">Ponto de Virada — Premium</h3>
+                  <h3
+                    style="
+                      margin: 0.1rem 0 0;
+                      color: #ffffff;
+                      font-size: 1.1rem;
+                      font-weight: 700;
+                    "
+                  >
+                    Ponto de Virada — Premium
+                  </h3>
                 </div>
               </div>
-              <p style="font-size: 0.78rem; color: #dce7de; margin-bottom: 0.55rem; line-height: 1.35;">
-                Pacote Completo de Inteligência Financeira · Diagnóstico Avançado · Método Avalanche · Leitor de Comprovantes · Renda Extra
+              <p
+                style="
+                  font-size: 0.78rem;
+                  color: #dce7de;
+                  margin-bottom: 0.55rem;
+                  line-height: 1.35;
+                "
+              >
+                Pacote Completo de Inteligência Financeira · Diagnóstico
+                Avançado · Método Avalanche · Leitor de Comprovantes · Renda
+                Extra
               </p>
-              <div style="display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.74rem; color: #ffffff; margin-bottom: 0.6rem;">
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0.25rem;
+                  font-size: 0.74rem;
+                  color: #ffffff;
+                  margin-bottom: 0.6rem;
+                "
+              >
                 <span>✔ Diagnóstico Financeiro em Tempo Real</span>
                 <span>✔ Simulador Avalanche &amp; Bola de Neve</span>
                 <span>✔ Leitor de Comprovantes (PDF/OFX/CSV)</span>
@@ -1382,15 +1492,32 @@
               </div>
             </div>
             <div>
-              <div style="font-size: 0.68rem; color: #8fc6a9; font-weight: 600; text-align: center; margin-bottom: 0.45rem;">
+              <div
+                style="
+                  font-size: 0.68rem;
+                  color: #8fc6a9;
+                  font-weight: 600;
+                  text-align: center;
+                  margin-bottom: 0.45rem;
+                "
+              >
                 PRODUTO DESENVOLVIDO POR VILARINHO TECH SOLUTIONS
               </div>
-              <div style="display: flex; gap: 0.35rem;">
+              <div style="display: flex; gap: 0.35rem">
                 <button
                   type="button"
                   class="btn small"
                   onclick="downloadProductCover('png')"
-                  style="background: #8fc6a9; color: #1f3d32; border: none; font-weight: 700; flex: 1; justify-content: center; padding: 0.5em; font-size: 0.76rem;"
+                  style="
+                    background: #8fc6a9;
+                    color: #1f3d32;
+                    border: none;
+                    font-weight: 700;
+                    flex: 1;
+                    justify-content: center;
+                    padding: 0.5em;
+                    font-size: 0.76rem;
+                  "
                 >
                   🖼️ Baixar PNG
                 </button>
@@ -1398,7 +1525,16 @@
                   type="button"
                   class="btn small"
                   onclick="downloadProductCover('jpg')"
-                  style="background: #f1e6cb; color: #1f3d32; border: none; font-weight: 700; flex: 1; justify-content: center; padding: 0.5em; font-size: 0.76rem;"
+                  style="
+                    background: #f1e6cb;
+                    color: #1f3d32;
+                    border: none;
+                    font-weight: 700;
+                    flex: 1;
+                    justify-content: center;
+                    padding: 0.5em;
+                    font-size: 0.76rem;
+                  "
                 >
                   🖼️ Baixar JPG
                 </button>
@@ -1408,107 +1544,360 @@
 
           <ul class="feature-list">
             <li class="feature-item">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Diagnóstico por IA em Tempo Real:</strong> Identifica contas perigosas e calcula o score de saúde financeira.</span>
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span
+                ><strong>Diagnóstico por IA em Tempo Real:</strong> Identifica
+                contas perigosas e calcula o score de saúde financeira.</span
+              >
             </li>
             <li class="feature-item">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Atualização Diária de Saldos & Status:</strong> Acompanhe valores com juros recalculados diariamente e mude o status de quitação.</span>
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span
+                ><strong>Atualização Diária de Saldos & Status:</strong>
+                Acompanhe valores com juros recalculados diariamente e mude o
+                status de quitação.</span
+              >
             </li>
             <li class="feature-item">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Simulador Avalanche vs. Bola de Neve:</strong> Projeção visual gráfica de quitação mês a mês.</span>
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span
+                ><strong>Simulador Avalanche vs. Bola de Neve:</strong> Projeção
+                visual gráfica de quitação mês a mês.</span
+              >
             </li>
             <li class="feature-item">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>100% Privado e Seguro (LGPD):</strong> Seus dados financeiros são isolados e não saem do seu dispositivo.</span>
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span
+                ><strong>100% Privado e Seguro (LGPD):</strong> Seus dados
+                financeiros são isolados e não saem do seu dispositivo.</span
+              >
             </li>
           </ul>
 
           <!-- CAIXA DE CHECKOUT COM VALOR AGREGADO E MULTI-CANAL -->
           <div class="checkout-box">
-            <div style="background: #e8f3ea; border: 1px dashed var(--accent); border-radius: var(--radius); padding: 0.75rem; margin-bottom: 0.5rem;">
-              <span class="badge ok" style="font-weight: 700; font-size: 0.78rem; background: var(--success); color: #fff; margin-bottom: 0.3rem; display: inline-block;">
+            <div
+              style="
+                background: #e8f3ea;
+                border: 1px dashed var(--accent);
+                border-radius: var(--radius);
+                padding: 0.75rem;
+                margin-bottom: 0.5rem;
+              "
+            >
+              <span
+                class="badge ok"
+                style="
+                  font-weight: 700;
+                  font-size: 0.78rem;
+                  background: var(--success);
+                  color: #fff;
+                  margin-bottom: 0.3rem;
+                  display: inline-block;
+                "
+              >
                 ✨ PACOTE PREMIUM COM ACESSO VITALÍCIO
               </span>
-              <strong style="display: block; font-size: 0.95rem; color: var(--accent-ink); margin-bottom: 0.2rem;">
+              <strong
+                style="
+                  display: block;
+                  font-size: 0.95rem;
+                  color: var(--accent-ink);
+                  margin-bottom: 0.2rem;
+                "
+              >
                 Pague Uma Única Vez · Sem Mensalidades · Acesso Para Sempre
               </strong>
-              <span style="font-size: 0.78rem; color: var(--ink-soft);">
-                Desenvolvido por <strong>VILARINHO TECH SOLUTIONS</strong> · Acesso ilimitado a todos os módulos e bônus.
+              <span style="font-size: 0.78rem; color: var(--ink-soft)">
+                Desenvolvido por <strong>VILARINHO TECH SOLUTIONS</strong> ·
+                Acesso ilimitado a todos os módulos e bônus.
               </span>
             </div>
 
             <!-- VALOR AGREGADO E BÔNUS INCLUSOS -->
-            <div style="background: #ffffff; border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 0.8rem; font-size: 0.82rem; margin-bottom: 0.5rem;">
-              <strong style="display: block; font-size: 0.86rem; color: var(--ink); margin-bottom: 0.4rem; border-bottom: 1px solid var(--line-soft); padding-bottom: 0.3rem;">
+            <div
+              style="
+                background: #ffffff;
+                border: 1px solid var(--line-soft);
+                border-radius: var(--radius);
+                padding: 0.8rem;
+                font-size: 0.82rem;
+                margin-bottom: 0.5rem;
+              "
+            >
+              <strong
+                style="
+                  display: block;
+                  font-size: 0.86rem;
+                  color: var(--ink);
+                  margin-bottom: 0.4rem;
+                  border-bottom: 1px solid var(--line-soft);
+                  padding-bottom: 0.3rem;
+                "
+              >
                 🎁 Bônus Exclusivos de Valor Agregado Inclusos Hoje:
               </strong>
-              <ul style="margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.3em; color: var(--ink-soft);">
-                <li><strong>Bônus 1:</strong> Roteiro Prático de Negociação com Credores (Até 80% de desconto).</li>
-                <li><strong>Bônus 2:</strong> Leitor Inteligente de Extratos, Holerites e Faturas (PDF/OFX/CSV).</li>
-                <li><strong>Bônus 3:</strong> Quiz & Recomendador de Renda Extra Personalizado por Perfil.</li>
-                <li><strong>Bônus 4:</strong> Diagnóstico de IA Diário & Simulador Gráfico Avalanche.</li>
-                <li><strong>Bônus 5:</strong> Atualizações Tecnológicas & Suporte Prioritário Vitalício.</li>
+              <ul
+                style="
+                  margin: 0;
+                  padding-left: 1.1rem;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0.3em;
+                  color: var(--ink-soft);
+                "
+              >
+                <li>
+                  <strong>Bônus 1:</strong> Roteiro Prático de Negociação com
+                  Credores (Até 80% de desconto).
+                </li>
+                <li>
+                  <strong>Bônus 2:</strong> Leitor Inteligente de Extratos,
+                  Holerites e Faturas (PDF/OFX/CSV).
+                </li>
+                <li>
+                  <strong>Bônus 3:</strong> Quiz & Recomendador de Renda Extra
+                  Personalizado por Perfil.
+                </li>
+                <li>
+                  <strong>Bônus 4:</strong> Diagnóstico de IA Diário & Simulador
+                  Gráfico Avalanche.
+                </li>
+                <li>
+                  <strong>Bônus 5:</strong> Atualizações Tecnológicas & Suporte
+                  Prioritário Vitalício.
+                </li>
               </ul>
             </div>
 
             <!-- ANCORAGEM DE PREÇO -->
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 0.4rem; border-top: 1px solid var(--line-soft); padding-top: 0.6rem; margin-bottom: 0.4rem;">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+                border-top: 1px solid var(--line-soft);
+                padding-top: 0.6rem;
+                margin-bottom: 0.4rem;
+              "
+            >
               <div>
-                <span style="font-size: 0.8rem; color: var(--debt); text-decoration: line-through; display: block; font-weight: 600;">
+                <span
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--debt);
+                    text-decoration: line-through;
+                    display: block;
+                    font-weight: 600;
+                  "
+                >
                   De R$ 297,00
                 </span>
-                <strong style="display: block; font-size: 0.88rem; color: var(--accent-ink);">
-                  Por Apenas 12x de <span style="font-size: 1.25rem; color: var(--success); font-family: 'Fraunces', serif;">R$ 9,74</span>
+                <strong
+                  style="
+                    display: block;
+                    font-size: 0.88rem;
+                    color: var(--accent-ink);
+                  "
+                >
+                  Por Apenas 12x de
+                  <span
+                    style="
+                      font-size: 1.25rem;
+                      color: var(--success);
+                      font-family: &quot;Fraunces&quot;, serif;
+                    "
+                    >R$ 9,74</span
+                  >
                 </strong>
-                <span style="font-size: 0.76rem; color: var(--ink-soft);">ou R$ 97,00 à vista no PIX / Cartão</span>
+                <span style="font-size: 0.76rem; color: var(--ink-soft)"
+                  >ou R$ 97,00 à vista no PIX / Cartão</span
+                >
               </div>
-              <div class="checkout-price" style="text-align: right;">
-                R$ 97,00 <span style="display: block; font-size: 0.7rem; text-align: right; color: var(--ink-soft);">/ acesso vitalício único</span>
+              <div class="checkout-price" style="text-align: right">
+                R$ 97,00
+                <span
+                  style="
+                    display: block;
+                    font-size: 0.7rem;
+                    text-align: right;
+                    color: var(--ink-soft);
+                  "
+                  >/ acesso vitalício único</span
+                >
               </div>
             </div>
 
             <!-- FORMAS DE PAGAMENTO -->
-            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
-              <span class="badge ok" style="font-weight: 600; font-size: 0.76rem; padding: 0.3em 0.55em; background: #d7efe0; color: #1f3d32;">💳 Cartão em até 12x de R$ 9,74</span>
-              <span class="badge ok" style="font-weight: 600; font-size: 0.76rem; padding: 0.3em 0.55em; background: #d7efe0; color: #1f3d32;">⚡ PIX Liberação Imediata</span>
-              <span class="badge" style="font-weight: 600; font-size: 0.76rem; padding: 0.3em 0.55em;">📄 Boleto Bancário</span>
+            <div
+              style="
+                display: flex;
+                gap: 0.4rem;
+                flex-wrap: wrap;
+                margin-bottom: 0.6rem;
+              "
+            >
+              <span
+                class="badge ok"
+                style="
+                  font-weight: 600;
+                  font-size: 0.76rem;
+                  padding: 0.3em 0.55em;
+                  background: #d7efe0;
+                  color: #1f3d32;
+                "
+                >💳 Cartão em até 12x de R$ 9,74</span
+              >
+              <span
+                class="badge ok"
+                style="
+                  font-weight: 600;
+                  font-size: 0.76rem;
+                  padding: 0.3em 0.55em;
+                  background: #d7efe0;
+                  color: #1f3d32;
+                "
+                >⚡ PIX Liberação Imediata</span
+              >
+              <span
+                class="badge"
+                style="
+                  font-weight: 600;
+                  font-size: 0.76rem;
+                  padding: 0.3em 0.55em;
+                "
+                >📄 Boleto Bancário</span
+              >
             </div>
 
             <!-- MULTI-CANAL DE COMPRA PARA PLATAFORMAS DIGITAIS -->
             <div>
-              <strong style="display: block; font-size: 0.8rem; color: var(--ink); margin-bottom: 0.4rem; text-align: center;">
+              <strong
+                style="
+                  display: block;
+                  font-size: 0.8rem;
+                  color: var(--ink);
+                  margin-bottom: 0.4rem;
+                  text-align: center;
+                "
+              >
                 🛒 Selecione sua Plataforma de Compra Preferida:
               </strong>
-              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.45rem;">
-                <a href="https://kiwify.com.br" target="_blank" class="checkout-channel-btn kiwify">
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(2, 1fr);
+                  gap: 0.45rem;
+                "
+              >
+                <a
+                  href="https://kiwify.com.br"
+                  target="_blank"
+                  class="checkout-channel-btn kiwify"
+                >
                   🥝 Kiwify (Checkout 1-Clique)
                 </a>
-                <a href="https://hotmart.com" target="_blank" class="checkout-channel-btn hotmart">
+                <a
+                  href="https://hotmart.com"
+                  target="_blank"
+                  class="checkout-channel-btn hotmart"
+                >
                   📦 Hotmart Pay
                 </a>
-                <a href="https://eduzz.com" target="_blank" class="checkout-channel-btn eduzz">
+                <a
+                  href="https://eduzz.com"
+                  target="_blank"
+                  class="checkout-channel-btn eduzz"
+                >
                   🎓 Eduzz Nutror
                 </a>
-                <a href="https://wa.me/5541987039711?text=Ol%C3%A1%2C%20quero%20comprar%20o%20Ponto%20de%20Virada%20diretamente!" target="_blank" class="checkout-channel-btn whatsapp">
+                <a
+                  href="https://wa.me/5541987039711?text=Ol%C3%A1%2C%20quero%20comprar%20o%20Ponto%20de%20Virada%20diretamente!"
+                  target="_blank"
+                  class="checkout-channel-btn whatsapp"
+                >
                   💬 Venda Direta WhatsApp
                 </a>
               </div>
             </div>
 
             <!-- SELOS DE SEGURANÇA E CONFIANÇA -->
-            <div class="trust-seals-wrap" style="margin-top: 0.6rem; padding-top: 0.6rem;">
+            <div
+              class="trust-seals-wrap"
+              style="margin-top: 0.6rem; padding-top: 0.6rem"
+            >
               <span class="trust-seal-item">🔒 SSL 256-bit Encrypted</span>
-              <span class="trust-seal-item">🛡️ Garantia Legal de 7 Dias (CDC Art. 49)</span>
+              <span class="trust-seal-item"
+                >🛡️ Garantia Legal de 7 Dias (CDC Art. 49)</span
+              >
               <span class="trust-seal-item">⚡ Liberação Imediata</span>
-              <span class="trust-seal-item">🔰 PRODUTO DESENVOLVIDO POR VILARINHO TECH SOLUTIONS</span>
+              <span class="trust-seal-item"
+                >🔰 PRODUTO DESENVOLVIDO POR VILARINHO TECH SOLUTIONS</span
+              >
             </div>
 
             <!-- AVISO DE POLÍTICA DE REEMBOLSO E ACESSO VITALÍCIO (CDC ART. 49) -->
-            <div style="margin-top: 0.8rem; padding: 0.6rem 0.8rem; background: rgba(0,0,0,0.02); border: 1px solid var(--line-soft); border-radius: var(--radius); font-size: 0.73rem; color: var(--ink-soft); line-height: 1.45; text-align: center;">
-              <strong>ℹ️ Política de Reembolso & Acesso Vitalício (Art. 49 do CDC):</strong><br />
-              Por se tratar de um produto digital com entrega imediata e licença vitalícia, é assegurado o direito legal de desistência e reembolso em até <strong>7 (sete) dias</strong> após a compra, conforme o Art. 49 do Código de Defesa do Consumidor. Decorrido o prazo legal de 7 dias, por se tratar de um produto de acesso definitivo sem mensalidades, não serão efetuados reembolsos adicionais.
+            <div
+              style="
+                margin-top: 0.8rem;
+                padding: 0.6rem 0.8rem;
+                background: rgba(0, 0, 0, 0.02);
+                border: 1px solid var(--line-soft);
+                border-radius: var(--radius);
+                font-size: 0.73rem;
+                color: var(--ink-soft);
+                line-height: 1.45;
+                text-align: center;
+              "
+            >
+              <strong
+                >ℹ️ Política de Reembolso & Acesso Vitalício (Art. 49 do
+                CDC):</strong
+              ><br />
+              Por se tratar de um produto digital com entrega imediata e licença
+              vitalícia, é assegurado o direito legal de desistência e reembolso
+              em até <strong>7 (sete) dias</strong> após a compra, conforme o
+              Art. 49 do Código de Defesa do Consumidor. Decorrido o prazo legal
+              de 7 dias, por se tratar de um produto de acesso definitivo sem
+              mensalidades, não serão efetuados reembolsos adicionais.
             </div>
           </div>
         </div>
@@ -1516,168 +1905,535 @@
         <!-- COLUNA 2: PORTAL DE AUTENTICAÇÃO E ATIVAÇÃO -->
         <div class="auth-card">
           <div class="auth-tabs">
-            <button type="button" class="auth-tab-btn active" data-authtab="login">Entrar (Login)</button>
-            <button type="button" class="auth-tab-btn" data-authtab="register">Criar Conta</button>
-            <button type="button" class="auth-tab-btn" data-authtab="license">Ativar Licença</button>
+            <button
+              type="button"
+              class="auth-tab-btn active"
+              data-authtab="login"
+            >
+              Entrar (Login)
+            </button>
+            <button type="button" class="auth-tab-btn" data-authtab="register">
+              Criar Conta
+            </button>
+            <button type="button" class="auth-tab-btn" data-authtab="license">
+              Ativar Licença
+            </button>
           </div>
 
           <!-- ABA LOGIN -->
           <div class="auth-form-step active" id="auth-step-login">
-            <h3 style="margin-bottom: 0.3em;">Acessar Minha Conta</h3>
-            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 1rem;">
-              Entre com seu e-mail e senha cadastrados para liberar seu aplicativo.
+            <h3 style="margin-bottom: 0.3em">Acessar Minha Conta</h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: var(--ink-soft);
+                margin-bottom: 1rem;
+              "
+            >
+              Entre com seu e-mail e senha cadastrados para liberar seu
+              aplicativo.
             </p>
 
             <form id="form-login">
-              <div style="margin-bottom: 0.8rem;">
+              <div style="margin-bottom: 0.8rem">
                 <label for="l-email">E-mail</label>
-                <input type="email" id="l-email" required placeholder="seuemail@exemplo.com" />
+                <input
+                  type="email"
+                  id="l-email"
+                  required
+                  placeholder="seuemail@exemplo.com"
+                />
               </div>
-              <div style="margin-bottom: 0.9rem;">
+              <div style="margin-bottom: 0.9rem">
                 <label for="l-password">Senha</label>
-                <input type="password" id="l-password" required placeholder="••••••••" />
+                <input
+                  type="password"
+                  id="l-password"
+                  required
+                  placeholder="••••••••"
+                />
               </div>
-              <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
-                <label style="display: flex; align-items: center; gap: 0.4em; cursor: pointer; margin: 0; font-size: 0.8rem;">
-                  <input type="checkbox" id="l-remember" style="width: auto;" checked /> Lembrar de mim
+              <div
+                style="
+                  margin-bottom: 1rem;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  font-size: 0.8rem;
+                "
+              >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.4em;
+                    cursor: pointer;
+                    margin: 0;
+                    font-size: 0.8rem;
+                  "
+                >
+                  <input
+                    type="checkbox"
+                    id="l-remember"
+                    style="width: auto"
+                    checked
+                  />
+                  Lembrar de mim
                 </label>
-                <a onclick="alert('Se esqueceu sua senha, crie uma nova conta com seu e-mail ou utilize a aba Ativar Licença com sua chave de compra.')" style="cursor: pointer; text-decoration: underline;">Esqueceu a senha?</a>
+                <a
+                  onclick="
+                    alert(
+                      'Se esqueceu sua senha, crie uma nova conta com seu e-mail ou utilize a aba Ativar Licença com sua chave de compra.',
+                    )
+                  "
+                  style="cursor: pointer; text-decoration: underline"
+                  >Esqueceu a senha?</a
+                >
               </div>
-              <button type="submit" class="btn btn-shine" style="width: 100%; justify-content: center; padding: 0.75em; font-weight: 700;">
+              <button
+                type="submit"
+                class="btn btn-shine"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  padding: 0.75em;
+                  font-weight: 700;
+                "
+              >
                 🔑 Entrar no Aplicativo
               </button>
             </form>
-            <div id="login-error-msg" style="margin-top: 0.8rem;"></div>
+            <div id="login-error-msg" style="margin-top: 0.8rem"></div>
           </div>
 
           <!-- ABA CRIAR CONTA -->
           <div class="auth-form-step" id="auth-step-register">
-            <h3 style="margin-bottom: 0.3em;">Criar Nova Conta</h3>
-            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 1rem;">
+            <h3 style="margin-bottom: 0.3em">Criar Nova Conta</h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: var(--ink-soft);
+                margin-bottom: 1rem;
+              "
+            >
               Crie seu acesso pessoal com isolamento total de dados por conta.
             </p>
 
             <form id="form-register">
-              <div style="margin-bottom: 0.7rem;">
+              <div style="margin-bottom: 0.7rem">
                 <label for="r-name">Nome Completo</label>
-                <input type="text" id="r-name" required placeholder="Seu nome" />
+                <input
+                  type="text"
+                  id="r-name"
+                  required
+                  placeholder="Seu nome"
+                />
               </div>
-              <div style="margin-bottom: 0.7rem;">
+              <div style="margin-bottom: 0.7rem">
                 <label for="r-email">E-mail</label>
-                <input type="email" id="r-email" required placeholder="seuemail@exemplo.com" />
+                <input
+                  type="email"
+                  id="r-email"
+                  required
+                  placeholder="seuemail@exemplo.com"
+                />
               </div>
-              <div style="margin-bottom: 0.8rem;">
+              <div style="margin-bottom: 0.8rem">
                 <label for="r-password">Criar Senha</label>
-                <input type="password" id="r-password" required minlength="4" placeholder="Mínimo 4 caracteres" />
+                <input
+                  type="password"
+                  id="r-password"
+                  required
+                  minlength="4"
+                  placeholder="Mínimo 4 caracteres"
+                />
               </div>
-              <div style="margin-bottom: 0.9rem; font-size: 0.78rem;">
-                <label style="display: flex; align-items: flex-start; gap: 0.4em; cursor: pointer; font-size: 0.78rem; line-height: 1.3;">
-                  <input type="checkbox" id="r-terms" required style="width: auto; margin-top: 0.15em;" />
-                  <span>Li e concordo com os <a onclick="openTermsModal()" style="text-decoration: underline; cursor: pointer;">Termos de Uso e Política de Privacidade (LGPD)</a>.</span>
+              <div style="margin-bottom: 0.9rem; font-size: 0.78rem">
+                <label
+                  style="
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.4em;
+                    cursor: pointer;
+                    font-size: 0.78rem;
+                    line-height: 1.3;
+                  "
+                >
+                  <input
+                    type="checkbox"
+                    id="r-terms"
+                    required
+                    style="width: auto; margin-top: 0.15em"
+                  />
+                  <span
+                    >Li e concordo com os
+                    <a
+                      onclick="openTermsModal()"
+                      style="text-decoration: underline; cursor: pointer"
+                      >Termos de Uso e Política de Privacidade (LGPD)</a
+                    >.</span
+                  >
                 </label>
               </div>
-              <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 0.7em;">
+              <button
+                type="submit"
+                class="btn"
+                style="width: 100%; justify-content: center; padding: 0.7em"
+              >
                 ✨ Criar Conta & Acessar
               </button>
             </form>
-            <div id="register-error-msg" style="margin-top: 0.8rem;"></div>
+            <div id="register-error-msg" style="margin-top: 0.8rem"></div>
           </div>
 
           <!-- ABA ATIVAR LICENÇA -->
           <div class="auth-form-step" id="auth-step-license">
-            <h3 style="margin-bottom: 0.3em;">Ativar Licença de Compra</h3>
-            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 1rem;">
-              Comprou em uma plataforma digital? Insira seu e-mail e chave para liberar o acesso imediato.
+            <h3 style="margin-bottom: 0.3em">Ativar Licença de Compra</h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: var(--ink-soft);
+                margin-bottom: 1rem;
+              "
+            >
+              Comprou em uma plataforma digital? Insira seu e-mail e chave para
+              liberar o acesso imediato.
             </p>
 
             <form id="form-license">
-              <div style="margin-bottom: 0.7rem;">
+              <div style="margin-bottom: 0.7rem">
                 <label for="lic-email">E-mail cadastrado na Compra</label>
-                <input type="email" id="lic-email" required placeholder="seuemail@exemplo.com" />
+                <input
+                  type="email"
+                  id="lic-email"
+                  required
+                  placeholder="seuemail@exemplo.com"
+                />
               </div>
-              <div style="margin-bottom: 0.9rem;">
-                <label for="lic-key">Chave da Licença ou Código da Transação</label>
-                <input type="text" id="lic-key" required placeholder="Ex.: PV-2026-PREMIUM" />
+              <div style="margin-bottom: 0.9rem">
+                <label for="lic-key"
+                  >Chave da Licença ou Código da Transação</label
+                >
+                <input
+                  type="text"
+                  id="lic-key"
+                  required
+                  placeholder="Ex.: PV-2026-PREMIUM"
+                />
               </div>
-              <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 0.7em; background: var(--success); border-color: var(--success);">
+              <button
+                type="submit"
+                class="btn"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  padding: 0.7em;
+                  background: var(--success);
+                  border-color: var(--success);
+                "
+              >
                 ✅ Ativar Licença Premium
               </button>
             </form>
-            <div id="license-msg" style="margin-top: 0.8rem;"></div>
+            <div id="license-msg" style="margin-top: 0.8rem"></div>
           </div>
         </div>
       </div>
 
       <!-- SEÇÃO SHOWCASE: SIMULADOR DE USABILIDADE DA VISÃO INTERNA DO APLICATIVO COM DADOS FICTÍCIOS -->
-      <div class="landing-showcase" style="max-width: 1140px; margin: 0 auto 2.5rem; padding: 0 1.5rem; width: 100%;">
-        <div class="sales-hero-card" style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.8rem; box-shadow: var(--shadow);">
-          <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--line-soft); padding-bottom: 0.8rem;">
+      <div
+        class="landing-showcase"
+        style="
+          max-width: 1140px;
+          margin: 0 auto 2.5rem;
+          padding: 0 1.5rem;
+          width: 100%;
+        "
+      >
+        <div
+          class="sales-hero-card"
+          style="
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+          "
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              flex-wrap: wrap;
+              gap: 1rem;
+              margin-bottom: 1.2rem;
+              border-bottom: 1px solid var(--line-soft);
+              padding-bottom: 0.8rem;
+            "
+          >
             <div>
-              <span class="eyebrow" style="color: var(--accent-ink); font-weight: 700;">SIMULADOR DE USABILIDADE</span>
-              <h2 style="margin: 0.2rem 0 0; color: var(--accent-ink);">Conheça por Dentro os Módulos do Ponto de Virada</h2>
+              <span
+                class="eyebrow"
+                style="color: var(--accent-ink); font-weight: 700"
+                >SIMULADOR DE USABILIDADE</span
+              >
+              <h2 style="margin: 0.2rem 0 0; color: var(--accent-ink)">
+                Conheça por Dentro os Módulos do Ponto de Virada
+              </h2>
             </div>
-            <span class="badge ok" style="font-size: 0.78rem; font-weight: 600;">📊 Visão Interna com Dados Fictícios de Demonstração</span>
+            <span class="badge ok" style="font-size: 0.78rem; font-weight: 600"
+              >📊 Visão Interna com Dados Fictícios de Demonstração</span
+            >
           </div>
 
           <!-- NAVEGAÇÃO DOS MÓDULOS NO SIMULADOR -->
-          <div class="sim-module-tabs" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
-            <button type="button" class="btn small sim-tab-btn active" data-simtab="balanco" onclick="switchSimTab('balanco')">
+          <div
+            class="sim-module-tabs"
+            style="
+              display: flex;
+              gap: 0.5rem;
+              flex-wrap: wrap;
+              margin-bottom: 1.2rem;
+            "
+          >
+            <button
+              type="button"
+              class="btn small sim-tab-btn active"
+              data-simtab="balanco"
+              onclick="switchSimTab('balanco')"
+            >
               📊 01. Balanço & Saúde
             </button>
-            <button type="button" class="btn small secondary sim-tab-btn" data-simtab="dividas" onclick="switchSimTab('dividas')">
+            <button
+              type="button"
+              class="btn small secondary sim-tab-btn"
+              data-simtab="dividas"
+              onclick="switchSimTab('dividas')"
+            >
               💳 02. Quita Dívidas & Atualização Diária
             </button>
-            <button type="button" class="btn small secondary sim-tab-btn" data-simtab="estrategia" onclick="switchSimTab('estrategia')">
+            <button
+              type="button"
+              class="btn small secondary sim-tab-btn"
+              data-simtab="estrategia"
+              onclick="switchSimTab('estrategia')"
+            >
               🚀 03. Simulador Avalanche
             </button>
-            <button type="button" class="btn small secondary sim-tab-btn" data-simtab="ia" onclick="switchSimTab('ia')">
+            <button
+              type="button"
+              class="btn small secondary sim-tab-btn"
+              data-simtab="ia"
+              onclick="switchSimTab('ia')"
+            >
               🤖 04. Inteligência Financeira IA
             </button>
           </div>
 
           <!-- CONTEÚDO DO SIMULADOR DA VISÃO INTERNA -->
-          <div id="sim-content-area" style="background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.2rem;">
+          <div
+            id="sim-content-area"
+            style="
+              background: var(--paper);
+              border: 1px solid var(--line);
+              border-radius: var(--radius);
+              padding: 1.2rem;
+            "
+          >
             <!-- ABA 1: BALANÇO E SAÚDE -->
             <div class="sim-view-pane active" id="sim-pane-balanco">
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-bottom: 1rem;">
-                <div class="metric" style="background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--line-soft);">
-                  <div class="label" style="font-size: 0.75rem; color: var(--ink-soft);">Total Devedor Atualizado</div>
-                  <div class="value num" id="sim-val-devido" style="font-size: 1.3rem; font-weight: 700; color: var(--debt);">R$ 12.450,00</div>
-                  <div style="font-size: 0.7rem; color: var(--warn);">⚡ Atualização Diária</div>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  gap: 0.8rem;
+                  margin-bottom: 1rem;
+                "
+              >
+                <div
+                  class="metric"
+                  style="
+                    background: #fff;
+                    padding: 0.8rem;
+                    border-radius: 4px;
+                    border: 1px solid var(--line-soft);
+                  "
+                >
+                  <div
+                    class="label"
+                    style="font-size: 0.75rem; color: var(--ink-soft)"
+                  >
+                    Total Devedor Atualizado
+                  </div>
+                  <div
+                    class="value num"
+                    id="sim-val-devido"
+                    style="
+                      font-size: 1.3rem;
+                      font-weight: 700;
+                      color: var(--debt);
+                    "
+                  >
+                    R$ 12.450,00
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--warn)">
+                    ⚡ Atualização Diária
+                  </div>
                 </div>
-                <div class="metric" style="background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--line-soft);">
-                  <div class="label" style="font-size: 0.75rem; color: var(--ink-soft);">Renda Mensal Líquida</div>
-                  <div class="value num" style="font-size: 1.3rem; font-weight: 700; color: var(--success);">R$ 5.200,00</div>
-                  <div style="font-size: 0.7rem; color: var(--ink-soft);">Salário + Renda Extra</div>
+                <div
+                  class="metric"
+                  style="
+                    background: #fff;
+                    padding: 0.8rem;
+                    border-radius: 4px;
+                    border: 1px solid var(--line-soft);
+                  "
+                >
+                  <div
+                    class="label"
+                    style="font-size: 0.75rem; color: var(--ink-soft)"
+                  >
+                    Renda Mensal Líquida
+                  </div>
+                  <div
+                    class="value num"
+                    style="
+                      font-size: 1.3rem;
+                      font-weight: 700;
+                      color: var(--success);
+                    "
+                  >
+                    R$ 5.200,00
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--ink-soft)">
+                    Salário + Renda Extra
+                  </div>
                 </div>
-                <div class="metric" style="background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--line-soft);">
-                  <div class="label" style="font-size: 0.75rem; color: var(--ink-soft);">Gastos Essenciais</div>
-                  <div class="value num" style="font-size: 1.3rem; font-weight: 700; color: var(--ink);">R$ 2.950,00</div>
-                  <div style="font-size: 0.7rem; color: var(--ink-soft);">Contas, Alimentação</div>
+                <div
+                  class="metric"
+                  style="
+                    background: #fff;
+                    padding: 0.8rem;
+                    border-radius: 4px;
+                    border: 1px solid var(--line-soft);
+                  "
+                >
+                  <div
+                    class="label"
+                    style="font-size: 0.75rem; color: var(--ink-soft)"
+                  >
+                    Gastos Essenciais
+                  </div>
+                  <div
+                    class="value num"
+                    style="
+                      font-size: 1.3rem;
+                      font-weight: 700;
+                      color: var(--ink);
+                    "
+                  >
+                    R$ 2.950,00
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--ink-soft)">
+                    Contas, Alimentação
+                  </div>
                 </div>
-                <div class="metric" style="background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--line-soft);">
-                  <div class="label" style="font-size: 0.75rem; color: var(--ink-soft);">Sobra Operacional</div>
-                  <div class="value num" id="sim-val-sobra" style="font-size: 1.3rem; font-weight: 700; color: var(--accent-ink);">R$ 1.100,00</div>
-                  <div style="font-size: 0.7rem; color: var(--success);">Disponível p/ Quitação</div>
+                <div
+                  class="metric"
+                  style="
+                    background: #fff;
+                    padding: 0.8rem;
+                    border-radius: 4px;
+                    border: 1px solid var(--line-soft);
+                  "
+                >
+                  <div
+                    class="label"
+                    style="font-size: 0.75rem; color: var(--ink-soft)"
+                  >
+                    Sobra Operacional
+                  </div>
+                  <div
+                    class="value num"
+                    id="sim-val-sobra"
+                    style="
+                      font-size: 1.3rem;
+                      font-weight: 700;
+                      color: var(--accent-ink);
+                    "
+                  >
+                    R$ 1.100,00
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--success)">
+                    Disponível p/ Quitação
+                  </div>
                 </div>
               </div>
 
-              <div style="background: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--line-soft); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+              <div
+                style="
+                  background: #fff;
+                  padding: 1rem;
+                  border-radius: 4px;
+                  border: 1px solid var(--line-soft);
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  flex-wrap: wrap;
+                  gap: 1rem;
+                "
+              >
                 <div>
-                  <h4 style="margin: 0; color: var(--accent-ink);">Score de Saúde Financeira: 82 / 100</h4>
-                  <p style="margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--ink-soft);">Situação sob controle. 21.1% da renda alocada em dívidas ativas.</p>
+                  <h4 style="margin: 0; color: var(--accent-ink)">
+                    Score de Saúde Financeira: 82 / 100
+                  </h4>
+                  <p
+                    style="
+                      margin: 0.2rem 0 0;
+                      font-size: 0.82rem;
+                      color: var(--ink-soft);
+                    "
+                  >
+                    Situação sob controle. 21.1% da renda alocada em dívidas
+                    ativas.
+                  </p>
                 </div>
-                <span class="badge ok" style="font-size: 0.85rem; padding: 0.4em 0.8em;">🟢 Nível Seguro</span>
+                <span
+                  class="badge ok"
+                  style="font-size: 0.85rem; padding: 0.4em 0.8em"
+                  >🟢 Nível Seguro</span
+                >
               </div>
             </div>
 
             <!-- ABA 2: QUITA DÍVIDAS COM ATUALIZAÇÃO DIÁRIA E STATUS -->
-            <div class="sim-view-pane" id="sim-pane-dividas" style="display: none;">
-              <p style="font-size: 0.85rem; margin-bottom: 0.8rem; color: var(--ink-soft);">
-                <strong>Simulador de Usabilidade:</strong> Altere o status das dívidas fictícias abaixo para testar a atualização automática nos valores!
+            <div
+              class="sim-view-pane"
+              id="sim-pane-dividas"
+              style="display: none"
+            >
+              <p
+                style="
+                  font-size: 0.85rem;
+                  margin-bottom: 0.8rem;
+                  color: var(--ink-soft);
+                "
+              >
+                <strong>Simulador de Usabilidade:</strong> Altere o status das
+                dívidas fictícias abaixo para testar a atualização automática
+                nos valores!
               </p>
 
-              <div class="table-wrap" style="background: #fff; border-radius: 4px; border: 1px solid var(--line-soft); overflow-x: auto;">
+              <div
+                class="table-wrap"
+                style="
+                  background: #fff;
+                  border-radius: 4px;
+                  border: 1px solid var(--line-soft);
+                  overflow-x: auto;
+                "
+              >
                 <table>
                   <thead>
                     <tr>
@@ -1696,10 +2452,20 @@
                       <td>Cartão de crédito</td>
                       <td class="num">R$ 3.800,00</td>
                       <td class="num">R$ 450,00</td>
-                      <td class="num"><strong style="color: var(--debt);">R$ 3.818,24</strong></td>
+                      <td class="num">
+                        <strong style="color: var(--debt)">R$ 3.818,24</strong>
+                      </td>
                       <td class="num">14,5%</td>
                       <td>
-                        <select onchange="updateSimData()" class="sim-status-select" style="padding: 0.2em; font-size: 0.78rem; font-weight: 600;">
+                        <select
+                          onchange="updateSimData()"
+                          class="sim-status-select"
+                          style="
+                            padding: 0.2em;
+                            font-size: 0.78rem;
+                            font-weight: 600;
+                          "
+                        >
                           <option value="3818.24" selected>🟢 Em Dia</option>
                           <option value="3818.24">🟡 Pendente</option>
                           <option value="3818.24">🔴 Em Atraso</option>
@@ -1712,10 +2478,20 @@
                       <td>Cheque especial</td>
                       <td class="num">R$ 1.200,00</td>
                       <td class="num">R$ 180,00</td>
-                      <td class="num"><strong style="color: var(--debt);">R$ 1.205,12</strong></td>
+                      <td class="num">
+                        <strong style="color: var(--debt)">R$ 1.205,12</strong>
+                      </td>
                       <td class="num">12,8%</td>
                       <td>
-                        <select onchange="updateSimData()" class="sim-status-select" style="padding: 0.2em; font-size: 0.78rem; font-weight: 600;">
+                        <select
+                          onchange="updateSimData()"
+                          class="sim-status-select"
+                          style="
+                            padding: 0.2em;
+                            font-size: 0.78rem;
+                            font-weight: 600;
+                          "
+                        >
                           <option value="1205.12">🟢 Em Dia</option>
                           <option value="1205.12">🟡 Pendente</option>
                           <option value="1205.12" selected>🔴 Em Atraso</option>
@@ -1724,14 +2500,26 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><strong>Caixa — Financiamento Imobiliário</strong></td>
+                      <td>
+                        <strong>Caixa — Financiamento Imobiliário</strong>
+                      </td>
                       <td>Financiamento</td>
                       <td class="num">R$ 7.450,00</td>
                       <td class="num">R$ 520,00</td>
-                      <td class="num"><strong style="color: var(--debt);">R$ 7.452,10</strong></td>
+                      <td class="num">
+                        <strong style="color: var(--debt)">R$ 7.452,10</strong>
+                      </td>
                       <td class="num">0,8%</td>
                       <td>
-                        <select onchange="updateSimData()" class="sim-status-select" style="padding: 0.2em; font-size: 0.78rem; font-weight: 600;">
+                        <select
+                          onchange="updateSimData()"
+                          class="sim-status-select"
+                          style="
+                            padding: 0.2em;
+                            font-size: 0.78rem;
+                            font-weight: 600;
+                          "
+                        >
                           <option value="7452.10" selected>🟢 Em Dia</option>
                           <option value="7452.10">🟡 Pendente</option>
                           <option value="7452.10">🔴 Em Atraso</option>
@@ -1745,40 +2533,138 @@
             </div>
 
             <!-- ABA 3: SIMULADOR AVALANCHE -->
-            <div class="sim-view-pane" id="sim-pane-estrategia" style="display: none;">
-              <div style="background: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--line-soft);">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem;">
-                  <h4 style="margin: 0; color: var(--accent-ink);">Estratégia Recomendada: Método Avalanche</h4>
-                  <span class="badge ok" style="font-size: 0.75rem;">⚡ Menor Custo de Juros</span>
+            <div
+              class="sim-view-pane"
+              id="sim-pane-estrategia"
+              style="display: none"
+            >
+              <div
+                style="
+                  background: #fff;
+                  padding: 1rem;
+                  border-radius: 4px;
+                  border: 1px solid var(--line-soft);
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    margin-bottom: 0.8rem;
+                  "
+                >
+                  <h4 style="margin: 0; color: var(--accent-ink)">
+                    Estratégia Recomendada: Método Avalanche
+                  </h4>
+                  <span class="badge ok" style="font-size: 0.75rem"
+                    >⚡ Menor Custo de Juros</span
+                  >
                 </div>
-                <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 1rem;">
-                  A IA prioriza quitar primeiro o <strong>Nubank Cartão (14.5% a.m.)</strong> para estancar o juro mais caro, eliminando as dívidas em apenas <strong>11 meses</strong>.
+                <p
+                  style="
+                    font-size: 0.85rem;
+                    color: var(--ink-soft);
+                    margin-bottom: 1rem;
+                  "
+                >
+                  A IA prioriza quitar primeiro o
+                  <strong>Nubank Cartão (14.5% a.m.)</strong> para estancar o
+                  juro mais caro, eliminando as dívidas em apenas
+                  <strong>11 meses</strong>.
                 </p>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                  <div style="flex: 1; min-width: 200px; background: var(--success-soft); padding: 0.8rem; border-radius: 4px; border-left: 4px solid var(--success);">
-                    <div style="font-size: 0.75rem; color: var(--ink-soft);">Economia estimada em juros</div>
-                    <strong style="font-size: 1.2rem; color: var(--success);">R$ 3.840,00 economizados</strong>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+                  <div
+                    style="
+                      flex: 1;
+                      min-width: 200px;
+                      background: var(--success-soft);
+                      padding: 0.8rem;
+                      border-radius: 4px;
+                      border-left: 4px solid var(--success);
+                    "
+                  >
+                    <div style="font-size: 0.75rem; color: var(--ink-soft)">
+                      Economia estimada em juros
+                    </div>
+                    <strong style="font-size: 1.2rem; color: var(--success)"
+                      >R$ 3.840,00 economizados</strong
+                    >
                   </div>
-                  <div style="flex: 1; min-width: 200px; background: var(--accent-soft); padding: 0.8rem; border-radius: 4px; border-left: 4px solid var(--accent);">
-                    <div style="font-size: 0.75rem; color: var(--ink-soft);">Tempo até Dívida Zero</div>
-                    <strong style="font-size: 1.2rem; color: var(--accent-ink);">11 Meses (Quitação Acelerada)</strong>
+                  <div
+                    style="
+                      flex: 1;
+                      min-width: 200px;
+                      background: var(--accent-soft);
+                      padding: 0.8rem;
+                      border-radius: 4px;
+                      border-left: 4px solid var(--accent);
+                    "
+                  >
+                    <div style="font-size: 0.75rem; color: var(--ink-soft)">
+                      Tempo até Dívida Zero
+                    </div>
+                    <strong style="font-size: 1.2rem; color: var(--accent-ink)"
+                      >11 Meses (Quitação Acelerada)</strong
+                    >
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- ABA 4: DIAGNÓSTICO IA -->
-            <div class="sim-view-pane" id="sim-pane-ia" style="display: none;">
-              <div class="ai-insight-card warning" style="margin: 0; padding: 1rem; border-left: 4px solid var(--warn); background: #faf6eb; border-radius: 4px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-                  <h4 style="margin: 0; font-size: 0.95rem; color: var(--ink); font-weight: 700;">🤖 Parecer da Inteligência Financeira</h4>
-                  <span class="badge warn" style="font-size: 0.7rem;">Alerta Prioritário</span>
+            <div class="sim-view-pane" id="sim-pane-ia" style="display: none">
+              <div
+                class="ai-insight-card warning"
+                style="
+                  margin: 0;
+                  padding: 1rem;
+                  border-left: 4px solid var(--warn);
+                  background: #faf6eb;
+                  border-radius: 4px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 0.4rem;
+                  "
+                >
+                  <h4
+                    style="
+                      margin: 0;
+                      font-size: 0.95rem;
+                      color: var(--ink);
+                      font-weight: 700;
+                    "
+                  >
+                    🤖 Parecer da Inteligência Financeira
+                  </h4>
+                  <span class="badge warn" style="font-size: 0.7rem"
+                    >Alerta Prioritário</span
+                  >
                 </div>
-                <p style="font-size: 0.85rem; color: var(--ink); margin: 0 0 0.5rem 0;">
-                  "Atenção com o Cartão Nubank! Ele representa 74% de todo o seu custo de juros mensal. Destine R$ 300,00 adicionais da sua sobra para estancar esse ralo de dinheiro."
+                <p
+                  style="
+                    font-size: 0.85rem;
+                    color: var(--ink);
+                    margin: 0 0 0.5rem 0;
+                  "
+                >
+                  "Atenção com o Cartão Nubank! Ele representa 74% de todo o seu
+                  custo de juros mensal. Destine R$ 300,00 adicionais da sua
+                  sobra para estancar esse ralo de dinheiro."
                 </p>
-                <div style="font-size: 0.75rem; color: var(--ink-soft);">
-                  💡 <em>Dica de Renda Extra identificada: Faça vendas de itens usados para levantar R$ 500,00 nos próximos 5 dias.</em>
+                <div style="font-size: 0.75rem; color: var(--ink-soft)">
+                  💡
+                  <em
+                    >Dica de Renda Extra identificada: Faça vendas de itens
+                    usados para levantar R$ 500,00 nos próximos 5 dias.</em
+                  >
                 </div>
               </div>
             </div>
@@ -1788,18 +2674,42 @@
 
       <footer class="landing-footer">
         Ponto de Virada® — Plataforma de Inteligência Financeira Pessoal.<br />
-        Um produto oficial da <strong>VILARINHO TECH SOLUTIONS</strong>. Todos os direitos reservados.<br />
-        <a onclick="openTermsModal()">Termos de Uso</a> · <a onclick="openTermsModal()">Política de Privacidade & LGPD</a> · Proteção e Privacidade Total.
+        Um produto oficial da <strong>VILARINHO TECH SOLUTIONS</strong>. Todos
+        os direitos reservados.<br />
+        <a onclick="openTermsModal()">Termos de Uso</a> ·
+        <a onclick="openTermsModal()">Política de Privacidade & LGPD</a> ·
+        Proteção e Privacidade Total.
       </footer>
     </div>
 
     <!-- HEADER MOBILE (Exibido apenas quando logado) -->
-    <header class="mobile-header" id="app-mobile-header" style="display: none;">
-      <div class="brand-mark" style="display: flex; align-items: center; gap: 0.4em;">
-        <svg viewBox="0 0 32 32" width="22" height="22" fill="none" style="flex: none;">
-          <rect width="32" height="32" rx="6" fill="#2A724E"/>
-          <path d="M8 22L14 15L18 19L24 10" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M19 10H24V15" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <header class="mobile-header" id="app-mobile-header" style="display: none">
+      <div
+        class="brand-mark"
+        style="display: flex; align-items: center; gap: 0.4em"
+      >
+        <svg
+          viewBox="0 0 32 32"
+          width="22"
+          height="22"
+          fill="none"
+          style="flex: none"
+        >
+          <rect width="32" height="32" rx="6" fill="#2A724E" />
+          <path
+            d="M8 22L14 15L18 19L24 10"
+            stroke="#8FC6A9"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M19 10H24V15"
+            stroke="#8FC6A9"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
         <span>Ponto de Virada</span>
       </div>
@@ -1832,23 +2742,44 @@
           class="btn danger small"
           onclick="userLogout()"
           title="Sair da Conta"
-          style="padding: 0.3em 0.5em;"
+          style="padding: 0.3em 0.5em"
         >
           🔒 Sair
         </button>
       </div>
     </header>
 
-    <div class="shell" id="app-main-shell" style="display: none;">
+    <div class="shell" id="app-main-shell" style="display: none">
       <!-- SIDEBAR DESKTOP -->
       <aside class="rail">
         <div class="brand">
-          <div class="mark" style="display: flex; align-items: center; gap: 0.4em;">
-            <svg viewBox="0 0 32 32" width="28" height="28" fill="none" style="flex: none;">
-              <rect width="32" height="32" rx="7" fill="#2A724E"/>
-              <path d="M8 22L14 15L18 19L24 10" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M19 10H24V15" stroke="#8FC6A9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="24" cy="10" r="2" fill="#8FC6A9"/>
+          <div
+            class="mark"
+            style="display: flex; align-items: center; gap: 0.4em"
+          >
+            <svg
+              viewBox="0 0 32 32"
+              width="28"
+              height="28"
+              fill="none"
+              style="flex: none"
+            >
+              <rect width="32" height="32" rx="7" fill="#2A724E" />
+              <path
+                d="M8 22L14 15L18 19L24 10"
+                stroke="#8FC6A9"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M19 10H24V15"
+                stroke="#8FC6A9"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <circle cx="24" cy="10" r="2" fill="#8FC6A9" />
             </svg>
             <span>Ponto de Virada</span>
           </div>
@@ -1877,11 +2808,34 @@
           </button>
         </nav>
         <div class="rail-foot">
-          <div id="user-session-info" style="margin-bottom: 0.8rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.15);">
-            <div style="font-size: 0.7rem; color: #8AA394;">Conta Conectada:</div>
-            <strong id="user-display-email" style="font-size: 0.78rem; word-break: break-all; color: #FFFFFF;">usuario@email.com</strong>
-            <div style="margin-top: 0.4rem;">
-              <button type="button" class="btn secondary small" onclick="userLogout()" style="width: 100%; justify-content: center; font-size: 0.72rem; padding: 0.3em 0.5em;">
+          <div
+            id="user-session-info"
+            style="
+              margin-bottom: 0.8rem;
+              padding-bottom: 0.6rem;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            "
+          >
+            <div style="font-size: 0.7rem; color: #8aa394">
+              Conta Conectada:
+            </div>
+            <strong
+              id="user-display-email"
+              style="font-size: 0.78rem; word-break: break-all; color: #ffffff"
+              >usuario@email.com</strong
+            >
+            <div style="margin-top: 0.4rem">
+              <button
+                type="button"
+                class="btn secondary small"
+                onclick="userLogout()"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  font-size: 0.72rem;
+                  padding: 0.3em 0.5em;
+                "
+              >
                 🔒 Sair / Logout
               </button>
             </div>
@@ -1914,7 +2868,12 @@
               type="button"
               class="btn secondary small"
               onclick="openTermsModal()"
-              style="width: 100%; justify-content: center; margin-top: 0.4em; font-size: 0.74rem;"
+              style="
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.4em;
+                font-size: 0.74rem;
+              "
             >
               📜 Termos & Privacidade
             </button>
@@ -2135,16 +3094,13 @@
                   />
                 </div>
                 <div>
-                  <label for="d-parcela">Valor no Vencimento / Parcela (R$)</label>
+                  <label for="d-parcela"
+                    >Valor no Vencimento / Parcela (R$)</label
+                  >
                   <input
                     id="d-parcela"
                     type="number"
                     min="0"
-                    step="0.01"
-                    required
-                    placeholder="0,00"
-                  />
-                </div>
                     step="0.01"
                     required
                     placeholder="0,00"
@@ -2843,7 +3799,7 @@ SELECT * FROM dividas;</textarea
     </div>
 
     <!-- NAVEGAÇÃO MOBILE FIXA INFERIOR -->
-    <nav class="mobile-nav" id="app-mobile-nav" style="display: none;">
+    <nav class="mobile-nav" id="app-mobile-nav" style="display: none">
       <div class="mobile-nav-inner" id="nav-mobile">
         <button class="mobile-nav-item active" data-view="dashboard">
           <svg viewBox="0 0 24 24">
@@ -2899,7 +3855,7 @@ SELECT * FROM dividas;</textarea
 
     <!-- MODAL DE TERMOS DE USO E POLÍTICA DE PRIVACIDADE (LGPD) -->
     <div class="modal-overlay" id="modal-terms-privacy">
-      <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-card" style="max-width: 650px">
         <div class="panel-head" style="margin-bottom: 0.8rem">
           <h3 style="margin: 0; color: var(--accent-ink)">
             Termos de Uso e Política de Privacidade (LGPD)
@@ -2914,30 +3870,62 @@ SELECT * FROM dividas;</textarea
           </button>
         </div>
 
-        <div style="font-size: 0.85rem; line-height: 1.6; color: var(--ink);">
-          <h4 style="margin-bottom: 0.3em; font-weight: 600;">1. Aceitação dos Termos</h4>
-          <p style="margin-bottom: 0.8em;">
-            Ao utilizar a plataforma <strong>Ponto de Virada</strong>, você concorda com os presentes Termos de Uso e Política de Privacidade. O aplicativo destina-se ao gerenciamento de finanças pessoais, planejamento de saída de dívidas e recomendações de renda extra com suporte de inteligência artificial.
+        <div style="font-size: 0.85rem; line-height: 1.6; color: var(--ink)">
+          <h4 style="margin-bottom: 0.3em; font-weight: 600">
+            1. Aceitação dos Termos
+          </h4>
+          <p style="margin-bottom: 0.8em">
+            Ao utilizar a plataforma <strong>Ponto de Virada</strong>, você
+            concorda com os presentes Termos de Uso e Política de Privacidade. O
+            aplicativo destina-se ao gerenciamento de finanças pessoais,
+            planejamento de saída de dívidas e recomendações de renda extra com
+            suporte de inteligência artificial.
           </p>
 
-          <h4 style="margin-bottom: 0.3em; font-weight: 600;">2. Privacidade e Proteção de Dados (LGPD - Lei nº 13.709/2018)</h4>
-          <p style="margin-bottom: 0.5em;">
-            O <strong>Ponto de Virada</strong> adota a arquitetura de <em>Privacidade por Design (Privacy by Design)</em> e <em>Zero-Server Financial Storage</em>:
+          <h4 style="margin-bottom: 0.3em; font-weight: 600">
+            2. Privacidade e Proteção de Dados (LGPD - Lei nº 13.709/2018)
+          </h4>
+          <p style="margin-bottom: 0.5em">
+            O <strong>Ponto de Virada</strong> adota a arquitetura de
+            <em>Privacidade por Design (Privacy by Design)</em> e
+            <em>Zero-Server Financial Storage</em>:
           </p>
-          <ul style="padding-left: 1.2rem; margin-bottom: 0.8em;">
-            <li style="margin-bottom: 0.3em;"><strong>Isolamento Físico de Usuário:</strong> Cada conta possui um banco de dados SQLite individual. Seus lançamentos e dívidas ficam salvos localmente na memória protegida do navegador sob o seu perfil.</li>
-            <li style="margin-bottom: 0.3em;"><strong>Zero Vazamento de Dados:</strong> Nenhuma outra pessoa no mesmo computador ou celular consegue visualizar seus lançamentos, nem há cruzamento de dados entre usuários.</li>
-            <li style="margin-bottom: 0.3em;"><strong>Sem Transmissão para Servidores Externos:</strong> Nenhum dado bancário, valor de dívida ou holerite é enviado para nuvem. Tudo roda localmente no seu dispositivo.</li>
+          <ul style="padding-left: 1.2rem; margin-bottom: 0.8em">
+            <li style="margin-bottom: 0.3em">
+              <strong>Isolamento Físico de Usuário:</strong> Cada conta possui
+              um banco de dados SQLite individual. Seus lançamentos e dívidas
+              ficam salvos localmente na memória protegida do navegador sob o
+              seu perfil.
+            </li>
+            <li style="margin-bottom: 0.3em">
+              <strong>Zero Vazamento de Dados:</strong> Nenhuma outra pessoa no
+              mesmo computador ou celular consegue visualizar seus lançamentos,
+              nem há cruzamento de dados entre usuários.
+            </li>
+            <li style="margin-bottom: 0.3em">
+              <strong>Sem Transmissão para Servidores Externos:</strong> Nenhum
+              dado bancário, valor de dívida ou holerite é enviado para nuvem.
+              Tudo roda localmente no seu dispositivo.
+            </li>
           </ul>
 
-          <h4 style="margin-bottom: 0.3em; font-weight: 600;">3. Licença de Uso e Produto Digital</h4>
-          <p style="margin-bottom: 0.8em;">
-            A licença adquirida nas plataformas parceiras (ex.: Kiwify, Hotmart, Eduzz) é pessoal, intransferível e válida para uso individual na edição Ponto de Virada Premium.
+          <h4 style="margin-bottom: 0.3em; font-weight: 600">
+            3. Licença de Uso e Produto Digital
+          </h4>
+          <p style="margin-bottom: 0.8em">
+            A licença adquirida nas plataformas parceiras (ex.: Kiwify, Hotmart,
+            Eduzz) é pessoal, intransferível e válida para uso individual na
+            edição Ponto de Virada Premium.
           </p>
 
-          <h4 style="margin-bottom: 0.3em; font-weight: 600;">4. Isenção de Responsabilidade</h4>
-          <p style="margin-bottom: 0.8em;">
-            As simulações (Avalanche e Bola de Neve), diagnósticos da IA e roteiros de negociação legal (Lei 14.181/2021) possuem propósito estritamente educacional e de suporte à tomada de decisão financeira pessoal.
+          <h4 style="margin-bottom: 0.3em; font-weight: 600">
+            4. Isenção de Responsabilidade
+          </h4>
+          <p style="margin-bottom: 0.8em">
+            As simulações (Avalanche e Bola de Neve), diagnósticos da IA e
+            roteiros de negociação legal (Lei 14.181/2021) possuem propósito
+            estritamente educacional e de suporte à tomada de decisão financeira
+            pessoal.
           </p>
         </div>
 
@@ -3230,11 +4218,20 @@ SELECT * FROM dividas;</textarea
             b.classList.toggle("active", b.dataset.authtab === targetTab);
           });
           document.querySelectorAll(".auth-form-step").forEach((step) => {
-            step.classList.toggle("active", step.id === "auth-step-" + targetTab);
+            step.classList.toggle(
+              "active",
+              step.id === "auth-step-" + targetTab,
+            );
           });
         });
 
-        function exportSvgToCanvasImage(svgString, width, height, format, fileName) {
+        function exportSvgToCanvasImage(
+          svgString,
+          width,
+          height,
+          format,
+          fileName,
+        ) {
           const img = new Image();
           const svgBlob = new Blob([svgString], {
             type: "image/svg+xml;charset=utf-8",
@@ -3255,7 +4252,10 @@ SELECT * FROM dividas;</textarea
             ctx.drawImage(img, 0, 0, width, height);
             URL.revokeObjectURL(url);
 
-            const mimeType = (format === "jpg" || format === "jpeg") ? "image/jpeg" : "image/png";
+            const mimeType =
+              format === "jpg" || format === "jpeg"
+                ? "image/jpeg"
+                : "image/png";
             const dataUrl = canvas.toDataURL(mimeType, 0.95);
 
             const a = document.createElement("a");
@@ -3273,7 +4273,8 @@ SELECT * FROM dividas;</textarea
         }
 
         window.downloadProductCover = function (format) {
-          const imgFormat = (format === "jpg" || format === "jpeg") ? "jpg" : "png";
+          const imgFormat =
+            format === "jpg" || format === "jpeg" ? "jpg" : "png";
           const fileName = `ponto-de-virada-capa-300x250.${imgFormat}`;
           const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
     <defs>
@@ -3320,7 +4321,8 @@ SELECT * FROM dividas;</textarea
         };
 
         window.downloadOfferCard = function (format) {
-          const imgFormat = (format === "jpg" || format === "jpeg") ? "jpg" : "png";
+          const imgFormat =
+            format === "jpg" || format === "jpeg" ? "jpg" : "png";
           const fileName = `ponto-de-virada-card-oferta-300x250.${imgFormat}`;
           const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
     <defs>
@@ -3561,7 +4563,8 @@ SELECT * FROM dividas;</textarea
             activeUser = null;
             clearActiveSessionUser();
 
-            const authLandingView = document.getElementById("view-auth-landing");
+            const authLandingView =
+              document.getElementById("view-auth-landing");
             const mainShell = document.getElementById("app-main-shell");
             const mobileHeader = document.getElementById("app-mobile-header");
             const mobileNav = document.getElementById("app-mobile-nav");
@@ -3578,7 +4581,8 @@ SELECT * FROM dividas;</textarea
           if (sessionUser) {
             loginUserSuccess(sessionUser, true);
           } else {
-            const authLandingView = document.getElementById("view-auth-landing");
+            const authLandingView =
+              document.getElementById("view-auth-landing");
             const mainShell = document.getElementById("app-main-shell");
             const mobileHeader = document.getElementById("app-mobile-header");
             const mobileNav = document.getElementById("app-mobile-nav");
@@ -3700,13 +4704,17 @@ SELECT * FROM dividas;</textarea
             db.run("ALTER TABLE dividas ADD COLUMN data_vencimento TEXT;");
           } catch (e) {}
           try {
-            db.run("ALTER TABLE dividas ADD COLUMN situacao TEXT DEFAULT 'ativa';");
+            db.run(
+              "ALTER TABLE dividas ADD COLUMN situacao TEXT DEFAULT 'ativa';",
+            );
           } catch (e) {}
           try {
             db.run("ALTER TABLE movimentos ADD COLUMN data_entrada TEXT;");
           } catch (e) {}
           try {
-            db.run("ALTER TABLE movimentos ADD COLUMN situacao TEXT DEFAULT 'confirmado';");
+            db.run(
+              "ALTER TABLE movimentos ADD COLUMN situacao TEXT DEFAULT 'confirmado';",
+            );
           } catch (e) {}
           salvar();
           renderAll();
@@ -4254,8 +5262,7 @@ SELECT * FROM dividas;</textarea
             0,
           );
 
-          resumo.textContent =
-            `${activeRows.length} dívida(s) ativa(s) · Total devedor ${fmtBRL(totalDevidoInicial)} · Valor no Vencimento ${fmtBRL(totalParcelas)}/mês`;
+          resumo.textContent = `${activeRows.length} dívida(s) ativa(s) · Total devedor ${fmtBRL(totalDevidoInicial)} · Valor no Vencimento ${fmtBRL(totalParcelas)}/mês`;
 
           let html =
             '<table><thead><tr><th>Credor</th><th>Tipo</th><th class="num">Saldo Inicial</th><th class="num">Valor no Vencimento</th><th class="num">Valor Atualizado Hoje ⚡</th><th class="num">Juros a.m.</th><th>Vencimento</th><th>Status (Controle)</th><th></th></tr></thead><tbody>';
@@ -4267,7 +5274,11 @@ SELECT * FROM dividas;</textarea
 
             // Cálculo da atualização automática diária de saldo com juros
             let valorAtualizado = r.saldo_devedor || 0;
-            if (r.saldo_devedor > 0 && r.taxa_juros_mensal > 0 && r.situacao !== "paga") {
+            if (
+              r.saldo_devedor > 0 &&
+              r.taxa_juros_mensal > 0 &&
+              r.situacao !== "paga"
+            ) {
               let dias = 1;
               if (r.criado_em) {
                 const diffMs = Date.now() - new Date(r.criado_em).getTime();
@@ -4276,7 +5287,8 @@ SELECT * FROM dividas;</textarea
                 dias = new Date().getDate();
               }
               const taxaDiaria = (r.taxa_juros_mensal || 0) / 30;
-              valorAtualizado = (r.saldo_devedor || 0) * (1 + (taxaDiaria * dias));
+              valorAtualizado =
+                (r.saldo_devedor || 0) * (1 + taxaDiaria * dias);
             }
 
             const valAtualizadoDisplay =
@@ -4457,7 +5469,8 @@ SELECT * FROM dividas;</textarea
                 dias = new Date().getDate();
               }
               const taxaDiaria = (d.taxa_juros_mensal || 0) / 30;
-              valorAtualizado = (d.saldo_devedor || 0) * (1 + (taxaDiaria * dias));
+              valorAtualizado =
+                (d.saldo_devedor || 0) * (1 + taxaDiaria * dias);
             }
             return s + valorAtualizado;
           }, 0);
