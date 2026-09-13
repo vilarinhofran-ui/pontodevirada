@@ -2898,23 +2898,58 @@
           <div id="dashboard-alerts"></div>
 
           <!-- CAIXA DE DIÁLOGO / INPUTS EM DESTAQUE PARA + LANÇAR ENTRADA OU - LANÇAR SAÍDA -->
-          <div class="panel" style="background: linear-gradient(135deg, #ffffff 0%, #f4f8f5 100%); border: 2px solid var(--accent); margin-bottom: 1.5rem; box-shadow: var(--shadow);">
-            <div class="panel-head" style="margin-bottom: 0.6rem;">
-              <h2 style="margin: 0; color: var(--accent-ink); display: flex; align-items: center; gap: 0.4em;">
+          <div
+            class="panel"
+            style="
+              background: linear-gradient(135deg, #ffffff 0%, #f4f8f5 100%);
+              border: 2px solid var(--accent);
+              margin-bottom: 1.5rem;
+              box-shadow: var(--shadow);
+            "
+          >
+            <div class="panel-head" style="margin-bottom: 0.6rem">
+              <h2
+                style="
+                  margin: 0;
+                  color: var(--accent-ink);
+                  display: flex;
+                  align-items: center;
+                  gap: 0.4em;
+                "
+              >
                 ⚡ Lançamento Rápido no Orçamento e Dívidas
               </h2>
-              <span class="badge ok" style="font-weight: 600;">Sincronização Instantânea em Todos os Módulos</span>
+              <span class="badge ok" style="font-weight: 600"
+                >Sincronização Instantânea em Todos os Módulos</span
+              >
             </div>
-            <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 1rem;">
-              Registre receitas, contas ou dívidas com praticidade e agilidade para atualizar o balanço, os gráficos e a inteligência financeira em tempo real.
+            <p
+              style="
+                font-size: 0.88rem;
+                color: var(--ink-soft);
+                margin-bottom: 1rem;
+              "
+            >
+              Registre receitas, contas ou dívidas com praticidade e agilidade
+              para atualizar o balanço, os gráficos e a inteligência financeira
+              em tempo real.
             </p>
 
-            <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+            <div style="display: flex; gap: 0.8rem; flex-wrap: wrap">
               <button
                 type="button"
                 class="btn btn-shine"
                 onclick="openQuickLancamentoModal('receita')"
-                style="background: var(--success); border-color: var(--success); font-weight: 700; padding: 0.8em 1.4em; font-size: 0.98rem; flex: 1; min-width: 220px; justify-content: center;"
+                style="
+                  background: var(--success);
+                  border-color: var(--success);
+                  font-weight: 700;
+                  padding: 0.8em 1.4em;
+                  font-size: 0.98rem;
+                  flex: 1;
+                  min-width: 220px;
+                  justify-content: center;
+                "
               >
                 🟢 + Lançar Entrada (Renda)
               </button>
@@ -2922,7 +2957,17 @@
                 type="button"
                 class="btn"
                 onclick="openQuickLancamentoModal('saida')"
-                style="background: var(--debt); border-color: var(--debt); color: #ffffff; font-weight: 700; padding: 0.8em 1.4em; font-size: 0.98rem; flex: 1; min-width: 220px; justify-content: center;"
+                style="
+                  background: var(--debt);
+                  border-color: var(--debt);
+                  color: #ffffff;
+                  font-weight: 700;
+                  padding: 0.8em 1.4em;
+                  font-size: 0.98rem;
+                  flex: 1;
+                  min-width: 220px;
+                  justify-content: center;
+                "
               >
                 🔴 - Lançar Saída / Dívida
               </button>
@@ -4037,55 +4082,235 @@ SELECT * FROM dividas;</textarea
 
     <!-- MODAL DE CAIXA DE DIÁLOGO: LANÇAMENTO RÁPIDO (+ ENTRADA / - SAÍDA) -->
     <div class="modal-overlay" id="modal-quick-lancamento">
-      <div class="modal-card" style="max-width: 500px">
-        <div class="panel-head" style="margin-bottom: 0.8rem; border-bottom: 1px solid var(--line-soft); padding-bottom: 0.6rem;">
-          <h3 id="quick-modal-title" style="margin: 0; color: var(--accent-ink)">+ Lançar Entrada ou Saída</h3>
-          <button type="button" class="btn secondary small" onclick="closeQuickLancamentoModal()">✕ Fechar</button>
+      <div class="modal-card" style="max-width: 580px">
+        <div
+          class="panel-head"
+          style="
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid var(--line-soft);
+            padding-bottom: 0.6rem;
+          "
+        >
+          <h3
+            id="quick-modal-title"
+            style="margin: 0; color: var(--accent-ink)"
+          >
+            + Lançar Entrada ou Saída
+          </h3>
+          <button
+            type="button"
+            class="btn secondary small"
+            onclick="closeQuickLancamentoModal()"
+          >
+            ✕ Fechar
+          </button>
         </div>
 
         <form id="form-quick-lancamento">
           <input type="hidden" id="q-tipo-operacao" value="receita" />
 
-          <div style="margin-bottom: 0.8rem">
-            <label for="q-categoria" id="q-label-categoria">Categoria / Credor</label>
-            <input type="text" id="q-categoria" required placeholder="Ex.: Salário, Renda Extra, Aluguel, Cartão Nubank..." />
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem">
-            <div>
-              <label for="q-valor">Valor Mensal (R$)</label>
-              <input type="number" id="q-valor" min="0.01" step="0.01" required placeholder="0,00" />
-            </div>
-            <div>
-              <label id="q-label-data" for="q-data">Data de Entrada/Vencimento</label>
-              <input type="date" id="q-data" />
-            </div>
-          </div>
-
-          <!-- Campos extras específicos quando o tipo é Saída / Dívida -->
-          <div id="q-saida-options" style="display: none; background: var(--paper); border: 1px solid var(--line-soft); border-radius: 4px; padding: 0.85rem; margin-bottom: 0.8rem;">
-            <div style="margin-bottom: 0.6rem">
-              <label for="q-subtipo-saida">Tipo de Saída</label>
-              <select id="q-subtipo-saida" onchange="toggleQuickDebtFields()">
-                <option value="despesa_essencial">Despesa Essencial (Aluguel, Luz, Mercado...)</option>
-                <option value="despesa_variavel">Despesa Variável (Lazer, Compras...)</option>
-                <option value="divida" selected>Dívida / Conta com Juros (Cartão, Empréstimo, Financiamento)</option>
+          <!-- SEÇÃO 1: FORMULÁRIO ENTRADA / RENDA (MÓDULO 03 ORÇAMENTO MENSAL) -->
+          <div id="q-section-entrada" style="display: block;">
+            <div style="margin-bottom: 0.8rem">
+              <label for="q-m-categoria">Categoria da Renda / Receita</label>
+              <select id="q-m-categoria">
+                <option value="" disabled selected>
+                  Selecione a Categoria...
+                </option>
+                <optgroup label="Entradas (Receitas)">
+                  <option value="Salário Principal">Salário Principal</option>
+                  <option value="Renda Extra">Renda Extra</option>
+                  <option value="Pró-Labore / Serviços">Pró-Labore / Serviços</option>
+                  <option value="Comissões / Vendas">Comissões / Vendas</option>
+                  <option value="Rendimentos / Outros">Rendimentos / Outros</option>
+                </optgroup>
+                <option value="Outro">Outra Categoria / Digitar Nome...</option>
               </select>
+              <input
+                type="text"
+                id="q-m-categoria-custom"
+                placeholder="Digite a descrição da renda..."
+                style="display: none; margin-top: 0.4em"
+              />
             </div>
-            <div id="q-divida-fields" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
               <div>
-                <label for="q-saldo-inicial">Saldo Devedor Inicial (R$)</label>
-                <input type="number" id="q-saldo-inicial" min="0" step="0.01" placeholder="0,00 (Opcional)" />
+                <label for="q-m-valor">Valor mensal (R$)</label>
+                <input
+                  type="number"
+                  id="q-m-valor"
+                  min="0.01"
+                  step="0.01"
+                  placeholder="0,00"
+                />
               </div>
               <div>
-                <label for="q-juros">Juros ao mês (%)</label>
-                <input type="number" id="q-juros" min="0" step="0.01" placeholder="Ex.: 12" />
+                <label for="q-m-data">Data de Entrada / Recebimento</label>
+                <input type="date" id="q-m-data" />
+              </div>
+            </div>
+          </div>
+
+          <!-- SEÇÃO 2: FORMULÁRIO SAÍDA / DÍVIDA (MÓDULO 02 MINHAS DÍVIDAS & DESPESAS) -->
+          <div id="q-section-saida" style="display: none;">
+            <div style="margin-bottom: 0.8rem; background: var(--paper); border: 1px solid var(--line-soft); padding: 0.6rem 0.8rem; border-radius: 4px;">
+              <label for="q-subtipo-saida" style="font-weight: 600; color: var(--accent-ink);">Selecione o Destino do Lançamento:</label>
+              <select id="q-subtipo-saida" onchange="toggleQuickSaidaMode()">
+                <option value="divida" selected>💳 Minhas Dívidas / Conta com Juros (Bancos, Cartões, Empréstimos)</option>
+                <option value="despesa_essencial">📌 Despesa Essencial (Aluguel, Luz, Mercado... - Orçamento)</option>
+                <option value="despesa_variavel">🛍️ Despesa Variável (Lazer, Compras... - Orçamento)</option>
+              </select>
+            </div>
+
+            <!-- SUB-FORMULÁRIO: MINHAS DÍVIDAS (MÓDULO 02) -->
+            <div id="q-subform-divida" style="display: block;">
+              <div style="margin-bottom: 0.8rem">
+                <label for="q-d-credor">Credor / Descrição</label>
+                <select id="q-d-credor">
+                  <option value="" disabled selected>
+                    Selecione o Credor / Instituição...
+                  </option>
+                  <optgroup label="Bancos & Instituições Frequentes">
+                    <option value="Nubank — Cartão de Crédito" data-taxa="14.5" data-tipo="cartao">Nubank (Cartão ~ 14.5% a.m.)</option>
+                    <option value="Itaú — Cheque Especial" data-taxa="12.8" data-tipo="cheque_especial">Itaú (Cheque Especial ~ 12.8% a.m.)</option>
+                    <option value="Bradesco — Empréstimo Pessoal" data-taxa="4.5" data-tipo="emprestimo">Bradesco (Empréstimo ~ 4.5% a.m.)</option>
+                    <option value="Banco do Brasil — Cartão / Cheque" data-taxa="11.9" data-tipo="cartao">Banco do Brasil (~ 11.9% a.m.)</option>
+                    <option value="Santander — Empréstimo" data-taxa="5.2" data-tipo="emprestimo">Santander (Empréstimo ~ 5.2% a.m.)</option>
+                    <option value="Caixa — Financiamento / Crédito" data-taxa="2.5" data-tipo="financiamento">Caixa Econômica (~ 2.5% a.m.)</option>
+                    <option value="Banco Inter — Cartão / Crédito" data-taxa="12.5" data-tipo="cartao">Banco Inter (~ 12.5% a.m.)</option>
+                    <option value="C6 Bank — Cartão Rotativo" data-taxa="13.9" data-tipo="cartao">C6 Bank (~ 13.9% a.m.)</option>
+                    <option value="Mercado Pago — Crédito Pessoal" data-taxa="15.2" data-tipo="emprestimo">Mercado Pago (~ 15.2% a.m.)</option>
+                    <option value="Carnê / Parcelamento de Loja" data-taxa="8.9" data-tipo="parcelamento">Carnê Loja / Departamentos (~ 8.9% a.m.)</option>
+                    <option value="Empréstimo Consignado" data-taxa="2.1" data-tipo="emprestimo">Empréstimo Consignado (~ 2.1% a.m.)</option>
+                    <option value="Financiamento Imobiliário" data-taxa="0.8" data-tipo="financiamento">Financiamento Imobiliário (~ 0.8% a.m.)</option>
+                    <option value="Dívida Pessoal / Amigos" data-taxa="0" data-tipo="pessoa_fisica">Dívida Pessoal / Amigos (0% a.m.)</option>
+                  </optgroup>
+                  <option value="Outro">Outro Credor / Digitar Nome...</option>
+                </select>
+                <input
+                  id="q-d-credor-custom"
+                  placeholder="Digite o nome do credor..."
+                  style="display: none; margin-top: 0.4em"
+                />
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+                <div>
+                  <label for="q-d-tipo">Tipo</label>
+                  <select id="q-d-tipo">
+                    <option value="cartao">Cartão de crédito</option>
+                    <option value="cheque_especial">Cheque especial</option>
+                    <option value="emprestimo">Empréstimo pessoal</option>
+                    <option value="financiamento">Financiamento</option>
+                    <option value="parcelamento">Parcelamento / loja</option>
+                    <option value="pessoa_fisica">Dívida com pessoa física</option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="q-d-saldo">Saldo Devedor Inicial (R$)</label>
+                  <input
+                    id="q-d-saldo"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="0,00"
+                  />
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+                <div>
+                  <label for="q-d-parcela">Valor no Vencimento / Parcela (R$)</label>
+                  <input
+                    id="q-d-parcela"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="0,00"
+                  />
+                </div>
+                <div>
+                  <label for="q-d-taxa">Juros ao mês (%)</label>
+                  <input
+                    id="q-d-taxa"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 12"
+                  />
+                </div>
+              </div>
+
+              <div style="margin-bottom: 0.8rem;">
+                <label for="q-d-data-venc">Data de Vencimento</label>
+                <input id="q-d-data-venc" type="date" />
+              </div>
+            </div>
+
+            <!-- SUB-FORMULÁRIO: DESPESA DE ORÇAMENTO (MÓDULO 03) -->
+            <div id="q-subform-despesa" style="display: none;">
+              <div style="margin-bottom: 0.8rem">
+                <label for="q-desp-categoria">Categoria da Despesa</label>
+                <select id="q-desp-categoria">
+                  <option value="" disabled selected>Selecione a Categoria...</option>
+                  <optgroup label="Despesas Essenciais">
+                    <option value="Aluguel & Condomínio">Aluguel & Condomínio</option>
+                    <option value="Supermercado & Alimentação">Supermercado & Alimentação</option>
+                    <option value="Transporte & Combustível">Transporte & Combustível</option>
+                    <option value="Farmácia & Saúde">Farmácia & Saúde</option>
+                    <option value="Contas Básicas (Água/Luz/Gás)">Contas Básicas (Água/Luz/Gás)</option>
+                    <option value="Educação & Cursos">Educação & Cursos</option>
+                  </optgroup>
+                  <optgroup label="Despesas Variáveis & Estilo de Vida">
+                    <option value="Lazer & Restaurantes">Lazer & Restaurantes</option>
+                    <option value="Internet & Celular">Internet & Celular</option>
+                    <option value="Assinaturas & Streaming">Assinaturas & Streaming</option>
+                    <option value="Compras & Vestuário">Compras & Vestuário</option>
+                    <option value="Outros Lançamentos">Outros Lançamentos</option>
+                  </optgroup>
+                  <option value="Outro">Outra Categoria / Digitar...</option>
+                </select>
+                <input
+                  type="text"
+                  id="q-desp-categoria-custom"
+                  placeholder="Digite o nome da despesa..."
+                  style="display: none; margin-top: 0.4em"
+                />
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+                <div>
+                  <label for="q-desp-valor">Valor Mensal (R$)</label>
+                  <input
+                    type="number"
+                    id="q-desp-valor"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="0,00"
+                  />
+                </div>
+                <div>
+                  <label for="q-desp-data">Data de Vencimento / Pagamento</label>
+                  <input type="date" id="q-desp-data" />
+                </div>
               </div>
             </div>
           </div>
 
           <div class="form-actions" style="margin-top: 1.2rem">
-            <button type="submit" id="q-btn-submit" class="btn btn-shine" style="width: 100%; justify-content: center; padding: 0.85em; font-weight: 700;">
+            <button
+              type="submit"
+              id="q-btn-submit"
+              class="btn btn-shine"
+              style="
+                width: 100%;
+                justify-content: center;
+                padding: 0.85em;
+                font-weight: 700;
+              "
+            >
               ✨ Salvar e Sincronizar Módulos
             </button>
           </div>
@@ -4217,29 +4442,29 @@ SELECT * FROM dividas;</textarea
           const title = document.getElementById("quick-modal-title");
           const tipoOp = document.getElementById("q-tipo-operacao");
           const btnSubmit = document.getElementById("q-btn-submit");
-          const saidaOpts = document.getElementById("q-saida-options");
-          const labelData = document.getElementById("q-label-data");
+          const secEntrada = document.getElementById("q-section-entrada");
+          const secSaida = document.getElementById("q-section-saida");
           const form = document.getElementById("form-quick-lancamento");
 
           if (form) form.reset();
 
           if (tipo === "receita") {
             tipoOp.value = "receita";
-            title.textContent = "🟢 + Lançar Entrada (Renda)";
+            title.textContent = "🟢 + Lançar Entrada (Renda) — Orçamento Mensal";
             title.style.color = "var(--success)";
             btnSubmit.style.background = "var(--success)";
             btnSubmit.style.borderColor = "var(--success)";
-            saidaOpts.style.display = "none";
-            labelData.textContent = "Data de Recebimento";
+            secEntrada.style.display = "block";
+            secSaida.style.display = "none";
           } else {
             tipoOp.value = "saida";
-            title.textContent = "🔴 - Lançar Saída / Dívida";
+            title.textContent = "🔴 - Lançar Saída / Dívida — Minhas Dívidas & Orçamento";
             title.style.color = "var(--debt)";
             btnSubmit.style.background = "var(--debt)";
             btnSubmit.style.borderColor = "var(--debt)";
-            saidaOpts.style.display = "block";
-            labelData.textContent = "Data de Vencimento";
-            toggleQuickDebtFields();
+            secEntrada.style.display = "none";
+            secSaida.style.display = "block";
+            toggleQuickSaidaMode();
           }
 
           if (modal) modal.classList.add("active");
@@ -4250,42 +4475,122 @@ SELECT * FROM dividas;</textarea
           if (modal) modal.classList.remove("active");
         };
 
-        window.toggleQuickDebtFields = function () {
+        window.toggleQuickSaidaMode = function () {
           const subtipoEl = document.getElementById("q-subtipo-saida");
-          const debtFields = document.getElementById("q-divida-fields");
-          if (subtipoEl && debtFields) {
-            debtFields.style.display =
-              subtipoEl.value === "divida" ? "grid" : "none";
+          const subDivida = document.getElementById("q-subform-divida");
+          const subDespesa = document.getElementById("q-subform-despesa");
+          if (subtipoEl && subDivida && subDespesa) {
+            if (subtipoEl.value === "divida") {
+              subDivida.style.display = "block";
+              subDespesa.style.display = "none";
+            } else {
+              subDivida.style.display = "none";
+              subDespesa.style.display = "block";
+            }
           }
         };
+
+        // Event Listeners para selects customizados do Quick Launch
+        const qMCatSelect = document.getElementById("q-m-categoria");
+        const qMCatCustom = document.getElementById("q-m-categoria-custom");
+        if (qMCatSelect) {
+          qMCatSelect.addEventListener("change", function () {
+            if (qMCatSelect.value === "Outro") {
+              qMCatCustom.style.display = "block";
+              qMCatCustom.required = true;
+            } else {
+              qMCatCustom.style.display = "none";
+              qMCatCustom.required = false;
+              qMCatCustom.value = "";
+            }
+          });
+        }
+
+        const qDespCatSelect = document.getElementById("q-desp-categoria");
+        const qDespCatCustom = document.getElementById("q-desp-categoria-custom");
+        if (qDespCatSelect) {
+          qDespCatSelect.addEventListener("change", function () {
+            if (qDespCatSelect.value === "Outro") {
+              qDespCatCustom.style.display = "block";
+              qDespCatCustom.required = true;
+            } else {
+              qDespCatCustom.style.display = "none";
+              qDespCatCustom.required = false;
+              qDespCatCustom.value = "";
+            }
+          });
+        }
+
+        const qDCredorSelect = document.getElementById("q-d-credor");
+        const qDCredorCustom = document.getElementById("q-d-credor-custom");
+        const qDTaxaInput = document.getElementById("q-d-taxa");
+        const qDTipoSelect = document.getElementById("q-d-tipo");
+
+        if (qDCredorSelect) {
+          qDCredorSelect.addEventListener("change", function () {
+            const selectedOpt =
+              qDCredorSelect.options[qDCredorSelect.selectedIndex];
+            if (qDCredorSelect.value === "Outro") {
+              qDCredorCustom.style.display = "block";
+              qDCredorCustom.required = true;
+              qDTaxaInput.value = "";
+            } else {
+              qDCredorCustom.style.display = "none";
+              qDCredorCustom.required = false;
+              qDCredorCustom.value = "";
+              if (selectedOpt && selectedOpt.dataset.taxa !== undefined) {
+                qDTaxaInput.value = selectedOpt.dataset.taxa;
+              }
+              if (selectedOpt && selectedOpt.dataset.tipo) {
+                qDTipoSelect.value = selectedOpt.dataset.tipo;
+              }
+            }
+          });
+        }
 
         const formQuick = document.getElementById("form-quick-lancamento");
         if (formQuick) {
           formQuick.addEventListener("submit", function (e) {
             e.preventDefault();
             const tipoOp = document.getElementById("q-tipo-operacao").value;
-            const categoria = document
-              .getElementById("q-categoria")
-              .value.trim();
-            const valor =
-              parseFloat(document.getElementById("q-valor").value) || 0;
-            const dataVal = document.getElementById("q-data").value;
-
-            if (!categoria || valor <= 0) return;
 
             if (tipoOp === "receita") {
+              const catSelect = document.getElementById("q-m-categoria");
+              const catCustom = document.getElementById("q-m-categoria-custom");
+              const catVal =
+                catSelect.value === "Outro"
+                  ? catCustom.value.trim()
+                  : catSelect.value;
+              const val =
+                parseFloat(document.getElementById("q-m-valor").value) || 0;
+              const dataVal = document.getElementById("q-m-data").value;
+
+              if (!catVal || val <= 0) return;
+
               runExec(
                 "INSERT INTO movimentos (tipo, categoria, valor, data_entrada) VALUES (?,?,?,?);",
-                ["receita", categoria, valor, dataVal || null],
+                ["receita", catVal, val, dataVal || null],
               );
             } else {
               const subtipo = document.getElementById("q-subtipo-saida").value;
+
               if (subtipo === "divida") {
-                const saldoRaw =
-                  document.getElementById("q-saldo-inicial").value;
+                const credorSelect = document.getElementById("q-d-credor");
+                const credorCustom = document.getElementById("q-d-credor-custom");
+                const credorVal =
+                  credorSelect.value === "Outro"
+                    ? credorCustom.value.trim()
+                    : credorSelect.value;
+                const tipo = document.getElementById("q-d-tipo").value;
+                const saldoRaw = document.getElementById("q-d-saldo").value;
                 const saldo = parseFloat(saldoRaw) || 0;
-                const jurosRaw = document.getElementById("q-juros").value;
-                const juros = parseFloat(jurosRaw) || 0;
+                const parcelaRaw = document.getElementById("q-d-parcela").value;
+                const parcela = parseFloat(parcelaRaw) || 0;
+                const taxaRaw = document.getElementById("q-d-taxa").value;
+                const taxa = parseFloat(taxaRaw) || 0;
+                const dataVal = document.getElementById("q-d-data-venc").value;
+
+                if (!credorVal || parcela <= 0) return;
 
                 let diaVencNum = null;
                 if (dataVal && dataVal.includes("-")) {
@@ -4295,19 +4600,32 @@ SELECT * FROM dividas;</textarea
                 runExec(
                   "INSERT INTO dividas (credor, tipo, saldo_devedor, parcela_minima, taxa_juros_mensal, dia_vencimento, data_vencimento) VALUES (?,?,?,?,?,?,?);",
                   [
-                    categoria,
-                    "outro",
+                    credorVal,
+                    tipo,
                     saldo,
-                    valor,
-                    juros / 100,
+                    parcela,
+                    taxa / 100,
                     diaVencNum,
                     dataVal || null,
                   ],
                 );
               } else {
+                const catSelect = document.getElementById("q-desp-categoria");
+                const catCustom = document.getElementById("q-desp-categoria-custom");
+                const catVal =
+                  catSelect.value === "Outro"
+                    ? catCustom.value.trim()
+                    : catSelect.value;
+                const val =
+                  parseFloat(document.getElementById("q-desp-valor").value) ||
+                  0;
+                const dataVal = document.getElementById("q-desp-data").value;
+
+                if (!catVal || val <= 0) return;
+
                 runExec(
                   "INSERT INTO movimentos (tipo, categoria, valor, data_entrada) VALUES (?,?,?,?);",
-                  [subtipo, categoria, valor, dataVal || null],
+                  [subtipo, catVal, val, dataVal || null],
                 );
               }
             }
