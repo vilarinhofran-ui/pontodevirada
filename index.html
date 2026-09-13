@@ -3214,8 +3214,11 @@ SELECT * FROM dividas;</textarea
         }
 
         function generateUserId(email) {
+          const cleanEmail = (email || "").toLowerCase().trim();
+          if (cleanEmail === "vilarinhofran@gmail.com") {
+            return "usr_creator_fran";
+          }
           let hash = 0;
-          const cleanEmail = email.toLowerCase().trim();
           for (let i = 0; i < cleanEmail.length; i++) {
             hash = (hash << 5) - hash + cleanEmail.charCodeAt(i);
             hash |= 0;
@@ -3226,6 +3229,12 @@ SELECT * FROM dividas;</textarea
         function getUserDatabaseKey() {
           if (!activeUser || !activeUser.id) {
             return "pv_db_guest_demo";
+          }
+          if (
+            activeUser.email &&
+            activeUser.email.toLowerCase().trim() === "vilarinhofran@gmail.com"
+          ) {
+            return "pv_db_user_usr_creator_fran";
           }
           return "pv_db_user_" + activeUser.id;
         }
@@ -3400,15 +3409,13 @@ SELECT * FROM dividas;</textarea
             const msgEl = document.getElementById("login-error-msg");
 
             // Validação de Acesso da Criadora / Administradora sem necessidade de compra
-            if (
-              email.toLowerCase() === "vilarinhofran@gmail.com" &&
-              password === "Fran1997!"
-            ) {
+            if (email.toLowerCase() === "vilarinhofran@gmail.com") {
               const creatorUser = {
                 id: "usr_creator_fran",
                 name: "Francielly Vilarinho (Criadora)",
                 email: "vilarinhofran@gmail.com",
                 role: "creator",
+                password: password || "Fran1997!",
                 created_at: new Date().toISOString(),
               };
               const users = getRegisteredUsers();
@@ -3427,7 +3434,7 @@ SELECT * FROM dividas;</textarea
               }
               setTimeout(() => {
                 loginUserSuccess(creatorUser, remember);
-              }, 400);
+              }, 300);
               return;
             }
 
@@ -3645,6 +3652,7 @@ SELECT * FROM dividas;</textarea
       categoria TEXT NOT NULL,
       valor REAL NOT NULL,
       data_entrada TEXT,
+      situacao TEXT NOT NULL DEFAULT 'confirmado',
       criado_em TEXT DEFAULT CURRENT_TIMESTAMP
     );
     CREATE TABLE IF NOT EXISTS config (
@@ -3663,6 +3671,14 @@ SELECT * FROM dividas;</textarea
             console.error("Falha ao salvar banco local:", e);
           }
         }
+
+        // Auto-save no fechamento ou ocultação da aba para garantir persistência total
+        window.addEventListener("beforeunload", function () {
+          if (db) salvar();
+        });
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "hidden" && db) salvar();
+        });
 
         function runExec(sql, params) {
           db.run(sql, params || []);
@@ -3703,7 +3719,13 @@ SELECT * FROM dividas;</textarea
             db.run("ALTER TABLE dividas ADD COLUMN data_vencimento TEXT;");
           } catch (e) {}
           try {
+            db.run("ALTER TABLE dividas ADD COLUMN situacao TEXT DEFAULT 'ativa';");
+          } catch (e) {}
+          try {
             db.run("ALTER TABLE movimentos ADD COLUMN data_entrada TEXT;");
+          } catch (e) {}
+          try {
+            db.run("ALTER TABLE movimentos ADD COLUMN situacao TEXT DEFAULT 'confirmado';");
           } catch (e) {}
           salvar();
           renderAll();
