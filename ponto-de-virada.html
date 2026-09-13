@@ -1285,7 +1285,7 @@
         border: 1px solid var(--line-soft);
       }
 
-      /* Canais de Compra (Kiwify, Hotmart, Eduzz, WhatsApp) */
+      /* Canais de Compra (Kiwify, WhatsApp) */
       .checkout-channel-btn {
         display: flex;
         align-items: center;
@@ -1304,16 +1304,6 @@
         background: #2a724e;
         color: #ffffff;
         border-color: #2a724e;
-      }
-      .checkout-channel-btn.hotmart {
-        background: #f05323;
-        color: #ffffff;
-        border-color: #f05323;
-      }
-      .checkout-channel-btn.eduzz {
-        background: #111a30;
-        color: #ffffff;
-        border-color: #111a30;
       }
       .checkout-channel-btn.whatsapp {
         background: #25d366;
@@ -1372,7 +1362,7 @@
           </svg>
           <span>Ponto de Virada</span>
           <span class="badge ok" style="font-size: 0.65rem"
-            >Versão Premium</span
+            >Sua Virada Financeira Começa Aqui</span
           >
         </div>
         <div class="landing-nav-actions">
@@ -1384,7 +1374,7 @@
             📱 Instalar App
           </button>
           <a
-            href="https://kiwify.com.br"
+            href="https://pay.kiwify.com.br/Hiva5x8"
             target="_blank"
             class="btn small"
             style="background: #2a724e; border-color: #2a724e"
@@ -1808,53 +1798,41 @@
               >
             </div>
 
-            <!-- MULTI-CANAL DE COMPRA PARA PLATAFORMAS DIGITAIS -->
+            <!-- CANAIS DE COMPRA EXCLUSIVOS -->
             <div>
               <strong
                 style="
                   display: block;
-                  font-size: 0.8rem;
+                  font-size: 0.82rem;
                   color: var(--ink);
-                  margin-bottom: 0.4rem;
+                  margin-bottom: 0.5rem;
                   text-align: center;
                 "
               >
-                🛒 Selecione sua Plataforma de Compra Preferida:
+                🛒 Selecione seu Canal de Compra Preferido:
               </strong>
               <div
                 style="
                   display: grid;
                   grid-template-columns: repeat(2, 1fr);
-                  gap: 0.45rem;
+                  gap: 0.5rem;
                 "
               >
                 <a
-                  href="https://kiwify.com.br"
+                  href="https://pay.kiwify.com.br/Hiva5x8"
                   target="_blank"
                   class="checkout-channel-btn kiwify"
+                  style="font-size: 0.88rem; font-weight: 700; padding: 0.8em"
                 >
-                  🥝 Kiwify (Checkout 1-Clique)
-                </a>
-                <a
-                  href="https://hotmart.com"
-                  target="_blank"
-                  class="checkout-channel-btn hotmart"
-                >
-                  📦 Hotmart Pay
-                </a>
-                <a
-                  href="https://eduzz.com"
-                  target="_blank"
-                  class="checkout-channel-btn eduzz"
-                >
-                  🎓 Eduzz Nutror
+                  🥝 Comprar com Kiwify
                 </a>
                 <a
                   href="https://wa.me/5541987039711?text=Ol%C3%A1%2C%20quero%20comprar%20o%20Ponto%20de%20Virada%20diretamente!"
                   target="_blank"
                   class="checkout-channel-btn whatsapp"
+                  style="font-size: 0.88rem; font-weight: 700; padding: 0.8em"
                 >
-                  💬 Venda Direta WhatsApp
+                  💬 Comprar Direto WhatsApp
                 </a>
               </div>
             </div>
@@ -2784,7 +2762,7 @@
             <span>Ponto de Virada</span>
           </div>
           <div class="sub">
-            Organize as dívidas. Aumente a renda. Siga o plano com IA.
+            Sua virada financeira começa aqui. Da dívida zero à liberdade.
           </div>
         </div>
         <nav id="nav-desktop">
@@ -3990,9 +3968,9 @@ SELECT * FROM dividas;</textarea
             3. Licença de Uso e Produto Digital
           </h4>
           <p style="margin-bottom: 0.8em">
-            A licença adquirida nas plataformas parceiras (ex.: Kiwify, Hotmart,
-            Eduzz) é pessoal, intransferível e válida para uso individual na
-            edição Ponto de Virada Premium.
+            A licença adquirida na plataforma parceira (Kiwify) ou via
+            atendimento oficial é pessoal, intransferível e válida para uso
+            individual na edição Ponto de Virada Premium.
           </p>
 
           <h4 style="margin-bottom: 0.3em; font-weight: 600">
@@ -4110,7 +4088,7 @@ SELECT * FROM dividas;</textarea
           <input type="hidden" id="q-tipo-operacao" value="receita" />
 
           <!-- SEÇÃO 1: FORMULÁRIO ENTRADA / RENDA (MÓDULO 03 ORÇAMENTO MENSAL) -->
-          <div id="q-section-entrada" style="display: block;">
+          <div id="q-section-entrada" style="display: block">
             <div style="margin-bottom: 0.8rem">
               <label for="q-m-categoria">Categoria da Renda / Receita</label>
               <select id="q-m-categoria">
@@ -4120,9 +4098,13 @@ SELECT * FROM dividas;</textarea
                 <optgroup label="Entradas (Receitas)">
                   <option value="Salário Principal">Salário Principal</option>
                   <option value="Renda Extra">Renda Extra</option>
-                  <option value="Pró-Labore / Serviços">Pró-Labore / Serviços</option>
+                  <option value="Pró-Labore / Serviços">
+                    Pró-Labore / Serviços
+                  </option>
                   <option value="Comissões / Vendas">Comissões / Vendas</option>
-                  <option value="Rendimentos / Outros">Rendimentos / Outros</option>
+                  <option value="Rendimentos / Outros">
+                    Rendimentos / Outros
+                  </option>
                 </optgroup>
                 <option value="Outro">Outra Categoria / Digitar Nome...</option>
               </select>
@@ -4134,7 +4116,14 @@ SELECT * FROM dividas;</textarea
               />
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+                margin-bottom: 0.8rem;
+              "
+            >
               <div>
                 <label for="q-m-valor">Valor mensal (R$)</label>
                 <input
@@ -4153,18 +4142,37 @@ SELECT * FROM dividas;</textarea
           </div>
 
           <!-- SEÇÃO 2: FORMULÁRIO SAÍDA / DÍVIDA (MÓDULO 02 MINHAS DÍVIDAS & DESPESAS) -->
-          <div id="q-section-saida" style="display: none;">
-            <div style="margin-bottom: 0.8rem; background: var(--paper); border: 1px solid var(--line-soft); padding: 0.6rem 0.8rem; border-radius: 4px;">
-              <label for="q-subtipo-saida" style="font-weight: 600; color: var(--accent-ink);">Selecione o Destino do Lançamento:</label>
+          <div id="q-section-saida" style="display: none">
+            <div
+              style="
+                margin-bottom: 0.8rem;
+                background: var(--paper);
+                border: 1px solid var(--line-soft);
+                padding: 0.6rem 0.8rem;
+                border-radius: 4px;
+              "
+            >
+              <label
+                for="q-subtipo-saida"
+                style="font-weight: 600; color: var(--accent-ink)"
+                >Selecione o Destino do Lançamento:</label
+              >
               <select id="q-subtipo-saida" onchange="toggleQuickSaidaMode()">
-                <option value="divida" selected>💳 Minhas Dívidas / Conta com Juros (Bancos, Cartões, Empréstimos)</option>
-                <option value="despesa_essencial">📌 Despesa Essencial (Aluguel, Luz, Mercado... - Orçamento)</option>
-                <option value="despesa_variavel">🛍️ Despesa Variável (Lazer, Compras... - Orçamento)</option>
+                <option value="divida" selected>
+                  💳 Minhas Dívidas / Conta com Juros (Bancos, Cartões,
+                  Empréstimos)
+                </option>
+                <option value="despesa_essencial">
+                  📌 Despesa Essencial (Aluguel, Luz, Mercado... - Orçamento)
+                </option>
+                <option value="despesa_variavel">
+                  🛍️ Despesa Variável (Lazer, Compras... - Orçamento)
+                </option>
               </select>
             </div>
 
             <!-- SUB-FORMULÁRIO: MINHAS DÍVIDAS (MÓDULO 02) -->
-            <div id="q-subform-divida" style="display: block;">
+            <div id="q-subform-divida" style="display: block">
               <div style="margin-bottom: 0.8rem">
                 <label for="q-d-credor">Credor / Descrição</label>
                 <select id="q-d-credor">
@@ -4172,19 +4180,97 @@ SELECT * FROM dividas;</textarea
                     Selecione o Credor / Instituição...
                   </option>
                   <optgroup label="Bancos & Instituições Frequentes">
-                    <option value="Nubank — Cartão de Crédito" data-taxa="14.5" data-tipo="cartao">Nubank (Cartão ~ 14.5% a.m.)</option>
-                    <option value="Itaú — Cheque Especial" data-taxa="12.8" data-tipo="cheque_especial">Itaú (Cheque Especial ~ 12.8% a.m.)</option>
-                    <option value="Bradesco — Empréstimo Pessoal" data-taxa="4.5" data-tipo="emprestimo">Bradesco (Empréstimo ~ 4.5% a.m.)</option>
-                    <option value="Banco do Brasil — Cartão / Cheque" data-taxa="11.9" data-tipo="cartao">Banco do Brasil (~ 11.9% a.m.)</option>
-                    <option value="Santander — Empréstimo" data-taxa="5.2" data-tipo="emprestimo">Santander (Empréstimo ~ 5.2% a.m.)</option>
-                    <option value="Caixa — Financiamento / Crédito" data-taxa="2.5" data-tipo="financiamento">Caixa Econômica (~ 2.5% a.m.)</option>
-                    <option value="Banco Inter — Cartão / Crédito" data-taxa="12.5" data-tipo="cartao">Banco Inter (~ 12.5% a.m.)</option>
-                    <option value="C6 Bank — Cartão Rotativo" data-taxa="13.9" data-tipo="cartao">C6 Bank (~ 13.9% a.m.)</option>
-                    <option value="Mercado Pago — Crédito Pessoal" data-taxa="15.2" data-tipo="emprestimo">Mercado Pago (~ 15.2% a.m.)</option>
-                    <option value="Carnê / Parcelamento de Loja" data-taxa="8.9" data-tipo="parcelamento">Carnê Loja / Departamentos (~ 8.9% a.m.)</option>
-                    <option value="Empréstimo Consignado" data-taxa="2.1" data-tipo="emprestimo">Empréstimo Consignado (~ 2.1% a.m.)</option>
-                    <option value="Financiamento Imobiliário" data-taxa="0.8" data-tipo="financiamento">Financiamento Imobiliário (~ 0.8% a.m.)</option>
-                    <option value="Dívida Pessoal / Amigos" data-taxa="0" data-tipo="pessoa_fisica">Dívida Pessoal / Amigos (0% a.m.)</option>
+                    <option
+                      value="Nubank — Cartão de Crédito"
+                      data-taxa="14.5"
+                      data-tipo="cartao"
+                    >
+                      Nubank (Cartão ~ 14.5% a.m.)
+                    </option>
+                    <option
+                      value="Itaú — Cheque Especial"
+                      data-taxa="12.8"
+                      data-tipo="cheque_especial"
+                    >
+                      Itaú (Cheque Especial ~ 12.8% a.m.)
+                    </option>
+                    <option
+                      value="Bradesco — Empréstimo Pessoal"
+                      data-taxa="4.5"
+                      data-tipo="emprestimo"
+                    >
+                      Bradesco (Empréstimo ~ 4.5% a.m.)
+                    </option>
+                    <option
+                      value="Banco do Brasil — Cartão / Cheque"
+                      data-taxa="11.9"
+                      data-tipo="cartao"
+                    >
+                      Banco do Brasil (~ 11.9% a.m.)
+                    </option>
+                    <option
+                      value="Santander — Empréstimo"
+                      data-taxa="5.2"
+                      data-tipo="emprestimo"
+                    >
+                      Santander (Empréstimo ~ 5.2% a.m.)
+                    </option>
+                    <option
+                      value="Caixa — Financiamento / Crédito"
+                      data-taxa="2.5"
+                      data-tipo="financiamento"
+                    >
+                      Caixa Econômica (~ 2.5% a.m.)
+                    </option>
+                    <option
+                      value="Banco Inter — Cartão / Crédito"
+                      data-taxa="12.5"
+                      data-tipo="cartao"
+                    >
+                      Banco Inter (~ 12.5% a.m.)
+                    </option>
+                    <option
+                      value="C6 Bank — Cartão Rotativo"
+                      data-taxa="13.9"
+                      data-tipo="cartao"
+                    >
+                      C6 Bank (~ 13.9% a.m.)
+                    </option>
+                    <option
+                      value="Mercado Pago — Crédito Pessoal"
+                      data-taxa="15.2"
+                      data-tipo="emprestimo"
+                    >
+                      Mercado Pago (~ 15.2% a.m.)
+                    </option>
+                    <option
+                      value="Carnê / Parcelamento de Loja"
+                      data-taxa="8.9"
+                      data-tipo="parcelamento"
+                    >
+                      Carnê Loja / Departamentos (~ 8.9% a.m.)
+                    </option>
+                    <option
+                      value="Empréstimo Consignado"
+                      data-taxa="2.1"
+                      data-tipo="emprestimo"
+                    >
+                      Empréstimo Consignado (~ 2.1% a.m.)
+                    </option>
+                    <option
+                      value="Financiamento Imobiliário"
+                      data-taxa="0.8"
+                      data-tipo="financiamento"
+                    >
+                      Financiamento Imobiliário (~ 0.8% a.m.)
+                    </option>
+                    <option
+                      value="Dívida Pessoal / Amigos"
+                      data-taxa="0"
+                      data-tipo="pessoa_fisica"
+                    >
+                      Dívida Pessoal / Amigos (0% a.m.)
+                    </option>
                   </optgroup>
                   <option value="Outro">Outro Credor / Digitar Nome...</option>
                 </select>
@@ -4195,7 +4281,14 @@ SELECT * FROM dividas;</textarea
                 />
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 0.8rem;
+                  margin-bottom: 0.8rem;
+                "
+              >
                 <div>
                   <label for="q-d-tipo">Tipo</label>
                   <select id="q-d-tipo">
@@ -4204,7 +4297,9 @@ SELECT * FROM dividas;</textarea
                     <option value="emprestimo">Empréstimo pessoal</option>
                     <option value="financiamento">Financiamento</option>
                     <option value="parcelamento">Parcelamento / loja</option>
-                    <option value="pessoa_fisica">Dívida com pessoa física</option>
+                    <option value="pessoa_fisica">
+                      Dívida com pessoa física
+                    </option>
                     <option value="outro">Outro</option>
                   </select>
                 </div>
@@ -4220,9 +4315,18 @@ SELECT * FROM dividas;</textarea
                 </div>
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 0.8rem;
+                  margin-bottom: 0.8rem;
+                "
+              >
                 <div>
-                  <label for="q-d-parcela">Valor no Vencimento / Parcela (R$)</label>
+                  <label for="q-d-parcela"
+                    >Valor no Vencimento / Parcela (R$)</label
+                  >
                   <input
                     id="q-d-parcela"
                     type="number"
@@ -4243,32 +4347,52 @@ SELECT * FROM dividas;</textarea
                 </div>
               </div>
 
-              <div style="margin-bottom: 0.8rem;">
+              <div style="margin-bottom: 0.8rem">
                 <label for="q-d-data-venc">Data de Vencimento</label>
                 <input id="q-d-data-venc" type="date" />
               </div>
             </div>
 
             <!-- SUB-FORMULÁRIO: DESPESA DE ORÇAMENTO (MÓDULO 03) -->
-            <div id="q-subform-despesa" style="display: none;">
+            <div id="q-subform-despesa" style="display: none">
               <div style="margin-bottom: 0.8rem">
                 <label for="q-desp-categoria">Categoria da Despesa</label>
                 <select id="q-desp-categoria">
-                  <option value="" disabled selected>Selecione a Categoria...</option>
+                  <option value="" disabled selected>
+                    Selecione a Categoria...
+                  </option>
                   <optgroup label="Despesas Essenciais">
-                    <option value="Aluguel & Condomínio">Aluguel & Condomínio</option>
-                    <option value="Supermercado & Alimentação">Supermercado & Alimentação</option>
-                    <option value="Transporte & Combustível">Transporte & Combustível</option>
+                    <option value="Aluguel & Condomínio">
+                      Aluguel & Condomínio
+                    </option>
+                    <option value="Supermercado & Alimentação">
+                      Supermercado & Alimentação
+                    </option>
+                    <option value="Transporte & Combustível">
+                      Transporte & Combustível
+                    </option>
                     <option value="Farmácia & Saúde">Farmácia & Saúde</option>
-                    <option value="Contas Básicas (Água/Luz/Gás)">Contas Básicas (Água/Luz/Gás)</option>
+                    <option value="Contas Básicas (Água/Luz/Gás)">
+                      Contas Básicas (Água/Luz/Gás)
+                    </option>
                     <option value="Educação & Cursos">Educação & Cursos</option>
                   </optgroup>
                   <optgroup label="Despesas Variáveis & Estilo de Vida">
-                    <option value="Lazer & Restaurantes">Lazer & Restaurantes</option>
-                    <option value="Internet & Celular">Internet & Celular</option>
-                    <option value="Assinaturas & Streaming">Assinaturas & Streaming</option>
-                    <option value="Compras & Vestuário">Compras & Vestuário</option>
-                    <option value="Outros Lançamentos">Outros Lançamentos</option>
+                    <option value="Lazer & Restaurantes">
+                      Lazer & Restaurantes
+                    </option>
+                    <option value="Internet & Celular">
+                      Internet & Celular
+                    </option>
+                    <option value="Assinaturas & Streaming">
+                      Assinaturas & Streaming
+                    </option>
+                    <option value="Compras & Vestuário">
+                      Compras & Vestuário
+                    </option>
+                    <option value="Outros Lançamentos">
+                      Outros Lançamentos
+                    </option>
                   </optgroup>
                   <option value="Outro">Outra Categoria / Digitar...</option>
                 </select>
@@ -4280,7 +4404,14 @@ SELECT * FROM dividas;</textarea
                 />
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 0.8rem;
+                  margin-bottom: 0.8rem;
+                "
+              >
                 <div>
                   <label for="q-desp-valor">Valor Mensal (R$)</label>
                   <input
@@ -4292,7 +4423,9 @@ SELECT * FROM dividas;</textarea
                   />
                 </div>
                 <div>
-                  <label for="q-desp-data">Data de Vencimento / Pagamento</label>
+                  <label for="q-desp-data"
+                    >Data de Vencimento / Pagamento</label
+                  >
                   <input type="date" id="q-desp-data" />
                 </div>
               </div>
@@ -4450,7 +4583,8 @@ SELECT * FROM dividas;</textarea
 
           if (tipo === "receita") {
             tipoOp.value = "receita";
-            title.textContent = "🟢 + Lançar Entrada (Renda) — Orçamento Mensal";
+            title.textContent =
+              "🟢 + Lançar Entrada (Renda) — Orçamento Mensal";
             title.style.color = "var(--success)";
             btnSubmit.style.background = "var(--success)";
             btnSubmit.style.borderColor = "var(--success)";
@@ -4458,7 +4592,8 @@ SELECT * FROM dividas;</textarea
             secSaida.style.display = "none";
           } else {
             tipoOp.value = "saida";
-            title.textContent = "🔴 - Lançar Saída / Dívida — Minhas Dívidas & Orçamento";
+            title.textContent =
+              "🔴 - Lançar Saída / Dívida — Minhas Dívidas & Orçamento";
             title.style.color = "var(--debt)";
             btnSubmit.style.background = "var(--debt)";
             btnSubmit.style.borderColor = "var(--debt)";
@@ -4507,7 +4642,9 @@ SELECT * FROM dividas;</textarea
         }
 
         const qDespCatSelect = document.getElementById("q-desp-categoria");
-        const qDespCatCustom = document.getElementById("q-desp-categoria-custom");
+        const qDespCatCustom = document.getElementById(
+          "q-desp-categoria-custom",
+        );
         if (qDespCatSelect) {
           qDespCatSelect.addEventListener("change", function () {
             if (qDespCatSelect.value === "Outro") {
@@ -4576,7 +4713,8 @@ SELECT * FROM dividas;</textarea
 
               if (subtipo === "divida") {
                 const credorSelect = document.getElementById("q-d-credor");
-                const credorCustom = document.getElementById("q-d-credor-custom");
+                const credorCustom =
+                  document.getElementById("q-d-credor-custom");
                 const credorVal =
                   credorSelect.value === "Outro"
                     ? credorCustom.value.trim()
@@ -4611,7 +4749,9 @@ SELECT * FROM dividas;</textarea
                 );
               } else {
                 const catSelect = document.getElementById("q-desp-categoria");
-                const catCustom = document.getElementById("q-desp-categoria-custom");
+                const catCustom = document.getElementById(
+                  "q-desp-categoria-custom",
+                );
                 const catVal =
                   catSelect.value === "Outro"
                     ? catCustom.value.trim()
