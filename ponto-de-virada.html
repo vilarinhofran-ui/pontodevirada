@@ -1368,15 +1368,14 @@
                   <circle cx="24" cy="10" r="2" fill="#1F3D32"/>
                 </svg>
                 <div>
-                  <span class="product-mockup-badge" style="font-size: 0.65rem; padding: 0.2em 0.55em;">Format 300x250 px · Capa Digital</span>
-                  <h3 style="margin: 0.1rem 0 0; color: #ffffff; font-size: 1.05rem; font-weight: 700;">Ponto de Virada — Premium</h3>
+                  <h3 style="margin: 0.1rem 0 0; color: #ffffff; font-size: 1.1rem; font-weight: 700;">Ponto de Virada — Premium</h3>
                 </div>
               </div>
               <p style="font-size: 0.78rem; color: #dce7de; margin-bottom: 0.55rem; line-height: 1.35;">
-                Pacote Completo de Inteligência Financeira · Diagnóstico IA · Método Avalanche · Leitor de Comprovantes · Renda Extra
+                Pacote Completo de Inteligência Financeira · Diagnóstico Avançado · Método Avalanche · Leitor de Comprovantes · Renda Extra
               </p>
               <div style="display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.74rem; color: #ffffff; margin-bottom: 0.6rem;">
-                <span>✔ Diagnóstico IA em Tempo Real</span>
+                <span>✔ Diagnóstico Financeiro em Tempo Real</span>
                 <span>✔ Simulador Avalanche &amp; Bola de Neve</span>
                 <span>✔ Leitor de Comprovantes (PDF/OFX/CSV)</span>
                 <span>✔ 100% LGPD Protegido · Acesso Vitalício</span>
@@ -1390,18 +1389,18 @@
                 <button
                   type="button"
                   class="btn small"
-                  onclick="downloadProductCover('300x250')"
+                  onclick="downloadProductCover('png')"
                   style="background: #8fc6a9; color: #1f3d32; border: none; font-weight: 700; flex: 1; justify-content: center; padding: 0.5em; font-size: 0.76rem;"
                 >
-                  📥 Capa 300x250 (SVG)
+                  🖼️ Baixar PNG
                 </button>
                 <button
                   type="button"
                   class="btn small"
-                  onclick="downloadOfferCard()"
+                  onclick="downloadProductCover('jpg')"
                   style="background: #f1e6cb; color: #1f3d32; border: none; font-weight: 700; flex: 1; justify-content: center; padding: 0.5em; font-size: 0.76rem;"
                 >
-                  🎁 Oferta 300x250 (SVG)
+                  🖼️ Baixar JPG
                 </button>
               </div>
             </div>
@@ -3245,55 +3244,48 @@ SELECT * FROM dividas;</textarea
           });
         });
 
-        window.downloadProductCover = function (size) {
-          let svgContent = "";
-          let fileName = "ponto-de-virada-capa-300x250.svg";
+        function exportSvgToCanvasImage(svgString, width, height, format, fileName) {
+          const img = new Image();
+          const svgBlob = new Blob([svgString], {
+            type: "image/svg+xml;charset=utf-8",
+          });
+          const url = URL.createObjectURL(svgBlob);
 
-          if (size === "1200x630") {
-            fileName = "ponto-de-virada-banner-1200x630.svg";
-            svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-    <defs>
-      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#1F3D32"/>
-        <stop offset="50%" stop-color="#122820"/>
-        <stop offset="100%" stop-color="#0B1A14"/>
-      </linearGradient>
-      <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#F1E6CB"/>
-        <stop offset="100%" stop-color="#A97A22"/>
-      </linearGradient>
-      <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#2A724E"/>
-        <stop offset="100%" stop-color="#8FC6A9"/>
-      </linearGradient>
-    </defs>
-    <rect width="1200" height="630" fill="url(#bg)"/>
-    <circle cx="1000" cy="150" r="300" fill="#2A724E" opacity="0.2"/>
-    <circle cx="200" cy="500" r="250" fill="#8FC6A9" opacity="0.1"/>
-    
-    <rect x="50" y="50" width="1100" height="530" rx="20" fill="none" stroke="url(#green)" stroke-width="4"/>
-    
-    <rect x="100" y="100" width="80" height="80" rx="20" fill="#2A724E"/>
-    <path d="M120 155 L138 137 L150 147 L165 125" stroke="#8FC6A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <path d="M152 125 H165 V138" stroke="#8FC6A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          img.onload = function () {
+            const canvas = document.createElement("canvas");
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext("2d");
 
-    <text x="210" y="140" font-family="'Fraunces', Georgia, serif" font-size="38" font-weight="700" fill="#FFFFFF">PONTO DE VIRADA</text>
-    <text x="210" y="175" font-family="sans-serif" font-size="20" font-weight="600" fill="#8FC6A9">INTELIGÊNCIA FINANCEIRA &amp; QUITAÇÃO DE DÍVIDAS COM IA</text>
-    
-    <text x="100" y="270" font-family="'Fraunces', Georgia, serif" font-size="52" font-weight="700" fill="#FFFFFF">Saia das Dívidas e Alcance a</text>
-    <text x="100" y="335" font-family="'Fraunces', Georgia, serif" font-size="52" font-weight="700" fill="url(#gold)">Liberdade Financeira Definitiva</text>
-    
-    <text x="100" y="410" font-family="sans-serif" font-size="22" fill="#DCE7DE">• Diagnóstico Financeiro em Tempo Real por IA</text>
-    <text x="100" y="445" font-family="sans-serif" font-size="22" fill="#DCE7DE">• Simulador de Quitação Avalanche &amp; Bola de Neve</text>
-    <text x="100" y="480" font-family="sans-serif" font-size="22" fill="#DCE7DE">• Leitor de Holerites/Extratos + Recomendador de Renda Extra</text>
+            if (format === "jpg" || format === "jpeg") {
+              ctx.fillStyle = "#1F3D32";
+              ctx.fillRect(0, 0, width, height);
+            }
 
-    <rect x="820" y="460" width="280" height="70" rx="12" fill="url(#gold)"/>
-    <text x="960" y="490" font-family="sans-serif" font-size="18" font-weight="700" fill="#1F3D32" text-anchor="middle">ACESSO VITALÍCIO</text>
-    <text x="960" y="515" font-family="sans-serif" font-size="14" font-weight="600" fill="#1F3D32" text-anchor="middle">Sem Mensalidades · 100% LGPD</text>
-  </svg>`;
-          } else {
-            // Padrão: 300x250 pixels
-            svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
+            ctx.drawImage(img, 0, 0, width, height);
+            URL.revokeObjectURL(url);
+
+            const mimeType = (format === "jpg" || format === "jpeg") ? "image/jpeg" : "image/png";
+            const dataUrl = canvas.toDataURL(mimeType, 0.95);
+
+            const a = document.createElement("a");
+            a.href = dataUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            alert(
+              `✅ Capa do Produto (${format.toUpperCase()}) ${width}x${height}px baixada com sucesso!`,
+            );
+          };
+
+          img.src = url;
+        }
+
+        window.downloadProductCover = function (format) {
+          const imgFormat = (format === "jpg" || format === "jpeg") ? "jpg" : "png";
+          const fileName = `ponto-de-virada-capa-300x250.${imgFormat}`;
+          const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
     <defs>
       <linearGradient id="bg300" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#1F3D32"/>
@@ -3319,39 +3311,27 @@ SELECT * FROM dividas;</textarea
     <circle cx="48" cy="25" r="1.8" fill="#8FC6A9"/>
 
     <text x="62" y="36" font-family="'Fraunces', Georgia, serif" font-size="14.5" font-weight="700" fill="#FFFFFF">PONTO DE VIRADA</text>
-    <text x="62" y="47" font-family="sans-serif" font-size="8" font-weight="600" fill="#8FC6A9">ED. PREMIUM · INTELIGÊNCIA IA</text>
+    <text x="62" y="47" font-family="sans-serif" font-size="8" font-weight="600" fill="#8FC6A9">EDIÇÃO PREMIUM · SISTEMA FINANCEIRO</text>
 
-    <text x="22" y="76" font-family="'Fraunces', Georgia, serif" font-size="15" font-weight="700" fill="#FFFFFF">Saia das Dívidas com IA e</text>
+    <text x="22" y="76" font-family="'Fraunces', Georgia, serif" font-size="15" font-weight="700" fill="#FFFFFF">Saia das Dívidas e</text>
     <text x="22" y="94" font-family="'Fraunces', Georgia, serif" font-size="15" font-weight="700" fill="url(#gold300)">Alcance a Liberdade</text>
 
-    <text x="22" y="118" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Diagnóstico IA em Tempo Real</text>
+    <text x="22" y="118" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Diagnóstico Financeiro em Tempo Real</text>
     <text x="22" y="134" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Simulador Avalanche &amp; Bola de Neve</text>
     <text x="22" y="150" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Leitor de Holerites/Extratos (PDF/CSV)</text>
-    <text x="22" y="166" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Acesso Vitalício · 100% LGPD</text>
+    <text x="22" y="166" font-family="sans-serif" font-size="9.5" fill="#DCE7DE">✔ Acesso Vitalício · 100% LGPD Protegido</text>
 
     <rect x="18" y="186" width="264" height="30" rx="6" fill="url(#gold300)"/>
     <text x="150" y="200" font-family="sans-serif" font-size="9.5" font-weight="700" fill="#1F3D32" text-anchor="middle">ACESSO VITALÍCIO — SEM MENSALIDADES</text>
-    <text x="150" y="211" font-family="sans-serif" font-size="7" font-weight="600" fill="#1F3D32" text-anchor="middle">DESENVOLVIDO POR VILARINHO TECH SOLUTIONS</text>
+    <text x="150" y="211" font-family="sans-serif" font-size="7" font-weight="600" fill="#1F3D32" text-anchor="middle">PRODUTO DESENVOLVIDO POR VILARINHO TECH SOLUTIONS</text>
   </svg>`;
-          }
 
-          const blob = new Blob([svgContent], {
-            type: "image/svg+xml;charset=utf-8",
-          });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-          alert(
-            `✅ Capa Oficial ${size === "1200x630" ? "1200x630px" : "300x250px"} baixada com sucesso! Utilize no cadastro do produto na Kiwify, Hotmart ou Eduzz.`,
-          );
+          exportSvgToCanvasImage(svgContent, 300, 250, imgFormat, fileName);
         };
 
-        window.downloadOfferCard = function () {
+        window.downloadOfferCard = function (format) {
+          const imgFormat = (format === "jpg" || format === "jpeg") ? "jpg" : "png";
+          const fileName = `ponto-de-virada-card-oferta-300x250.${imgFormat}`;
           const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
     <defs>
       <linearGradient id="bgOff" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -3379,7 +3359,7 @@ SELECT * FROM dividas;</textarea
 
     <!-- Subtitle & Dev -->
     <text x="150" y="40" font-family="sans-serif" font-size="7.5" font-weight="600" fill="#F1E6CB" text-anchor="middle">Pague Uma Única Vez · Sem Mensalidades · Acesso Para Sempre</text>
-    <text x="150" y="50" font-family="sans-serif" font-size="6.5" font-weight="500" fill="#8FC6A9" text-anchor="middle">DESENVOLVIDO POR VILARINHO TECH SOLUTIONS</text>
+    <text x="150" y="50" font-family="sans-serif" font-size="6.5" font-weight="500" fill="#8FC6A9" text-anchor="middle">PRODUTO DESENVOLVIDO POR VILARINHO TECH SOLUTIONS</text>
 
     <!-- Bonus List Box -->
     <rect x="12" y="56" width="276" height="114" rx="5" fill="rgba(255,255,255,0.05)" stroke="rgba(143,198,169,0.3)" stroke-width="0.8"/>
@@ -3388,10 +3368,10 @@ SELECT * FROM dividas;</textarea
     <text x="18" y="82" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 1: Roteiro Prático de Negociação com Credores (80% desc.)</text>
     <text x="18" y="94" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 2: Leitor Inteligente de Extratos, Holerites e Faturas (PDF/OFX)</text>
     <text x="18" y="106" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 3: Quiz &amp; Recomendador de Renda Extra Personalizado</text>
-    <text x="18" y="118" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 4: Diagnóstico de IA Diário &amp; Simulador Avalanche</text>
+    <text x="18" y="118" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 4: Diagnóstico Financeiro Diário &amp; Simulador Avalanche</text>
     <text x="18" y="130" font-family="sans-serif" font-size="6.8" fill="#DCE7DE">• Bônus 5: Atualizações Tecnológicas &amp; Suporte Prioritário Vitalício</text>
 
-    <text x="18" y="146" font-family="sans-serif" font-size="6.8" font-weight="600" fill="#8FC6A9">✔ IA em Tempo Real  ✔ Saldos Diários  ✔ 100% LGPD Protegido</text>
+    <text x="18" y="146" font-family="sans-serif" font-size="6.8" font-weight="600" fill="#8FC6A9">✔ Análise em Tempo Real  ✔ Saldos Diários  ✔ 100% LGPD Protegido</text>
 
     <!-- Price Box -->
     <rect x="12" y="174" width="276" height="66" rx="6" fill="url(#goldOff)"/>
@@ -3406,20 +3386,7 @@ SELECT * FROM dividas;</textarea
     <text x="150" y="230" font-family="sans-serif" font-size="6.8" font-weight="700" fill="#1F3D32" text-anchor="middle">💳 Cartão 12x de R$ 9,74  |  ⚡ PIX Liberação Imediata  |  📄 Boleto</text>
   </svg>`;
 
-          const blob = new Blob([svgContent], {
-            type: "image/svg+xml;charset=utf-8",
-          });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "ponto-de-virada-card-oferta-300x250.svg";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-          alert(
-            "✅ Card Oficial da Oferta e Bônus (300x250px SVG) baixado com sucesso! Pronto para cadastrar nas plataformas de vendas.",
-          );
+          exportSvgToCanvasImage(svgContent, 300, 250, imgFormat, fileName);
         };
 
         // Form Login (com suporte a acesso direto de criadora/admin)
